@@ -33,16 +33,16 @@ const teamsData = {
         shortName: 'OFC',
         logo: 'images/club-logos/omara.svg'
     },
-    'maria-khan': {
-        name: 'Maria Khan FC',
-        stadium: 'Kraven Park',
-        manager: 'Aka The Kreven',
+    'smiles': {
+        name: 'Chuto Smiles FC',
+        stadium: 'Smiles Arena',
+        manager: 'Chuto Smiles',
         capacity: 42000,
         founded: 2024,
         titles: 0,
         colors: ['#0d47a1', '#29b6f6'],
-        shortName: 'AKA',
-        logo: 'images/club-logos/aka.svg'
+        shortName: 'CSFC',
+        logo: 'images/club-logos/chutosmiles.svg'
     },
     'ghost': {
         name: 'Ghost Da Killer',
@@ -145,75 +145,75 @@ let currentPage = 'home';
 const matchData = {
     fixtures: [
         // Matchday 1 - May 12, 2025
-        { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f2', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'omara', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f4', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - May 13, 2025
         { id: 'f5', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'priest', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f6', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'newton', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f6', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f7', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'ghost', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3 - May 14, 2025
         { id: 'f9', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f11', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'omara', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f12', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 4 - May 15, 2025
         { id: 'f13', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'offer-art', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f14', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f16', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - May 16, 2025
         { id: 'f17', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'offer-art', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f18', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f19', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f20', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'priest', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f20', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'priest', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - May 17, 2025
         { id: 'f21', matchday: 6, date: '2025-05-17', time: '20:00', homeTeam: 'omara', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f22', matchday: 6, date: '2025-05-17', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f23', matchday: 6, date: '2025-05-17', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-05-17', time: '20:00', homeTeam: 'smiles', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f24', matchday: 6, date: '2025-05-17', time: '20:00', homeTeam: 'priest', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 7 - May 18, 2025
         { id: 'f25', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'offer-art', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f26', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'omara', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f26', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'omara', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f27', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f28', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 8 - May 19, 2025
         { id: 'f29', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'newton', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f30', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'imoizy', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f31', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f31', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f32', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'omara', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 9 - May 20, 2025
         { id: 'f33', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'offer-art', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f34', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f35', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'imoizy', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f35', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'imoizy', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f36', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 10 - May 21, 2025
-        { id: 'f37', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f37', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f38', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f39', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'newton', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f40', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 11 - May 22, 2025
         { id: 'f41', matchday: 11, date: '2025-05-22', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f42', matchday: 11, date: '2025-05-22', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f42', matchday: 11, date: '2025-05-22', time: '20:00', homeTeam: 'smiles', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f43', matchday: 11, date: '2025-05-22', time: '20:00', homeTeam: 'priest', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f44', matchday: 11, date: '2025-05-22', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 12 - May 23, 2025
         { id: 'f45', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'offer-art', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f46', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f46', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f47', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f48', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'omara', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 13 - May 24, 2025
         { id: 'f49', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f50', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'omara', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f51', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f52', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f52', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'smiles', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 14 - May 25, 2025
         { id: 'f53', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'offer-art', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f54', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f55', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'priest', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f56', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } }
+        { id: 'f56', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } }
     ]
 };
 
@@ -2138,7 +2138,7 @@ function initializeMatchdaySelectors() {
 const ytyCupFixtures = [
     // Quarter Finals
     { id: 'yqf1', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'omara', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
+    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'omara', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
     { id: 'yqf3', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'offer-art', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
