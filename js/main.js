@@ -153,7 +153,7 @@ const matchData = {
         { id: 'f5', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'priest', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f6', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'newton', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f7', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'completed', score: { home: 4, away: 2 } },
-        { id: 'f8', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'ghost', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f8', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'ghost', awayTeam: 'omara', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 3 - May 14, 2025
         { id: 'f9', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -1060,6 +1060,10 @@ function getPageContent(pageId) {
                                                 <span class="stat-value">0</span>
                                                 <span class="stat-label">Points</span>
                                             </div>
+                                            <div class="stat-box win-percentage">
+                                                <span class="stat-value">0.0%</span>
+                                                <span class="stat-label">Win %</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-stats">
@@ -1171,6 +1175,10 @@ function getPageContent(pageId) {
                                             <div class="stat-box">
                                                 <span class="stat-value">0</span>
                                                 <span class="stat-label">Points</span>
+                                            </div>
+                                            <div class="stat-box win-percentage">
+                                                <span class="stat-value">0.0%</span>
+                                                <span class="stat-label">Win %</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1862,6 +1870,10 @@ function getTeamStatsAndForm(teamId) {
             matchday: match.matchday
         });
     });
+    // Calculate win percentage
+    stats.winPercentage = stats.matchesPlayed > 0 ? 
+        ((stats.wins / stats.matchesPlayed) * 100).toFixed(1) : '0.0';
+    
     // Keep all form results, no slicing
     stats.recentMatches = stats.recentMatches.reverse(); // newest first
     return stats;
@@ -1883,7 +1895,7 @@ function loadTeamStats(teamId) {
         }
     }
     document.querySelector('.manager-name').textContent = team.manager;
-    // Update stats display (now 8 stat boxes)
+    // Update stats display (now 9 stat boxes including win percentage)
     document.querySelector('.stat-box:nth-child(1) .stat-value').textContent = teamPosition;
     document.querySelector('.stat-box:nth-child(2) .stat-value').textContent = stats.matchesPlayed;
     document.querySelector('.stat-box:nth-child(3) .stat-value').textContent = stats.wins;
@@ -1892,6 +1904,7 @@ function loadTeamStats(teamId) {
     document.querySelector('.stat-box:nth-child(6) .stat-value').textContent = stats.goalsFor;
     document.querySelector('.stat-box:nth-child(7) .stat-value').textContent = stats.goalsAgainst;
     document.querySelector('.stat-box:nth-child(8) .stat-value').textContent = stats.points;
+    document.querySelector('.stat-box:nth-child(9) .stat-value').textContent = `${stats.winPercentage}%`;
     
     // Update form indicators with symbols
     const formIndicatorsContainer = document.querySelector('.form-indicators');
@@ -2416,5 +2429,44 @@ function getTeamOverview(teamId) {
             progression: ytyProgression
         }
     };
+}
+
+function showTeamStats(teamId) {
+    const team = teamsData[teamId];
+    if (!team) return;
+
+    const stats = getTeamStatsAndForm(teamId);
+    const winPercentage = ((stats.wins / (stats.wins + stats.losses + stats.draws)) * 100).toFixed(1);
+
+    const modalContent = `
+        <div class="team-stats-modal">
+            <div class="modal-header">
+                <h3>${team.name} Statistics</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-value">${stats.wins}</span>
+                    <span class="stat-label">Wins</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">${stats.losses}</span>
+                    <span class="stat-label">Losses</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">${stats.draws}</span>
+                    <span class="stat-label">Draws</span>
+                </div>
+                <div class="stat-box win-percentage">
+                    <span class="stat-value">${winPercentage}%</span>
+                    <span class="stat-label">Win Rate</span>
+                </div>
+            </div>
+            // ... existing code ...
+        </div>
+    `;
+
+    // Update the modal content
+    document.querySelector('.team-stats-modal').innerHTML = modalContent;
 }
 
