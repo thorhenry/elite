@@ -145,7 +145,7 @@ let currentPage = 'home';
 const matchData = {
     fixtures: [
         // Matchday 1 - May 12, 2025
-        { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'maria-khan', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f2', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'omara', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f4', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 1 } },
@@ -306,29 +306,7 @@ function getPageContent(pageId) {
                 ];
                 return all.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 3);
             }
-
-            // Recent Results (last 3 completed matches from all competitions)
-            function getRecentResults() {
-                // League
-                const leagueResults = matchData.fixtures.filter(f => f.status === 'completed');
-                // YTY Cup
-                const ytyResults = ytyCupFixtures.filter(f => f.status === 'completed');
-                // Super Cup
-                const superResults = superCupFixture.status === 'completed' ? [superCupFixture] : [];
-                // Champions League
-                const clResults = typeof championsLeagueFixtures !== 'undefined' ? championsLeagueFixtures.filter(f => f.status === 'completed') : [];
-                // Combine and sort by date
-                const all = [
-                    ...leagueResults.map(f => ({...f, competition: 'League'})),
-                    ...ytyResults.map(f => ({...f, competition: 'YTY Cup'})),
-                    ...superResults.map(f => ({...f, competition: 'Super Cup'})),
-                    ...clResults.map(f => ({...f, competition: 'Champions League'})),
-                ];
-                return all.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
-            }
-
             const upcomingMatches = getUpcomingMatches();
-            const recentResults = getRecentResults();
             // Mini League Table (top 4 and bottom 2)
             const leagueTable = computeLeagueTable();
             const top4 = leagueTable.slice(0, 4);
@@ -342,8 +320,8 @@ function getPageContent(pageId) {
                         <h2 style="font-size:2.1em;font-weight:800;letter-spacing:0.01em;color:var(--primary-color);margin-bottom:0.2em;">Welcome to Elite League</h2>
                         <p style="color:var(--text-color);font-size:1.13em;max-width:500px;margin:0 auto;">Your hub for all things Elite League: fixtures, results, tables, cups, and more. Stay updated and explore the competition!</p>
                     </div>
-                    <div class="home-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:2.5em;align-items:start;max-width:1800px;margin:0 auto;">
-                        <div class="home-news" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;">
+                    <div class="home-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5em;align-items:start;max-width:1800px;margin:0 auto;">
+                        <div class="home-news" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Latest News</h3>
                             <div class="news-list">
                                 ${homeNews.map(n => `
@@ -355,95 +333,91 @@ function getPageContent(pageId) {
                                 `).join('')}
                             </div>
                         </div>
-                        <div class="home-upcoming" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;">
+                        <div class="home-fixtures" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Upcoming Matches</h3>
-                            <div class="upcoming-list">
+                            <div class="fixtures-list">
                                 ${upcomingMatches.length === 0 ? `<div style='color:var(--text-color);font-size:1.05em;'>No upcoming matches</div>` :
                                     upcomingMatches.map(match => `
-                                        <div class="fixture-card" style="margin-bottom:1em;">
-                                            <div class="match-details">
-                                                <div class="team home">
-                                                    <img src="${teamsData[match.homeTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.homeTeam]?.name || 'TBD'}" class="team-logo-small">
-                                                    <span style="color:var(--text-color);">${teamsData[match.homeTeam]?.name || 'TBD'}</span>
+                                        <div class="fixture-card" style="margin-bottom:1em;background:var(--card-bg);border-radius:10px;padding:1em;">
+                                            <div class="match-details" style="display:flex;flex-direction:column;gap:0.5em;">
+                                                <div class="team home" style="display:flex;align-items:center;gap:0.5em;">
+                                                    <img src="${teamsData[match.homeTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.homeTeam]?.name || 'TBD'}" class="team-logo-small" style="width:24px;height:24px;border-radius:50%;background:#fff;">
+                                                    <span style="color:var(--text-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${teamsData[match.homeTeam]?.name || 'TBD'}</span>
                                                 </div>
-                                                <div class="vs" style="color:var(--text-color);">vs</div>
-                                                <div class="team away">
-                                                    <img src="${teamsData[match.awayTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.awayTeam]?.name || 'TBD'}" class="team-logo-small">
-                                                    <span style="color:var(--text-color);">${teamsData[match.awayTeam]?.name || 'TBD'}</span>
-                                                </div>
-                                            </div>
-                                            <div class="match-info">
-                                                <div class="date" style="color:var(--secondary-text);">${match.date} ${match.time || ''}</div>
-                                                <div class="venue" style="color:var(--secondary-text);">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
-                                                <div class="match-status ${match.status}" style="color:var(--text-color);">${match.competition}</div>
-                                            </div>
-                                        </div>
-                                    `).join('')
-                                }
-                            </div>
-                        </div>
-                        <div class="home-results" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;">
-                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Recent Results</h3>
-                            <div class="results-list">
-                                ${recentResults.length === 0 ? `<div style='color:var(--text-color);font-size:1.05em;'>No recent results</div>` :
-                                    recentResults.map(match => `
-                                        <div class="result-card" style="margin-bottom:1em;">
-                                            <div class="match-details">
-                                                <div class="team home">
-                                                    <img src="${teamsData[match.homeTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.homeTeam]?.name || 'TBD'}" class="team-logo-small">
-                                                    <span style="color:var(--text-color);">${teamsData[match.homeTeam]?.name || 'TBD'}</span>
-                                                </div>
-                                                <div class="score" style="color:var(--accent-color);font-weight:700;">${match.score.home} - ${match.score.away}</div>
-                                                <div class="team away">
-                                                    <img src="${teamsData[match.awayTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.awayTeam]?.name || 'TBD'}" class="team-logo-small">
-                                                    <span style="color:var(--text-color);">${teamsData[match.awayTeam]?.name || 'TBD'}</span>
+                                                <div class="vs" style="color:var(--secondary-text);font-size:0.9em;text-align:center;">vs</div>
+                                                <div class="team away" style="display:flex;align-items:center;gap:0.5em;">
+                                                    <img src="${teamsData[match.awayTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.awayTeam]?.name || 'TBD'}" class="team-logo-small" style="width:24px;height:24px;border-radius:50%;background:#fff;">
+                                                    <span style="color:var(--text-color);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${teamsData[match.awayTeam]?.name || 'TBD'}</span>
                                                 </div>
                                             </div>
-                                            <div class="match-info">
-                                                <div class="date" style="color:var(--secondary-text);">${match.date} ${match.time || ''}</div>
-                                                <div class="venue" style="color:var(--secondary-text);">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
-                                                <div class="match-status completed" style="color:var(--text-color);">${match.competition}</div>
+                                            <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);margin-top:0.5em;">
+                                                <div class="date">${match.date} ${match.time || ''}</div>
+                                                <div class="venue" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
                                             </div>
                                         </div>
                                     `).join('')
                                 }
                             </div>
                         </div>
-                        <div class="home-table">
+                        <div class="home-table" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">League Table (Top 4 & Bottom 2)</h3>
-                            <div style="width:100%;background:none;box-shadow:none;">
-                                <table class="league-table" style="margin-bottom:1em;min-width:400px;border-radius:14px;overflow:hidden;">
+                            <div style="width:100%;background:none;box-shadow:none;overflow-x:auto;">
+                                <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;overflow:hidden;min-width:300px;">
                                     <thead>
                                         <tr>
-                                            <th style="color:var(--text-color);">Pos</th>
-                                            <th style="color:var(--text-color);">Team</th>
-                                            <th style="color:var(--text-color);">P</th>
-                                            <th style="color:var(--text-color);">Pts</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;">Pos</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;">Team</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">P</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">Pts</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        ${[...top4, ...bottom2].map((team, idx) => `
-                                            <tr style="background:${idx < 4 ? 'var(--card-bg)' : 'var(--light-bg)'};">
-                                                <td style="color:var(--text-color);">${idx + 1}</td>
-                                                <td style="color:var(--text-color);">${team.name}</td>
-                                                <td style="color:var(--text-color);">${team.played}</td>
-                                                <td style="color:var(--text-color);">${team.points}</td>
+                                        ${top4.map((team, idx) => `
+                                            <tr class="cl-qualifier">
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;">${idx + 1}</td>
+                                                <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);padding:0.8em 0.5em;">
+                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">
+                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${team.name}</span>
+                                                </td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
+                                            </tr>
+                                        `).join('')}
+                                        ${bottom2.map((team, idx) => `
+                                            <tr class="relegated">
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;">${leagueTable.length - 2 + idx + 1}</td>
+                                                <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);padding:0.8em 0.5em;">
+                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">
+                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${team.name}</span>
+                                                </td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
+                                                <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
                                             </tr>
                                         `).join('')}
                                     </tbody>
                                 </table>
                             </div>
-                            <a href="#table" style="color:var(--accent-color);font-weight:600;font-size:1em;text-decoration:none;">View Full Table &rarr;</a>
                         </div>
-                        <div class="home-links" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;display:flex;flex-direction:column;gap:1em;align-items:center;justify-content:center;">
-                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Quick Links</h3>
-                            <a href="#teams" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Teams</a>
-                            <a href="#fixtures" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Fixtures</a>
-                            <a href="#results" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Results</a>
-                            <a href="#table" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Table</a>
-                            <a href="#cups" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Cups</a>
-                            <a href="#champions-league" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Champions League</a>
-                            <a href="#search" class="home-link-btn" style="display:block;width:100%;padding:0.8em;text-align:center;background:var(--light-bg);color:var(--text-color);text-decoration:none;border-radius:8px;font-weight:500;transition:all 0.2s;">Search</a>
+                        <div class="home-links" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:1em;align-items:center;justify-content:center;">
+                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:0.5em;">Quick Links</h3>
+                            <div class="links-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1em;width:100%;">
+                                <a href="#fixtures" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-calendar-alt" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Fixtures</span>
+                                </a>
+                                <a href="#results" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-futbol" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Results</span>
+                                </a>
+                                <a href="#table" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-table" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Table</span>
+                                </a>
+                                <a href="#teams" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-users" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Teams</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -504,13 +478,9 @@ function getPageContent(pageId) {
                                                         <span>${matchUtils.getTeamName(match.awayTeam)}</span>
                                                     </div>
                                                 </div>
-                                                <div class="match-info">
-                                                    <div class="date">${matchUtils.formatMatchDate(match.date, match.time)}</div>
-                                                    <div class="venue">${matchUtils.getVenue(match.homeTeam)}</div>
-                                                    ${match.status === 'completed' ? 
-                                                        `<div class="match-status completed">Completed</div>` :
-                                                        `<div class="match-status scheduled">Scheduled</div>`
-                                                    }
+                                                <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);">
+                                                    <div class="date">${match.date} ${match.time || ''}</div>
+                                                    <div class="venue" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
                                                 </div>
                                             </div>
                                         `;
@@ -567,60 +537,32 @@ function getPageContent(pageId) {
                                 <div class="result-week" data-matchday="${matchday}">
                                     <h3>Matchday ${matchday}</h3>
                                     <div class="result-list">
-                                        ${matches.map(match => {
-                                            const homeTeam = teamUtils.getTeamName(match.homeTeam);
-                                            const awayTeam = teamUtils.getTeamName(match.awayTeam);
-                                            let resultColor = '';
-                                            if (match.status === 'completed' && match.score) {
-                                                // If the selected team is the home team
-                                                if (homeTeam === document.getElementById('resultsTeamSelect')?.value) {
-                                                    if (match.score.home > match.score.away) {
-                                                        resultColor = '#4caf50'; // Win - Green
-                                                    } else if (match.score.home < match.score.away) {
-                                                        resultColor = '#f44336'; // Loss - Red
-                                                    } else {
-                                                        resultColor = '#ffc107'; // Draw - Yellow
-                                                    }
-                                                }
-                                                // If the selected team is the away team
-                                                else if (awayTeam === document.getElementById('resultsTeamSelect')?.value) {
-                                                    if (match.score.away > match.score.home) {
-                                                        resultColor = '#4caf50'; // Win - Green
-                                                    } else if (match.score.away < match.score.home) {
-                                                        resultColor = '#f44336'; // Loss - Red
-                                                    } else {
-                                                        resultColor = '#ffc107'; // Draw - Yellow
-                                                    }
-                                                }
-                                            }
-                                            return `
-                                            <div class="result-card"
-                                                 data-home="${homeTeam}"
-                                                 data-away="${awayTeam}"
-                                                 data-status="${match.status}"
-                                                 style="${resultColor ? `border-left: 4px solid ${resultColor};` : ''}">
-                                                <div class="match-details">
-                                                    <div class="team home">
-                                                        <img src="${teamUtils.getTeamById(match.homeTeam).logo}" 
-                                                             alt="${homeTeam}" 
-                                                             class="team-logo-small">
-                                                        <span>${homeTeam}</span>
-                                                    </div>
-                                                    <div class="score" style="${resultColor ? `color: ${resultColor};` : ''}">${match.score.home} - ${match.score.away}</div>
-                                                    <div class="team away">
-                                                        <img src="${teamUtils.getTeamById(match.awayTeam).logo}" 
-                                                             alt="${awayTeam}" 
-                                                             class="team-logo-small">
-                                                        <span>${awayTeam}</span>
-                                                    </div>
+                                        ${matches.map(match => `
+                                        <div class="result-card"
+                                             data-home="${teamUtils.getTeamName(match.homeTeam)}"
+                                             data-away="${teamUtils.getTeamName(match.awayTeam)}"
+                                             data-status="${match.status}">
+                                            <div class="match-details">
+                                                <div class="team home">
+                                                    <img src="${teamUtils.getTeamById(match.homeTeam).logo}" 
+                                                         alt="${matchUtils.getTeamName(match.homeTeam)}" 
+                                                         class="team-logo-small">
+                                                    <span>${matchUtils.getTeamName(match.homeTeam)}</span>
                                                 </div>
-                                                <div class="match-info">
-                                                    <div class="date">${matchUtils.formatMatchDate(match.date, match.time)}</div>
-                                                    <div class="venue">${matchUtils.getVenue(match.homeTeam)}</div>
-                                                    <div class="match-status ${match.status}" style="${resultColor ? `background: rgba(${resultColor === '#4caf50' ? '76, 175, 80' : resultColor === '#f44336' ? '244, 67, 54' : '255, 193, 7'}, 0.1); color: ${resultColor};` : ''}">${match.status.charAt(0).toUpperCase() + match.status.slice(1)}</div>
+                                                <div class="score">${match.score.home} - ${match.score.away}</div>
+                                                <div class="team away">
+                                                    <img src="${teamUtils.getTeamById(match.awayTeam).logo}" 
+                                                         alt="${matchUtils.getTeamName(match.awayTeam)}" 
+                                                         class="team-logo-small">
+                                                    <span>${matchUtils.getTeamName(match.awayTeam)}</span>
                                                 </div>
                                             </div>
-                                        `}).join('')}
+                                            <div class="match-info">
+                                                <div class="date">${matchUtils.formatMatchDate(match.date, match.time)}</div>
+                                                <div class="venue">${matchUtils.getVenue(match.homeTeam)}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
                                     </div>
                                 </div>
                             `;
@@ -1163,30 +1105,30 @@ function getPageContent(pageId) {
         case 'search':
             return `
                 <section class="search-section">
-                    <div class="search-container">
+                    <div class="search-container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
                         <div class="search-header">
                             <h2>Search</h2>
-                            <div class="search-input-wrapper">
+                            <div class="search-input-wrapper" style="width: 100%; max-width: 800px; margin: 0 auto;">
                                 <input type="text" id="searchInput" placeholder="Search teams, matches, news..." class="search-input">
                                 <button class="search-submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="search-filters">
+                        <div class="search-filters" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 1rem 0;">
                             <button class="filter-btn active" data-filter="all">All</button>
                             <button class="filter-btn" data-filter="teams">Teams</button>
                             <button class="filter-btn" data-filter="matches">Matches</button>
                             <button class="filter-btn" data-filter="news">News</button>
                         </div>
                         <div class="search-results">
-                            <div class="results-container">
+                            <div class="results-container" style="max-width: 800px; margin: 0 auto;">
                                 <!-- Results will be populated here -->
                             </div>
                         </div>
                     </div>
                     <div class="team-stats-modal">
-                        <div class="stats-content">
+                        <div class="stats-content" style="width: 90%; max-width: 800px;">
                             <button class="close-stats-btn">
                                 <i class="fas fa-times"></i>
                             </button>
@@ -1212,7 +1154,7 @@ function getPageContent(pageId) {
                                 <div class="stats-panel active" id="overview">
                                     <div class="season-stats">
                                         <h4>Season Statistics</h4>
-                                        <div class="stats-grid">
+                                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
                                             <div class="stat-box">
                                                 <span class="stat-value">0</span>
                                                 <span class="stat-label">Position</span>
@@ -1265,9 +1207,7 @@ function getPageContent(pageId) {
                                 <div class="stats-panel" id="matches">
                                     <div class="match-history">
                                         <h4>Recent Matches</h4>
-                                        <div class="match-list">
-                                            <!-- Match history will be populated here -->
-                                        </div>
+                                        <!-- Match history will be populated here -->
                                     </div>
                                 </div>
                             </div>
