@@ -775,18 +775,18 @@ function getPageContent(pageId) {
             // --- Champions League Data ---
             // --- Champions League Fixtures Data (static) ---
             const championsLeagueFixtures = [
-                { id: 'clf1', matchday: 1, date: '2025-07-01', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf2', matchday: 1, date: '2025-07-01', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf3', matchday: 2, date: '2025-07-02', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf4', matchday: 2, date: '2025-07-02', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf5', matchday: 3, date: '2025-07-03', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf6', matchday: 3, date: '2025-07-03', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf7', matchday: 4, date: '2025-07-04', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf8', matchday: 4, date: '2025-07-04', time: '22:00', homeTeam: 'imoizy', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf9', matchday: 5, date: '2025-07-05', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf10', matchday: 5, date: '2025-07-05', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf11', matchday: 6, date: '2025-07-06', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf12', matchday: 6, date: '2025-07-06', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } }
+                { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf4', matchday: 2, date: '2025-05-16', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf5', matchday: 3, date: '2025-05-28', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf6', matchday: 3, date: '2025-05-28', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf7', matchday: 4, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf8', matchday: 4, date: '2025-05-20', time: '22:00', homeTeam: 'imoizy', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf9', matchday: 5, date: '2025-05-22', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf10', matchday: 5, date: '2025-05-22', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+                { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } }
             ];
             // Get unique team IDs from the fixtures
             const clTeamIds = Array.from(new Set(championsLeagueFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
@@ -847,7 +847,7 @@ function getPageContent(pageId) {
             const clFinal = {
                 id: 'clfinal',
                 matchday: 7,
-                date: '2025-07-20',
+                date: '2025-05-26',
                 time: '20:00',
                 homeTeam: 'tbd',
                 awayTeam: 'tbd',
@@ -1340,8 +1340,8 @@ const themeManager = {
     currentTheme: 'light',
 
     init() {
-        // Load saved theme or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         this.setTheme(savedTheme);
         this.createThemeToggle();
     },
@@ -2137,17 +2137,17 @@ function initializeMatchdaySelectors() {
 // --- YTY Cup Fixtures ---
 const ytyCupFixtures = [
     // Quarter Finals
-    { id: 'yqf1', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'omara', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
-    { id: 'yqf3', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf4', round: 'Quarter Final', date: '2025-05-16', time: '22:00', homeTeam: 'offer-art', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf1', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'omara', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
+    { id: 'yqf3', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf4', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'offer-art', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
-    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-05-19', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-05-19', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-05-19', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-05-19', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Final
-    { id: 'yfinal', round: 'Final', date: '2025-05-26', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
+    { id: 'yfinal', round: 'Final', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
 ];
 
 // --- Super Cup Fixture ---
