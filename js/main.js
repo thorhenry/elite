@@ -1154,7 +1154,7 @@ function getPageContent(pageId) {
                                 <div class="stats-panel active" id="overview">
                                     <div class="season-stats">
                                         <h4>Season Statistics</h4>
-                                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+                                        <div class="stats-grid">
                                             <div class="stat-box">
                                                 <span class="stat-value">0</span>
                                                 <span class="stat-label">Position</span>
@@ -1207,7 +1207,9 @@ function getPageContent(pageId) {
                                 <div class="stats-panel" id="matches">
                                     <div class="match-history">
                                         <h4>Recent Matches</h4>
-                                        <!-- Match history will be populated here -->
+                                        <div class="match-list">
+                                            <!-- Match history will be populated here -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
