@@ -1264,6 +1264,20 @@ section h2 {
     box-shadow: var(--shadow);
 }
 
+.stat-box.win-percentage {
+    background: linear-gradient(135deg, #4caf50, #8bc34a);
+    color: white;
+}
+
+.stat-box.win-percentage .stat-value {
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.stat-box.win-percentage .stat-label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .stat-value {
     display: block;
     font-size: 1.8rem;
