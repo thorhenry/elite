@@ -1348,8 +1348,15 @@ const themeManager = {
         // Add click handler for search
         const searchBtn = document.querySelector('.search-btn');
         searchBtn.addEventListener('click', () => {
-            // TODO: Implement search functionality
-            console.log('Search clicked');
+            currentPage = 'search';
+            loadPage('search');
+            // Focus the search input when the page loads
+            setTimeout(() => {
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.focus();
+                }
+            }, 100);
         });
 
         // Set initial button state
@@ -1599,6 +1606,19 @@ function searchContent(query, filter) {
                 }
             });
         }
+
+        // Sort matches by date
+        results.sort((a, b) => {
+            if (a.type === 'match' && b.type === 'match') {
+                const dateA = new Date(a.data.date);
+                const dateB = new Date(b.data.date);
+                return dateA - dateB;
+            }
+            // Keep non-match results at the top
+            if (a.type !== 'match') return -1;
+            if (b.type !== 'match') return 1;
+            return 0;
+        });
     }
 
     // Search news (if you have a news array, use it; else keep demo)
@@ -1623,17 +1643,38 @@ function createResultCard(result) {
 
     switch (result.type) {
         case 'team':
+            const team = result.data;
+            const overview = getTeamOverview(result.id);
+            const leagueTable = computeLeagueTable();
+            const teamPosition = leagueTable.findIndex(t => t.teamId === result.id) + 1;
+            const teamStats = leagueTable.find(t => t.teamId === result.id) || {};
+            
             card.innerHTML = `
                 <div class="team-result" style="display:flex;align-items:center;gap:1.2em;padding:1.2em;background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
                     <div class="team-badge" style="flex-shrink:0;">
-                        <img src="${result.data.logo}" alt="${result.data.name} logo" class="team-logo" style="width:64px;height:64px;border-radius:50%;background:white;padding:0.3em;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-                    </div>
+                        <img src="${team.logo}" alt="${team.name} logo" class="team-logo" style="width:64px;height:64px;border-radius:50%;background:white;padding:0.3em;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+                        </div>
                     <div class="result-content" style="flex-grow:1;">
-                        <h3 style="margin:0 0 0.3em 0;font-size:1.2em;color:var(--accent-color);font-weight:700;">${result.data.name}</h3>
-                        <p style="margin:0 0 0.8em 0;color:var(--secondary-text);font-size:0.95em;">${result.data.stadium} • ${result.data.manager}</p>
+                        <h3 style="margin:0 0 0.3em 0;font-size:1.2em;color:var(--accent-color);font-weight:700;">${team.name}</h3>
+                        <p style="margin:0 0 0.8em 0;color:var(--secondary-text);font-size:0.95em;">
+                            ${team.stadium} • ${team.manager} • Founded: ${team.founded} • Capacity: ${team.capacity.toLocaleString()}
+                        </p>
+                        <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;">
+                            <strong>League Position:</strong> ${teamPosition} • <strong>Points:</strong> ${teamStats.points || 0} • 
+                            <strong>Record:</strong> W${teamStats.won || 0} D${teamStats.drawn || 0} L${teamStats.lost || 0} • 
+                            <strong>Goals:</strong> ${teamStats.goalsFor || 0}-${teamStats.goalsAgainst || 0}
+                        </p>
+                        <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;">
+                            <strong>Champions League:</strong> ${overview.championsLeague.inCompetition ? 
+                                `${overview.championsLeague.progression || 'Group Stage'} (Position: ${overview.championsLeague.groupPosition || '-'})` : 
+                                'Not in competition'} • 
+                            <strong>YTY Cup:</strong> ${overview.ytyCup.inCompetition ? 
+                                overview.ytyCup.progression || 'In Progress' : 
+                                'Not in competition'}
+                        </p>
                         <button class="view-info-btn" data-team="${result.id}" style="background:var(--primary-color);color:white;border:none;padding:0.6em 1.2em;border-radius:6px;font-size:0.95em;font-weight:500;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5em;">
                             <i class="fas fa-info-circle"></i>
-                            View Info
+                            View Detailed Stats
                         </button>
                     </div>
                 </div>
@@ -1689,9 +1730,9 @@ function createResultCard(result) {
         case 'news':
             card.innerHTML = `
                 <div class="news-result" style="background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);padding:1.2em;">
-                    <h3 style="margin:0 0 0.5em 0;font-size:1.2em;color:var(--accent-color);font-weight:700;">${result.data.title}</h3>
-                    <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;line-height:1.5;">${result.data.content}</p>
-                    <span class="news-date" style="font-size:0.9em;color:var(--secondary-text);">${result.data.date}</span>
+                    <h3 style="margin:0 0 0.5em 0;font-size:1.2em;color:var(--text-color);">${result.data.title}</h3>
+                    <p style="margin:0 0 0.8em 0;color:var(--secondary-text);font-size:0.95em;">${result.data.content}</p>
+                    <div class="news-date" style="color:var(--accent-color);font-size:0.85em;font-weight:500;">${result.data.date}</div>
                 </div>
             `;
             break;
@@ -2218,10 +2259,10 @@ const championsLeagueFinal = {
     matchday: 7,
     date: '2025-05-26',
     time: '20:00',
-    homeTeam: 'tbd',
-    awayTeam: 'tbd',
-    status: 'scheduled',
-    score: { home: 0, away: 0 },
+    homeTeam: 'priest',
+    awayTeam: 'newton',
+    status: 'completed',
+    score: { home: 2, away: 1 },
     penalties: { home: 0, away: 0 }
 };
 
@@ -2266,71 +2307,83 @@ function getTeamOverview(teamId) {
     const leagueTable = computeLeagueTable();
     const leaguePos = leagueTable.findIndex(t => t.teamId === teamId) + 1;
     const leagueStats = leagueTable.find(t => t.teamId === teamId) || {};
+    
     // Champions League status
     let inCL = false, clGroup = null, clGroupPos = null, clProgression = null;
-    if (typeof championsLeagueFixtures !== 'undefined') {
-        // Get unique team IDs from the fixtures
-        const clTeamIds = Array.from(new Set(championsLeagueFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
-        // Is team in CL group?
-        inCL = clTeamIds.includes(teamId);
-        if (inCL) {
-            // Compute CL group table
-            const clTable = (function() {
-                const table = {};
-                clTeamIds.forEach(tid => {
-                    table[tid] = {
-                        teamId: tid,
-                        name: teamsData[tid]?.name || tid,
-                        played: 0,
-                        won: 0,
-                        drawn: 0,
-                        lost: 0,
-                        goalsFor: 0,
-                        goalsAgainst: 0,
-                        points: 0
-                    };
-                });
-                championsLeagueFixtures.forEach(fix => {
-                    if (fix.status === 'completed' && fix.score) {
-                        const home = table[fix.homeTeam];
-                        const away = table[fix.awayTeam];
-                        home.played++;
-                        away.played++;
-                        home.goalsFor += fix.score.home;
-                        home.goalsAgainst += fix.score.away;
-                        away.goalsFor += fix.score.away;
-                        away.goalsAgainst += fix.score.home;
-                        if (fix.score.home > fix.score.away) {
-                            home.won++;
-                            home.points += 3;
-                            away.lost++;
-                        } else if (fix.score.home < fix.score.away) {
-                            away.won++;
-                            away.points += 3;
-                            home.lost++;
-                        } else {
-                            home.drawn++;
-                            away.drawn++;
-                            home.points++;
-                            away.points++;
-                        }
+    
+    // Get Champions League fixtures
+    const championsLeagueFixtures = getChampionsLeagueFixtures();
+    // Get unique team IDs from the fixtures
+    const clTeamIds = Array.from(new Set(championsLeagueFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
+    
+    // Check if team is in CL group
+    inCL = clTeamIds.includes(teamId);
+    
+    if (inCL) {
+        // Compute CL group table
+        const clTable = (function() {
+            const table = {};
+            clTeamIds.forEach(tid => {
+                table[tid] = {
+                    teamId: tid,
+                    name: teamsData[tid]?.name || tid,
+                    played: 0,
+                    won: 0,
+                    drawn: 0,
+                    lost: 0,
+                    goalsFor: 0,
+                    goalsAgainst: 0,
+                    points: 0
+                };
+            });
+            championsLeagueFixtures.forEach(fix => {
+                if (fix.status === 'completed' && fix.score) {
+                    const home = table[fix.homeTeam];
+                    const away = table[fix.awayTeam];
+                    home.played++;
+                    away.played++;
+                    home.goalsFor += fix.score.home;
+                    home.goalsAgainst += fix.score.away;
+                    away.goalsFor += fix.score.away;
+                    away.goalsAgainst += fix.score.home;
+                    if (fix.score.home > fix.score.away) {
+                        home.won++;
+                        home.points += 3;
+                        away.lost++;
+                    } else if (fix.score.home < fix.score.away) {
+                        away.won++;
+                        away.points += 3;
+                        home.lost++;
+                    } else {
+                        home.drawn++;
+                        away.drawn++;
+                        home.points++;
+                        away.points++;
                     }
-                });
-                return Object.values(table).sort((a, b) => {
-                    if (b.points !== a.points) return b.points - a.points;
-                    const gdA = a.goalsFor - a.goalsAgainst;
-                    const gdB = b.goalsFor - b.goalsAgainst;
-                    if (gdB !== gdA) return gdB - gdA;
-                    if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
-                    return a.name.localeCompare(b.name);
-                });
-            })();
-            clGroup = clTable;
-            clGroupPos = clTable.findIndex(t => t.teamId === teamId) + 1;
+                }
+            });
+            return Object.values(table).sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                const gdA = a.goalsFor - a.goalsAgainst;
+                const gdB = b.goalsFor - b.goalsAgainst;
+                if (gdB !== gdA) return gdB - gdA;
+                if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
+                return a.name.localeCompare(b.name);
+            });
+        })();
+        clGroup = clTable;
+        clGroupPos = clTable.findIndex(t => t.teamId === teamId) + 1;
+        
+        // Check if team is in the final
+        const isInFinal = championsLeagueFinal.homeTeam === teamId || championsLeagueFinal.awayTeam === teamId;
+        if (isInFinal) {
+            clProgression = 'Final';
+        } else {
             // Progression: top 2 go to final
-            clProgression = clGroupPos > 0 && clGroupPos <= 2 ? 'Final' : 'Group';
+            clProgression = clGroupPos > 0 && clGroupPos <= 2 ? 'Final' : 'Group Stage';
         }
     }
+    
     // YTY Cup progression
     let inYTY = false, ytyProgression = null;
     const ytyMatches = ytyCupFixtures.filter(f => f.homeTeam === teamId || f.awayTeam === teamId);
@@ -2345,6 +2398,7 @@ function getTeamOverview(teamId) {
         });
         ytyProgression = maxIdx >= 0 ? rounds[maxIdx] : null;
     }
+    
     return {
         teamDetails: team,
         league: {
