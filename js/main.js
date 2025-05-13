@@ -772,22 +772,8 @@ function getPageContent(pageId) {
         }
 
         case 'champions-league': {
-            // --- Champions League Data ---
-            // --- Champions League Fixtures Data (static) ---
-            const championsLeagueFixtures = [
-                { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf4', matchday: 2, date: '2025-05-16', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf5', matchday: 3, date: '2025-05-28', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf6', matchday: 3, date: '2025-05-28', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf7', matchday: 4, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf8', matchday: 4, date: '2025-05-20', time: '22:00', homeTeam: 'imoizy', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf9', matchday: 5, date: '2025-05-22', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf10', matchday: 5, date: '2025-05-22', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-                { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } }
-            ];
+            // Get Champions League fixtures
+            const championsLeagueFixtures = getChampionsLeagueFixtures();
             // Get unique team IDs from the fixtures
             const clTeamIds = Array.from(new Set(championsLeagueFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
             // Compute dynamic group table from completed fixtures
@@ -843,18 +829,6 @@ function getPageContent(pageId) {
                 });
             }
             const clGroupTable = computeCLGroupTable();
-            // Final placeholder
-            const clFinal = {
-                id: 'clfinal',
-                matchday: 7,
-                date: '2025-05-26',
-                time: '20:00',
-                homeTeam: 'tbd',
-                awayTeam: 'tbd',
-                status: 'scheduled',
-                score: { home: 0, away: 0 },
-                penalties: { home: 0, away: 0 }
-            };
             // Group CL fixtures by matchday
             const clMatchdays = Array.from(new Set(championsLeagueFixtures.map(f => f.matchday))).sort((a, b) => a - b);
             return `
@@ -929,30 +903,30 @@ function getPageContent(pageId) {
                             }).join('')}
                         </div>
                         <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-color);margin-bottom:0.7em;text-align:center;">Final</h3>
-                        <div class="fixture-week" data-matchday="${clFinal.matchday}">
+                        <div class="fixture-week" data-matchday="${championsLeagueFinal.matchday}">
                             <h3>Final</h3>
                             <div class="fixture-list">
-                                <div class="fixture-card${clFinal.status === 'completed' ? ' completed' : ''}">
+                                <div class="fixture-card${championsLeagueFinal.status === 'completed' ? ' completed' : ''}">
                                     <div class="match-details">
                                         <div class="team home">
-                                            <img src="${clFinal.homeTeam === 'tbd' ? 'images/club-logos/tbd.svg' : teamsData[clFinal.homeTeam]?.logo}" alt="${clFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[clFinal.homeTeam]?.name}" class="team-logo-small">
-                                            <span>${clFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[clFinal.homeTeam]?.name}</span>
+                                            <img src="${championsLeagueFinal.homeTeam === 'tbd' ? 'images/club-logos/tbd.svg' : teamsData[championsLeagueFinal.homeTeam]?.logo}" alt="${championsLeagueFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.homeTeam]?.name}" class="team-logo-small">
+                                            <span>${championsLeagueFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.homeTeam]?.name}</span>
                                         </div>
-                                        ${clFinal.status === 'completed' && clFinal.score ?
-                                            `<div class='score'>${clFinal.score.home} - ${clFinal.score.away}</div>` :
+                                        ${championsLeagueFinal.status === 'completed' && championsLeagueFinal.score ?
+                                            `<div class='score'>${championsLeagueFinal.score.home} - ${championsLeagueFinal.score.away}</div>` :
                                             `<div class='vs'>vs</div>`
                                         }
                                         <div class="team away">
-                                            <img src="${clFinal.awayTeam === 'tbd' ? 'images/club-logos/tbd.svg' : teamsData[clFinal.awayTeam]?.logo}" alt="${clFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[clFinal.awayTeam]?.name}" class="team-logo-small">
-                                            <span>${clFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[clFinal.awayTeam]?.name}</span>
+                                            <img src="${championsLeagueFinal.awayTeam === 'tbd' ? 'images/club-logos/tbd.svg' : teamsData[championsLeagueFinal.awayTeam]?.logo}" alt="${championsLeagueFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.awayTeam]?.name}" class="team-logo-small">
+                                            <span>${championsLeagueFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.awayTeam]?.name}</span>
                                         </div>
                                     </div>
                                     <div class="match-info">
-                                        <div class="date">${clFinal.date} ${clFinal.time}</div>
-                                        <div class="venue">${clFinal.homeTeam !== 'tbd' && teamsData[clFinal.homeTeam] ? teamsData[clFinal.homeTeam].stadium : 'TBD'}</div>
-                                        <div class="match-status ${clFinal.status}">${clFinal.status.charAt(0).toUpperCase() + clFinal.status.slice(1)}</div>
-                                        ${clFinal.penalties && (clFinal.penalties.home > 0 || clFinal.penalties.away > 0) ?
-                                            `<span style='margin-left:1em;font-size:1em;color:var(--accent-color);'>(pens ${clFinal.penalties.home}-${clFinal.penalties.away})</span>` : ''}
+                                        <div class="date">${championsLeagueFinal.date} ${championsLeagueFinal.time}</div>
+                                        <div class="venue">${championsLeagueFinal.homeTeam !== 'tbd' && teamsData[championsLeagueFinal.homeTeam] ? teamsData[championsLeagueFinal.homeTeam].stadium : 'TBD'}</div>
+                                        <div class="match-status ${championsLeagueFinal.status}">${championsLeagueFinal.status.charAt(0).toUpperCase() + championsLeagueFinal.status.slice(1)}</div>
+                                        ${championsLeagueFinal.penalties && (championsLeagueFinal.penalties.home > 0 || championsLeagueFinal.penalties.away > 0) ?
+                                            `<span style='margin-left:1em;font-size:1em;color:var(--accent-color);'>(pens ${championsLeagueFinal.penalties.home}-${championsLeagueFinal.penalties.away})</span>` : ''}
                                     </div>
                                 </div>
                             </div>
@@ -1582,26 +1556,46 @@ function searchContent(query, filter) {
             });
         }
         // Champions League
-        if (typeof championsLeagueFixtures !== 'undefined') {
-            championsLeagueFixtures.forEach(match => {
-                const home = teamsData[match.homeTeam]?.name || (match.homeTeam === 'tbd' ? 'TBD' : match.homeTeam);
-                const away = teamsData[match.awayTeam]?.name || (match.awayTeam === 'tbd' ? 'TBD' : match.awayTeam);
-                if (
-                    home.toLowerCase().includes(searchQuery) ||
-                    away.toLowerCase().includes(searchQuery)
-                ) {
-                    results.push({
-                        type: 'match',
-                        competition: 'Champions League',
-                        data: {
-                            homeTeam: home,
-                            awayTeam: away,
-                            date: match.date + ' ' + (match.time || ''),
-                            venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
-                            score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                            status: match.status
-                        }
-                    });
+        const clFixtures = getChampionsLeagueFixtures();
+        clFixtures.forEach(match => {
+            const home = teamsData[match.homeTeam]?.name || (match.homeTeam === 'tbd' ? 'TBD' : match.homeTeam);
+            const away = teamsData[match.awayTeam]?.name || (match.awayTeam === 'tbd' ? 'TBD' : match.awayTeam);
+            if (
+                home.toLowerCase().includes(searchQuery) ||
+                away.toLowerCase().includes(searchQuery)
+            ) {
+                results.push({
+                    type: 'match',
+                    competition: 'Champions League',
+                    data: {
+                        homeTeam: home,
+                        awayTeam: away,
+                        date: match.date + ' ' + (match.time || ''),
+                        venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
+                        score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
+                        status: match.status
+                    }
+                });
+            }
+        });
+        // Add Champions League Final
+        const clFinal = championsLeagueFinal;
+        const clFinalHome = teamsData[clFinal.homeTeam]?.name || (clFinal.homeTeam === 'tbd' ? 'TBD' : clFinal.homeTeam);
+        const clFinalAway = teamsData[clFinal.awayTeam]?.name || (clFinal.awayTeam === 'tbd' ? 'TBD' : clFinal.awayTeam);
+        if (
+            clFinalHome.toLowerCase().includes(searchQuery) ||
+            clFinalAway.toLowerCase().includes(searchQuery)
+        ) {
+            results.push({
+                type: 'match',
+                competition: 'Champions League Final',
+                data: {
+                    homeTeam: clFinalHome,
+                    awayTeam: clFinalAway,
+                    date: clFinal.date + ' ' + (clFinal.time || ''),
+                    venue: clFinal.homeTeam !== 'tbd' && teamsData[clFinal.homeTeam] ? teamsData[clFinal.homeTeam].stadium : 'TBD',
+                    score: clFinal.status === 'completed' && clFinal.score ? `${clFinal.score.home} - ${clFinal.score.away}` : undefined,
+                    status: clFinal.status
                 }
             });
         }
@@ -1647,17 +1641,46 @@ function createResultCard(result) {
             break;
 
         case 'match':
+            const competitionColors = {
+                'League': 'var(--primary-color)',
+                'Champions League': '#1a237e',
+                'Champions League Final': '#1a237e',
+                'YTY Cup': '#ff1493',
+                'Super Cup': '#ffd700'
+            };
+            const competitionColor = competitionColors[result.competition] || 'var(--primary-color)';
+            
             card.innerHTML = `
-                <div class="match-result">
-                    <div class="teams">
-                        <span>${result.data.homeTeam}</span>
-                        <span class="vs">${result.data.score || 'vs'}</span>
-                        <span>${result.data.awayTeam}</span>
+                <div class="match-result" style="background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow:hidden;">
+                    <div class="match-header" style="background:${competitionColor};color:white;padding:0.8em 1.2em;font-weight:600;font-size:0.95em;display:flex;align-items:center;justify-content:space-between;">
+                        <span>${result.competition}</span>
+                        <span class="match-status" style="font-size:0.9em;opacity:0.9;">${result.data.status.charAt(0).toUpperCase() + result.data.status.slice(1)}</span>
                     </div>
-                    <div class="match-info">
-                        <span>${result.data.date}</span>
-                        <span>${result.data.venue}</span>
-                        ${result.competition ? `<span class="competition-label">${result.competition}</span>` : ''}
+                    <div class="match-content" style="padding:1.2em;">
+                        <div class="teams" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1em;">
+                            <div class="team home" style="display:flex;align-items:center;gap:0.8em;flex:1;">
+                                <span style="font-weight:600;color:var(--text-color);">${result.data.homeTeam}</span>
+                            </div>
+                            <div class="score-container" style="display:flex;align-items:center;gap:0.5em;padding:0 1em;">
+                                ${result.data.score ? 
+                                    `<span style="font-size:1.2em;font-weight:700;color:var(--accent-color);">${result.data.score}</span>` :
+                                    `<span style="font-size:1.1em;color:var(--secondary-text);">vs</span>`
+                                }
+                            </div>
+                            <div class="team away" style="display:flex;align-items:center;gap:0.8em;flex:1;justify-content:flex-end;">
+                                <span style="font-weight:600;color:var(--text-color);">${result.data.awayTeam}</span>
+                            </div>
+                        </div>
+                        <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);border-top:1px solid var(--light-bg);padding-top:0.8em;">
+                            <div class="date" style="display:flex;align-items:center;gap:0.5em;">
+                                <i class="fas fa-calendar"></i>
+                                <span>${result.data.date}</span>
+                            </div>
+                            <div class="venue" style="display:flex;align-items:center;gap:0.5em;">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${result.data.venue}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -1665,10 +1688,10 @@ function createResultCard(result) {
 
         case 'news':
             card.innerHTML = `
-                <div class="news-result">
-                    <h3>${result.data.title}</h3>
-                    <p>${result.data.content}</p>
-                    <span class="news-date">${result.data.date}</span>
+                <div class="news-result" style="background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);padding:1.2em;">
+                    <h3 style="margin:0 0 0.5em 0;font-size:1.2em;color:var(--accent-color);font-weight:700;">${result.data.title}</h3>
+                    <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;line-height:1.5;">${result.data.content}</p>
+                    <span class="news-date" style="font-size:0.9em;color:var(--secondary-text);">${result.data.date}</span>
                 </div>
             `;
             break;
@@ -2134,6 +2157,8 @@ function initializeMatchdaySelectors() {
     });
 }
 
+//allfixtures
+
 // --- YTY Cup Fixtures ---
 const ytyCupFixtures = [
     // Quarter Finals
@@ -2158,6 +2183,43 @@ const superCupFixture = {
     time: '22:00',
     homeTeam: 'tbd', // League winner
     awayTeam: 'tbd', // YTY Cup winner
+    status: 'scheduled',
+    score: { home: 0, away: 0 },
+    penalties: { home: 0, away: 0 }
+};
+
+// Function to get Champions League fixtures
+function getChampionsLeagueFixtures() {
+    return [
+        // Matchday 1
+        { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 2
+        { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf4', matchday: 2, date: '2025-05-16', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 3
+        { id: 'clf5', matchday: 3, date: '2025-05-18', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf6', matchday: 3, date: '2025-05-18', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 4
+        { id: 'clf7', matchday: 4, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf8', matchday: 4, date: '2025-05-20', time: '22:00', homeTeam: 'imoizy', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 5
+        { id: 'clf9', matchday: 5, date: '2025-05-22', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf10', matchday: 5, date: '2025-05-22', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 6
+        { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } }
+    ];
+}
+
+// --- Champions League Final ---
+const championsLeagueFinal = {
+    id: 'clfinal',
+    matchday: 7,
+    date: '2025-05-26',
+    time: '20:00',
+    homeTeam: 'tbd',
+    awayTeam: 'tbd',
     status: 'scheduled',
     score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
@@ -2301,3 +2363,4 @@ function getTeamOverview(teamId) {
         }
     };
 }
+
