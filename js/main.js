@@ -2047,6 +2047,22 @@ function loadTeamStats(teamId) {
     // Get team's position from league table
     const leagueTable = computeLeagueTable();
     const teamPosition = leagueTable.findIndex(t => t.teamId === teamId) + 1;
+    
+    // Create manager rankings
+    const managerRankings = Object.entries(teamsData).map(([id, teamData]) => {
+        const teamStats = leagueTable.find(t => t.teamId === id) || {};
+        return {
+            manager: teamData.manager,
+            team: teamData.name,
+            points: teamStats.points || 0,
+            position: leagueTable.findIndex(t => t.teamId === id) + 1,
+            form: teamStats.form || []
+        };
+    }).sort((a, b) => b.points - a.points);
+
+    // Find this manager's ranking
+    const managerRank = managerRankings.findIndex(r => r.manager === team.manager) + 1;
+
     // Set the team logo in the correct modal
     const modal = document.querySelector('.team-stats-modal.active') || document.querySelector('.team-stats-modal');
     if (modal) {
@@ -2056,8 +2072,27 @@ function loadTeamStats(teamId) {
             logoImg.alt = `${team.name} logo`;
         }
     }
+    
+    // Update manager info with ranking
     document.querySelector('.manager-name').textContent = team.manager;
-    // Update stats display (now 9 stat boxes including win percentage)
+    const managerInfo = document.querySelector('.stats-manager');
+    if (managerInfo) {
+        managerInfo.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 0.3rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="manager-label">Manager:</span>
+                    <span class="manager-name">${team.manager}</span>
+                    <img src="icons/verified-badge.svg" 
+                         alt="Verified" 
+                         class="verified-badge"
+                         title="Verified Manager">
+                </div>
+                <span style="color: var(--accent-color); font-weight: 600; font-size: 0.95em;">Manager Ranking: #${managerRank}</span>
+            </div>
+        `;
+    }
+    
+    // Update stats display
     document.querySelector('.stat-box:nth-child(1) .stat-value').textContent = teamPosition;
     document.querySelector('.stat-box:nth-child(2) .stat-value').textContent = stats.matchesPlayed;
     document.querySelector('.stat-box:nth-child(3) .stat-value').textContent = stats.wins;
@@ -2107,56 +2142,6 @@ function loadTeamStats(teamId) {
                     </div>
                 `;
             }).join('');
-    }
-
-    const infoPanel = document.querySelector('.team-overview-content');
-    if (infoPanel) {
-        const overview = getTeamOverview(teamId);
-        infoPanel.innerHTML = `
-            <div class="team-info-block" style="margin-bottom:1.5em;padding:1.3em 1.2em;background:var(--card-bg);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border:1.5px solid var(--light-bg);">
-                <h4 style="display:flex;align-items:center;gap:0.5em;font-size:1.18em;font-weight:700;color:var(--primary-color);margin-bottom:0.9em;letter-spacing:0.01em;"><i class='fas fa-info-circle' style='color:var(--accent-color);'></i> Team Details</h4>
-                <ul style="list-style:none;padding:0;margin:0;font-size:1.08em;color:var(--text-color);line-height:1.7;">
-                    <li><strong>Name:</strong> ${overview.teamDetails.name}</li>
-                    <li><strong>Stadium:</strong> ${overview.teamDetails.stadium}</li>
-                    <li><strong>Manager:</strong> ${overview.teamDetails.manager}</li>
-                    <li><strong>Founded:</strong> ${overview.teamDetails.founded}</li>
-                    <li><strong>Capacity:</strong> ${overview.teamDetails.capacity.toLocaleString()}</li>
-                </ul>
-            </div>
-            <div style="height:1px;background:var(--light-bg);margin:1.2em 0 1.2em 0;"></div>
-            <div class="team-info-block" style="margin-bottom:1.5em;padding:1.3em 1.2em;background:var(--card-bg);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border:1.5px solid var(--light-bg);">
-                <h4 style="display:flex;align-items:center;gap:0.5em;font-size:1.18em;font-weight:700;color:var(--primary-color);margin-bottom:0.9em;letter-spacing:0.01em;"><i class='fas fa-trophy' style='color:gold;'></i> League</h4>
-                <ul style="list-style:none;padding:0;margin:0;font-size:1.08em;color:var(--text-color);line-height:1.7;">
-                    <li><strong>Position:</strong> ${overview.league.position}</li>
-                    <li><strong>Points:</strong> ${overview.league.stats.points}</li>
-                    <li><strong>Played:</strong> ${overview.league.stats.played}</li>
-                    <li><strong>Wins:</strong> ${overview.league.stats.won}</li>
-                    <li><strong>Draws:</strong> ${overview.league.stats.drawn}</li>
-                    <li><strong>Losses:</strong> ${overview.league.stats.lost}</li>
-                    <li><strong>Goals For:</strong> ${overview.league.stats.goalsFor}</li>
-                    <li><strong>Goals Against:</strong> ${overview.league.stats.goalsAgainst}</li>
-                </ul>
-            </div>
-            <div style="height:1px;background:var(--light-bg);margin:1.2em 0 1.2em 0;"></div>
-            <div class="team-info-block" style="margin-bottom:1.5em;padding:1.3em 1.2em;background:var(--card-bg);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border:1.5px solid var(--light-bg);">
-                <h4 style="display:flex;align-items:center;gap:0.5em;font-size:1.18em;font-weight:700;color:var(--primary-color);margin-bottom:0.9em;letter-spacing:0.01em;"><i class='fas fa-star' style='color:var(--accent-color);'></i> Champions League</h4>
-                <ul style="list-style:none;padding:0;margin:0;font-size:1.08em;color:var(--text-color);line-height:1.7;">
-                    <li><strong>In Competition:</strong> <span style="font-weight:700;color:${overview.championsLeague.inCompetition ? 'var(--primary-color)' : 'var(--secondary-text)'}">${overview.championsLeague.inCompetition ? 'Yes' : 'No'}</span></li>
-                    ${overview.championsLeague.inCompetition ? `
-                    <li><strong>Group Position:</strong> <span style="font-weight:700;">${overview.championsLeague.groupPosition || '-'}</span></li>
-                    <li><strong>Progression:</strong> <span style="font-weight:700;">${overview.championsLeague.progression || '-'}</span></li>
-                    ` : ''}
-                </ul>
-            </div>
-            <div style="height:1px;background:var(--light-bg);margin:1.2em 0 1.2em 0;"></div>
-            <div class="team-info-block" style="margin-bottom:0;padding:1.3em 1.2em;background:var(--card-bg);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.07);border:1.5px solid var(--light-bg);">
-                <h4 style="display:flex;align-items:center;gap:0.5em;font-size:1.18em;font-weight:700;color:var(--primary-color);margin-bottom:0.9em;letter-spacing:0.01em;"><i class='fas fa-medal' style='color:var(--accent-color);'></i> YTY Cup</h4>
-                <ul style="list-style:none;padding:0;margin:0;font-size:1.08em;color:var(--text-color);line-height:1.7;">
-                    <li><strong>In Competition:</strong> <span style="font-weight:700;color:${overview.ytyCup.inCompetition ? 'var(--primary-color)' : 'var(--secondary-text)'}">${overview.ytyCup.inCompetition ? 'Yes' : 'No'}</span></li>
-                    ${overview.ytyCup.inCompetition ? `<li><strong>Progression:</strong> <span style="font-weight:700;">${overview.ytyCup.progression || '-'}</span></li>` : ''}
-                </ul>
-            </div>
-        `;
     }
 }
 
