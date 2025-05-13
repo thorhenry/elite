@@ -306,7 +306,29 @@ function getPageContent(pageId) {
                 ];
                 return all.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 3);
             }
+
+            // Recent Results (last 3 completed matches from all competitions)
+            function getRecentResults() {
+                // League
+                const leagueResults = matchData.fixtures.filter(f => f.status === 'completed');
+                // YTY Cup
+                const ytyResults = ytyCupFixtures.filter(f => f.status === 'completed');
+                // Super Cup
+                const superResults = superCupFixture.status === 'completed' ? [superCupFixture] : [];
+                // Champions League
+                const clResults = typeof championsLeagueFixtures !== 'undefined' ? championsLeagueFixtures.filter(f => f.status === 'completed') : [];
+                // Combine and sort by date
+                const all = [
+                    ...leagueResults.map(f => ({...f, competition: 'League'})),
+                    ...ytyResults.map(f => ({...f, competition: 'YTY Cup'})),
+                    ...superResults.map(f => ({...f, competition: 'Super Cup'})),
+                    ...clResults.map(f => ({...f, competition: 'Champions League'})),
+                ];
+                return all.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+            }
+
             const upcomingMatches = getUpcomingMatches();
+            const recentResults = getRecentResults();
             // Mini League Table (top 4 and bottom 2)
             const leagueTable = computeLeagueTable();
             const top4 = leagueTable.slice(0, 4);
@@ -360,6 +382,33 @@ function getPageContent(pageId) {
                                 }
                             </div>
                         </div>
+                        <div class="home-results" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;">
+                            <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">Recent Results</h3>
+                            <div class="results-list">
+                                ${recentResults.length === 0 ? `<div style='color:var(--text-color);font-size:1.05em;'>No recent results</div>` :
+                                    recentResults.map(match => `
+                                        <div class="result-card" style="margin-bottom:1em;">
+                                            <div class="match-details">
+                                                <div class="team home">
+                                                    <img src="${teamsData[match.homeTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.homeTeam]?.name || 'TBD'}" class="team-logo-small">
+                                                    <span style="color:var(--text-color);">${teamsData[match.homeTeam]?.name || 'TBD'}</span>
+                                                </div>
+                                                <div class="score" style="color:var(--accent-color);font-weight:700;">${match.score.home} - ${match.score.away}</div>
+                                                <div class="team away">
+                                                    <img src="${teamsData[match.awayTeam]?.logo || 'images/club-logos/tbd.svg'}" alt="${teamsData[match.awayTeam]?.name || 'TBD'}" class="team-logo-small">
+                                                    <span style="color:var(--text-color);">${teamsData[match.awayTeam]?.name || 'TBD'}</span>
+                                                </div>
+                                            </div>
+                                            <div class="match-info">
+                                                <div class="date" style="color:var(--secondary-text);">${match.date} ${match.time || ''}</div>
+                                                <div class="venue" style="color:var(--secondary-text);">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
+                                                <div class="match-status completed" style="color:var(--text-color);">${match.competition}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')
+                                }
+                            </div>
+                        </div>
                         <div class="home-table">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">League Table (Top 4 & Bottom 2)</h3>
                             <div style="width:100%;background:none;box-shadow:none;">
@@ -373,18 +422,10 @@ function getPageContent(pageId) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        ${top4.map((team, idx) => `
-                                            <tr class="cl-qualifier">
+                                        ${[...top4, ...bottom2].map((team, idx) => `
+                                            <tr style="background:${idx < 4 ? 'var(--card-bg)' : 'var(--light-bg)'};">
                                                 <td style="color:var(--text-color);">${idx + 1}</td>
-                                                <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);"><img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">${team.name}</td>
-                                                <td style="color:var(--text-color);">${team.played}</td>
-                                                <td style="color:var(--text-color);">${team.points}</td>
-                                            </tr>
-                                        `).join('')}
-                                        ${bottom2.map((team, idx) => `
-                                            <tr class="relegated">
-                                                <td style="color:var(--text-color);">${leagueTable.length - 2 + idx + 1}</td>
-                                                <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);"><img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">${team.name}</td>
+                                                <td style="color:var(--text-color);">${team.name}</td>
                                                 <td style="color:var(--text-color);">${team.played}</td>
                                                 <td style="color:var(--text-color);">${team.points}</td>
                                             </tr>
@@ -526,32 +567,60 @@ function getPageContent(pageId) {
                                 <div class="result-week" data-matchday="${matchday}">
                                     <h3>Matchday ${matchday}</h3>
                                     <div class="result-list">
-                                        ${matches.map(match => `
-                                        <div class="result-card"
-                                             data-home="${teamUtils.getTeamName(match.homeTeam)}"
-                                             data-away="${teamUtils.getTeamName(match.awayTeam)}"
-                                             data-status="${match.status}">
-                                            <div class="match-details">
-                                                <div class="team home">
-                                                    <img src="${teamUtils.getTeamById(match.homeTeam).logo}" 
-                                                         alt="${matchUtils.getTeamName(match.homeTeam)}" 
-                                                         class="team-logo-small">
-                                                    <span>${matchUtils.getTeamName(match.homeTeam)}</span>
+                                        ${matches.map(match => {
+                                            const homeTeam = teamUtils.getTeamName(match.homeTeam);
+                                            const awayTeam = teamUtils.getTeamName(match.awayTeam);
+                                            let resultColor = '';
+                                            if (match.status === 'completed' && match.score) {
+                                                // If the selected team is the home team
+                                                if (homeTeam === document.getElementById('resultsTeamSelect')?.value) {
+                                                    if (match.score.home > match.score.away) {
+                                                        resultColor = '#4caf50'; // Win - Green
+                                                    } else if (match.score.home < match.score.away) {
+                                                        resultColor = '#f44336'; // Loss - Red
+                                                    } else {
+                                                        resultColor = '#ffc107'; // Draw - Yellow
+                                                    }
+                                                }
+                                                // If the selected team is the away team
+                                                else if (awayTeam === document.getElementById('resultsTeamSelect')?.value) {
+                                                    if (match.score.away > match.score.home) {
+                                                        resultColor = '#4caf50'; // Win - Green
+                                                    } else if (match.score.away < match.score.home) {
+                                                        resultColor = '#f44336'; // Loss - Red
+                                                    } else {
+                                                        resultColor = '#ffc107'; // Draw - Yellow
+                                                    }
+                                                }
+                                            }
+                                            return `
+                                            <div class="result-card"
+                                                 data-home="${homeTeam}"
+                                                 data-away="${awayTeam}"
+                                                 data-status="${match.status}"
+                                                 style="${resultColor ? `border-left: 4px solid ${resultColor};` : ''}">
+                                                <div class="match-details">
+                                                    <div class="team home">
+                                                        <img src="${teamUtils.getTeamById(match.homeTeam).logo}" 
+                                                             alt="${homeTeam}" 
+                                                             class="team-logo-small">
+                                                        <span>${homeTeam}</span>
+                                                    </div>
+                                                    <div class="score" style="${resultColor ? `color: ${resultColor};` : ''}">${match.score.home} - ${match.score.away}</div>
+                                                    <div class="team away">
+                                                        <img src="${teamUtils.getTeamById(match.awayTeam).logo}" 
+                                                             alt="${awayTeam}" 
+                                                             class="team-logo-small">
+                                                        <span>${awayTeam}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="score">${match.score.home} - ${match.score.away}</div>
-                                                <div class="team away">
-                                                    <img src="${teamUtils.getTeamById(match.awayTeam).logo}" 
-                                                         alt="${matchUtils.getTeamName(match.awayTeam)}" 
-                                                         class="team-logo-small">
-                                                    <span>${matchUtils.getTeamName(match.awayTeam)}</span>
+                                                <div class="match-info">
+                                                    <div class="date">${matchUtils.formatMatchDate(match.date, match.time)}</div>
+                                                    <div class="venue">${matchUtils.getVenue(match.homeTeam)}</div>
+                                                    <div class="match-status ${match.status}" style="${resultColor ? `background: rgba(${resultColor === '#4caf50' ? '76, 175, 80' : resultColor === '#f44336' ? '244, 67, 54' : '255, 193, 7'}, 0.1); color: ${resultColor};` : ''}">${match.status.charAt(0).toUpperCase() + match.status.slice(1)}</div>
                                                 </div>
                                             </div>
-                                            <div class="match-info">
-                                                <div class="date">${matchUtils.formatMatchDate(match.date, match.time)}</div>
-                                                <div class="venue">${matchUtils.getVenue(match.homeTeam)}</div>
-                                            </div>
-                                        </div>
-                                    `).join('')}
+                                        `}).join('')}
                                     </div>
                                 </div>
                             `;
@@ -1513,6 +1582,30 @@ function searchContent(query, filter) {
                 away.toLowerCase().includes(searchQuery) ||
                 venue.toLowerCase().includes(searchQuery)
             ) {
+                let resultColor = '';
+                if (match.status === 'completed' && match.score) {
+                    // If the searched team is the home team
+                    if (home.toLowerCase().includes(searchQuery)) {
+                        if (match.score.home > match.score.away) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.home < match.score.away) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                    // If the searched team is the away team
+                    else if (away.toLowerCase().includes(searchQuery)) {
+                        if (match.score.away > match.score.home) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.away < match.score.home) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                }
+
                 results.push({
                     type: 'match',
                     competition: 'League',
@@ -1522,7 +1615,10 @@ function searchContent(query, filter) {
                         date: match.date + ' ' + match.time,
                         venue,
                         score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                        status: match.status
+                        status: match.status,
+                        resultColor: resultColor,
+                        homeScore: match.status === 'completed' ? match.score.home : undefined,
+                        awayScore: match.status === 'completed' ? match.score.away : undefined
                     }
                 });
             }
@@ -1535,6 +1631,30 @@ function searchContent(query, filter) {
                 home.toLowerCase().includes(searchQuery) ||
                 away.toLowerCase().includes(searchQuery)
             ) {
+                let resultColor = '';
+                if (match.status === 'completed' && match.score) {
+                    // If the searched team is the home team
+                    if (home.toLowerCase().includes(searchQuery)) {
+                        if (match.score.home > match.score.away) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.home < match.score.away) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                    // If the searched team is the away team
+                    else if (away.toLowerCase().includes(searchQuery)) {
+                        if (match.score.away > match.score.home) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.away < match.score.home) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                }
+
                 results.push({
                     type: 'match',
                     competition: 'YTY Cup',
@@ -1544,7 +1664,10 @@ function searchContent(query, filter) {
                         date: match.date + ' ' + (match.time || ''),
                         venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
                         score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                        status: match.status
+                        homeScore: match.status === 'completed' ? match.score.home : undefined,
+                        awayScore: match.status === 'completed' ? match.score.away : undefined,
+                        status: match.status,
+                        resultColor: resultColor
                     }
                 });
             }
@@ -1557,6 +1680,30 @@ function searchContent(query, filter) {
             home.toLowerCase().includes(searchQuery) ||
             away.toLowerCase().includes(searchQuery)
         ) {
+            let resultColor = '';
+            if (sc.status === 'completed' && sc.score) {
+                // If the searched team is the home team
+                if (home.toLowerCase().includes(searchQuery)) {
+                    if (sc.score.home > sc.score.away) {
+                        resultColor = '#4caf50'; // Win - Green
+                    } else if (sc.score.home < sc.score.away) {
+                        resultColor = '#f44336'; // Loss - Red
+                    } else {
+                        resultColor = '#ffc107'; // Draw - Yellow
+                    }
+                }
+                // If the searched team is the away team
+                else if (away.toLowerCase().includes(searchQuery)) {
+                    if (sc.score.away > sc.score.home) {
+                        resultColor = '#4caf50'; // Win - Green
+                    } else if (sc.score.away < sc.score.home) {
+                        resultColor = '#f44336'; // Loss - Red
+                    } else {
+                        resultColor = '#ffc107'; // Draw - Yellow
+                    }
+                }
+            }
+
             results.push({
                 type: 'match',
                 competition: 'Super Cup',
@@ -1566,7 +1713,10 @@ function searchContent(query, filter) {
                     date: sc.date + ' ' + (sc.time || ''),
                     venue: sc.homeTeam !== 'tbd' && teamsData[sc.homeTeam] ? teamsData[sc.homeTeam].stadium : 'TBD',
                     score: sc.status === 'completed' && sc.score ? `${sc.score.home} - ${sc.score.away}` : undefined,
-                    status: sc.status
+                    homeScore: sc.status === 'completed' ? sc.score.home : undefined,
+                    awayScore: sc.status === 'completed' ? sc.score.away : undefined,
+                    status: sc.status,
+                    resultColor: resultColor
                 }
             });
         }
@@ -1579,6 +1729,30 @@ function searchContent(query, filter) {
                 home.toLowerCase().includes(searchQuery) ||
                 away.toLowerCase().includes(searchQuery)
             ) {
+                let resultColor = '';
+                if (match.status === 'completed' && match.score) {
+                    // If the searched team is the home team
+                    if (home.toLowerCase().includes(searchQuery)) {
+                        if (match.score.home > match.score.away) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.home < match.score.away) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                    // If the searched team is the away team
+                    else if (away.toLowerCase().includes(searchQuery)) {
+                        if (match.score.away > match.score.home) {
+                            resultColor = '#4caf50'; // Win - Green
+                        } else if (match.score.away < match.score.home) {
+                            resultColor = '#f44336'; // Loss - Red
+                        } else {
+                            resultColor = '#ffc107'; // Draw - Yellow
+                        }
+                    }
+                }
+
                 results.push({
                     type: 'match',
                     competition: 'Champions League',
@@ -1588,7 +1762,10 @@ function searchContent(query, filter) {
                         date: match.date + ' ' + (match.time || ''),
                         venue: match.homeTeam !== 'tbd' && teamsData[match.homeTeam] ? teamsData[match.homeTeam].stadium : 'TBD',
                         score: match.status === 'completed' && match.score ? `${match.score.home} - ${match.score.away}` : undefined,
-                        status: match.status
+                        homeScore: match.status === 'completed' ? match.score.home : undefined,
+                        awayScore: match.status === 'completed' ? match.score.away : undefined,
+                        status: match.status,
+                        resultColor: resultColor
                     }
                 });
             }
@@ -1601,6 +1778,30 @@ function searchContent(query, filter) {
             clFinalHome.toLowerCase().includes(searchQuery) ||
             clFinalAway.toLowerCase().includes(searchQuery)
         ) {
+            let resultColor = '';
+            if (clFinal.status === 'completed' && clFinal.score) {
+                // If the searched team is the home team
+                if (clFinalHome.toLowerCase().includes(searchQuery)) {
+                    if (clFinal.score.home > clFinal.score.away) {
+                        resultColor = '#4caf50'; // Win - Green
+                    } else if (clFinal.score.home < clFinal.score.away) {
+                        resultColor = '#f44336'; // Loss - Red
+                    } else {
+                        resultColor = '#ffc107'; // Draw - Yellow
+                    }
+                }
+                // If the searched team is the away team
+                else if (clFinalAway.toLowerCase().includes(searchQuery)) {
+                    if (clFinal.score.away > clFinal.score.home) {
+                        resultColor = '#4caf50'; // Win - Green
+                    } else if (clFinal.score.away < clFinal.score.home) {
+                        resultColor = '#f44336'; // Loss - Red
+                    } else {
+                        resultColor = '#ffc107'; // Draw - Yellow
+                    }
+                }
+            }
+
             results.push({
                 type: 'match',
                 competition: 'Champions League Final',
@@ -1610,7 +1811,10 @@ function searchContent(query, filter) {
                     date: clFinal.date + ' ' + (clFinal.time || ''),
                     venue: clFinal.homeTeam !== 'tbd' && teamsData[clFinal.homeTeam] ? teamsData[clFinal.homeTeam].stadium : 'TBD',
                     score: clFinal.status === 'completed' && clFinal.score ? `${clFinal.score.home} - ${clFinal.score.away}` : undefined,
-                    status: clFinal.status
+                    homeScore: clFinal.status === 'completed' ? clFinal.score.home : undefined,
+                    awayScore: clFinal.status === 'completed' ? clFinal.score.away : undefined,
+                    status: clFinal.status,
+                    resultColor: resultColor
                 }
             });
         }
@@ -1669,7 +1873,7 @@ function createResultCard(result) {
                         </p>
                         <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;">
                             <strong>League Position:</strong> ${teamPosition} • <strong>Points:</strong> ${teamStats.points || 0} • 
-                            <strong>Record:</strong> W${teamStats.won || 0} D${teamStats.drawn || 0} L${teamStats.lost || 0} • 
+                            <strong>Record:</strong> <span style="color:#4caf50;font-weight:600;">W${teamStats.won || 0}</span> <span style="color:#ffc107;font-weight:600;">D${teamStats.drawn || 0}</span> <span style="color:#f44336;font-weight:600;">L${teamStats.lost || 0}</span> • 
                             <strong>Goals:</strong> ${teamStats.goalsFor || 0}-${teamStats.goalsAgainst || 0}
                         </p>
                         <p style="margin:0 0 0.8em 0;color:var(--text-color);font-size:0.95em;">
@@ -1699,11 +1903,23 @@ function createResultCard(result) {
             };
             const competitionColor = competitionColors[result.competition] || 'var(--primary-color)';
             
+            // Determine result color based on score
+            let resultColor = '';
+            if (result.data.status === 'completed' && result.data.homeScore !== undefined && result.data.awayScore !== undefined) {
+                if (result.data.homeScore > result.data.awayScore) {
+                    resultColor = '#4caf50'; // Win - Green
+                } else if (result.data.homeScore < result.data.awayScore) {
+                    resultColor = '#f44336'; // Loss - Red
+                } else {
+                    resultColor = '#ffc107'; // Draw - Yellow
+                }
+            }
+            
             card.innerHTML = `
-                <div class="match-result" style="background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow:hidden;">
+                <div class="match-result" style="background:var(--card-bg);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06);overflow:hidden;${result.data.status === 'completed' ? `border-left:4px solid ${result.data.resultColor};` : ''}">
                     <div class="match-header" style="background:${competitionColor};color:white;padding:0.8em 1.2em;font-weight:600;font-size:0.95em;display:flex;align-items:center;justify-content:space-between;">
                         <span>${result.competition}</span>
-                        <span class="match-status" style="font-size:0.9em;opacity:0.9;">${result.data.status.charAt(0).toUpperCase() + result.data.status.slice(1)}</span>
+                        <span class="match-status ${result.data.status}" style="font-size:0.9em;opacity:0.9;padding:0.2em 0.6em;border-radius:4px;background:${result.data.status === 'completed' ? `rgba(${result.data.resultColor === '#4caf50' ? '76, 175, 80' : result.data.resultColor === '#f44336' ? '244, 67, 54' : '255, 193, 7'}, 0.1)` : 'rgba(33, 150, 243, 0.1)'};color:${result.data.status === 'completed' ? result.data.resultColor : '#2196f3'};">${result.data.status.charAt(0).toUpperCase() + result.data.status.slice(1)}</span>
                     </div>
                     <div class="match-content" style="padding:1.2em;">
                         <div class="teams" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1em;">
@@ -1711,8 +1927,8 @@ function createResultCard(result) {
                                 <span style="font-weight:600;color:var(--text-color);">${result.data.homeTeam}</span>
                             </div>
                             <div class="score-container" style="display:flex;align-items:center;gap:0.5em;padding:0 1em;">
-                                ${result.data.score ? 
-                                    `<span style="font-size:1.2em;font-weight:700;color:var(--accent-color);">${result.data.score}</span>` :
+                                ${result.data.status === 'completed' && result.data.score ?
+                                    `<span style="font-size:1.2em;font-weight:700;color:${result.data.resultColor};">${result.data.score}</span>` :
                                     `<span style="font-size:1.1em;color:var(--secondary-text);">vs</span>`
                                 }
                             </div>
@@ -2198,6 +2414,50 @@ function initializeMatchdaySelectors() {
                         let show = true;
                         if (teamVal !== 'all' && teamVal !== home && teamVal !== away) show = false;
                         if (statusVal !== 'all' && statusVal !== status) show = false;
+                        
+                        // Apply color based on selected team's result
+                        if (show && status === 'completed' && teamVal !== 'all') {
+                            const score = card.querySelector('.score').textContent;
+                            const [homeScore, awayScore] = score.split(' - ').map(Number);
+                            let resultColor = '';
+                            
+                            if (teamVal === home) {
+                                if (homeScore > awayScore) {
+                                    resultColor = '#4caf50'; // Win - Green
+                                } else if (homeScore < awayScore) {
+                                    resultColor = '#f44336'; // Loss - Red
+                                } else {
+                                    resultColor = '#ffc107'; // Draw - Yellow
+                                }
+                            } else if (teamVal === away) {
+                                if (awayScore > homeScore) {
+                                    resultColor = '#4caf50'; // Win - Green
+                                } else if (awayScore < homeScore) {
+                                    resultColor = '#f44336'; // Loss - Red
+                                } else {
+                                    resultColor = '#ffc107'; // Draw - Yellow
+                                }
+                            }
+                            
+                            // Apply colors
+                            card.style.borderLeft = resultColor ? `4px solid ${resultColor}` : '';
+                            card.querySelector('.score').style.color = resultColor || '';
+                            const statusBadge = card.querySelector('.match-status');
+                            if (statusBadge) {
+                                statusBadge.style.background = resultColor ? `rgba(${resultColor === '#4caf50' ? '76, 175, 80' : resultColor === '#f44336' ? '244, 67, 54' : '255, 193, 7'}, 0.1)` : '';
+                                statusBadge.style.color = resultColor || '';
+                            }
+                        } else {
+                            // Reset colors if not showing or no team selected
+                            card.style.borderLeft = '';
+                            card.querySelector('.score').style.color = '';
+                            const statusBadge = card.querySelector('.match-status');
+                            if (statusBadge) {
+                                statusBadge.style.background = '';
+                                statusBadge.style.color = '';
+                            }
+                        }
+                        
                         card.style.display = show ? '' : 'none';
                         if (show) weekHasVisible = true;
                     });
