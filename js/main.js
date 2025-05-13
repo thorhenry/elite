@@ -359,16 +359,16 @@ function getPageContent(pageId) {
                                 }
                             </div>
                         </div>
-                        <div class="home-table" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;">
+                        <div class="home-table" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:350px;margin:0 auto;width:100%;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:1em;">League Table (Top 4 & Bottom 2)</h3>
                             <div style="width:100%;background:none;box-shadow:none;overflow-x:auto;">
-                                <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;overflow:hidden;min-width:300px;">
+                                <table class="league-table" style="margin-bottom:1em;width:100%;border-radius:14px;overflow:hidden;min-width:200px;">
                                     <thead>
                                         <tr>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;">Pos</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;">Team</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">P</th>
-                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">Pts</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:15%;">Pos</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:left;width:60%;">Team</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:12.5%;">P</th>
+                                            <th style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;width:12.5%;">Pts</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -376,8 +376,8 @@ function getPageContent(pageId) {
                                             <tr class="cl-qualifier">
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;">${idx + 1}</td>
                                                 <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);padding:0.8em 0.5em;">
-                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">
-                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${team.name}</span>
+                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:20px;height:20px;border-radius:50%;background:#fff;">
+                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;">${team.name}</span>
                                                 </td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
@@ -387,8 +387,8 @@ function getPageContent(pageId) {
                                             <tr class="relegated">
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;">${leagueTable.length - 2 + idx + 1}</td>
                                                 <td style="display:flex;align-items:center;gap:0.5em;color:var(--text-color);padding:0.8em 0.5em;">
-                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:24px;height:24px;border-radius:50%;background:#fff;">
-                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${team.name}</span>
+                                                    <img src="${teamsData[team.teamId].logo}" alt="${team.name} logo" style="width:20px;height:20px;border-radius:50%;background:#fff;">
+                                                    <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;">${team.name}</span>
                                                 </td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.played}</td>
                                                 <td style="color:var(--text-color);padding:0.8em 0.5em;text-align:center;">${team.points}</td>
@@ -397,6 +397,10 @@ function getPageContent(pageId) {
                                     </tbody>
                                 </table>
                             </div>
+                            <a href="#table" class="view-full-table-btn" style="display:block;text-align:center;background:var(--primary-color);color:white;text-decoration:none;padding:0.8em;border-radius:8px;font-weight:500;margin-top:1em;transition:all 0.3s ease;">
+                                <i class="fas fa-table" style="margin-right:0.5em;"></i>
+                                View Full Table
+                            </a>
                         </div>
                         <div class="home-links" style="background:var(--card-bg);border-radius:14px;box-shadow:var(--shadow);padding:1.5em;max-width:500px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:1em;align-items:center;justify-content:center;">
                             <h3 style="color:var(--primary-color);font-size:1.18em;font-weight:700;margin-bottom:0.5em;">Quick Links</h3>
@@ -478,7 +482,7 @@ function getPageContent(pageId) {
                                                         <span>${matchUtils.getTeamName(match.awayTeam)}</span>
                                                     </div>
                                                 </div>
-                                                <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);">
+                                                <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);margin-top:0.5em;">
                                                     <div class="date">${match.date} ${match.time || ''}</div>
                                                     <div class="venue" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${teamsData[match.homeTeam]?.stadium || 'TBD'}</div>
                                                 </div>
@@ -1105,31 +1109,31 @@ function getPageContent(pageId) {
         case 'search':
             return `
                 <section class="search-section">
-                    <div class="search-container" style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+                    <div class="search-container mobile-search" style="max-width:1200px;margin:0 auto;padding:0 1rem;">
                         <div class="search-header">
                             <h2>Search</h2>
-                            <div class="search-input-wrapper" style="width: 100%; max-width: 800px; margin: 0 auto;">
+                            <div class="search-input-wrapper" style="width:100%;max-width:800px;margin:0 auto;">
                                 <input type="text" id="searchInput" placeholder="Search teams, matches, news..." class="search-input">
                                 <button class="search-submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="search-filters" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin: 1rem 0;">
+                        <div class="search-filters" style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin:1rem 0;">
                             <button class="filter-btn active" data-filter="all">All</button>
                             <button class="filter-btn" data-filter="teams">Teams</button>
                             <button class="filter-btn" data-filter="matches">Matches</button>
                             <button class="filter-btn" data-filter="news">News</button>
                         </div>
                         <div class="search-results">
-                            <div class="results-container" style="max-width: 800px; margin: 0 auto;">
+                            <div class="results-container" style="max-width:1000px;margin:0 auto;">
                                 <!-- Results will be populated here -->
                             </div>
                         </div>
                     </div>
                     <div class="team-stats-modal">
-                        <div class="stats-content" style="width: 90%; max-width: 800px;">
-                            <button class="close-stats-btn">
+                        <div class="stats-content" style="max-width: 1000px; width: 100%;">
+                            <button class="close-stats-btn" onclick="this.closest('.team-stats-modal').classList.remove('active')">
                                 <i class="fas fa-times"></i>
                             </button>
                             <div class="stats-header">
