@@ -147,17 +147,17 @@ const matchData = {
         // Matchday 1 - May 12, 2025
         { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'maria-khan', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f2', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'completed', score: { home: 3, away: 1 } },
-        { id: 'f3', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'omara', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f3', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'omara', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 6 } },
         { id: 'f4', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 1 } },
         // Matchday 2 - May 13, 2025
-        { id: 'f5', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'priest', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f6', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'newton', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f5', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'priest', awayTeam: 'offer-art', status: 'completed', score: { home: 3, away: 1 } },
+        { id: 'f6', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'newton', awayTeam: 'maria-khan', status: 'completed', score: { home: 4, away: 3 } },
         { id: 'f7', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'completed', score: { home: 4, away: 2 } },
         { id: 'f8', matchday: 2, date: '2025-05-13', time: '20:00', homeTeam: 'ghost', awayTeam: 'omara', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 3 - May 14, 2025
-        { id: 'f9', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f10', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f11', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'omara', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f9', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer-art', status: 'completed', score: { home: 4, away: 4 } },
+        { id: 'f10', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'completed', score: { home: 8, away: 1 } },
+        { id: 'f11', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'omara', awayTeam: 'priest', status: 'completed', score: { home: 6, away: 1 } },
         { id: 'f12', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'maria-khan', status: 'completed', score: { home: 3, away: 0 } },
         // Matchday 4 - May 15, 2025
         { id: 'f13', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'offer-art', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2051,14 +2051,30 @@ function loadTeamStats(teamId) {
     // Create manager rankings
     const managerRankings = Object.entries(teamsData).map(([id, teamData]) => {
         const teamStats = leagueTable.find(t => t.teamId === id) || {};
+        // Calculate form points (3 for W, 1 for D, 0 for L)
+        const formPoints = (teamStats.form || []).reduce((sum, result) => {
+            switch(result) {
+                case 'W': return sum + 3;
+                case 'D': return sum + 1;
+                default: return sum;
+            }
+        }, 0);
         return {
             manager: teamData.manager,
             team: teamData.name,
             points: teamStats.points || 0,
             position: leagueTable.findIndex(t => t.teamId === id) + 1,
-            form: teamStats.form || []
+            form: teamStats.form || [],
+            formPoints: formPoints
         };
-    }).sort((a, b) => b.points - a.points);
+    }).sort((a, b) => {
+        // First sort by total points
+        if (b.points !== a.points) return b.points - a.points;
+        // If points are equal, sort by form points
+        if (b.formPoints !== a.formPoints) return b.formPoints - a.formPoints;
+        // If form points are equal, sort by position
+        return a.position - b.position;
+    });
 
     // Find this manager's ranking
     const managerRank = managerRankings.findIndex(r => r.manager === team.manager) + 1;
@@ -2437,8 +2453,8 @@ const superCupFixture = {
 function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'completed', score: { home: 5, away: 0 } },
+        { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 3 } },
         // Matchday 2
         { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'clf4', matchday: 2, date: '2025-05-16', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2463,10 +2479,10 @@ const championsLeagueFinal = {
     matchday: 7,
     date: '2025-05-26',
     time: '20:00',
-    homeTeam: 'priest',
-    awayTeam: 'newton',
-    status: 'completed',
-    score: { home: 2, away: 1 },
+    homeTeam: 'tbd',
+    awayTeam: 'tbd',
+    status: 'scheduled',
+    score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
 };
 
