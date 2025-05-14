@@ -146,7 +146,7 @@ const matchData = {
     fixtures: [
         // Matchday 1 - May 12, 2025
         { id: 'f1', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'offer-art', awayTeam: 'maria-khan', status: 'completed', score: { home: 2, away: 3 } },
-        { id: 'f2', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f3', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'omara', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f4', matchday: 1, date: '2025-05-12', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 1 } },
         // Matchday 2 - May 13, 2025
