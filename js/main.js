@@ -162,7 +162,7 @@ const matchData = {
         // Matchday 4 - May 15, 2025
         { id: 'f13', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'offer-art', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f14', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'ghost', status: 'completed', score: { home: 4, away: 2 } },
         { id: 'f16', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - May 16, 2025
         { id: 'f17', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'offer-art', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2064,15 +2064,18 @@ function loadTeamStats(teamId) {
             team: teamData.name,
             points: teamStats.points || 0,
             position: leagueTable.findIndex(t => t.teamId === id) + 1,
+            goalDiff: teamStats.goalDiff || 0,
             form: teamStats.form || [],
             formPoints: formPoints
         };
     }).sort((a, b) => {
-        // First sort by total points
-        if (b.points !== a.points) return b.points - a.points;
-        // If points are equal, sort by form points
+        // Sort by form points (recent performance)
         if (b.formPoints !== a.formPoints) return b.formPoints - a.formPoints;
-        // If form points are equal, sort by position
+        // If form points are equal, sort by goal difference
+        if (b.goalDiff !== a.goalDiff) return b.goalDiff - a.goalDiff;
+        // If goal difference is equal, sort by points
+        if (b.points !== a.points) return b.points - a.points;
+        // If points are equal, sort by position
         return a.position - b.position;
     });
 
