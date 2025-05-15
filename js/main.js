@@ -161,7 +161,7 @@ const matchData = {
         { id: 'f12', matchday: 3, date: '2025-05-14', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'maria-khan', status: 'completed', score: { home: 3, away: 0 } },
         // Matchday 4 - May 15, 2025
         { id: 'f13', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'offer-art', awayTeam: 'newton', status: 'completed', score: { home: 4, away: 5 } },
-        { id: 'f14', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f14', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 0 } },
         { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'ghost', status: 'completed', score: { home: 4, away: 2 } },
         { id: 'f16', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - May 16, 2025
