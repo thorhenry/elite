@@ -2427,7 +2427,7 @@ function initializeMatchdaySelectors() {
 const ytyCupFixtures = [
     // Quarter Finals
     { id: 'yqf1', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'completed', score: { home: 1, away: 3 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'omara', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
+    { id: 'yqf2', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'omara', awayTeam: 'maria-khan', status: 'completed', score: { home: 4, away: 3 }, penalties: null },
     { id: 'yqf3', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 4, away: 1 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-05-15', time: '22:00', homeTeam: 'offer-art', awayTeam: 'priest', status: 'completed', score: { home: 0, away: 3 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
