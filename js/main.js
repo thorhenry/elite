@@ -165,7 +165,7 @@ const matchData = {
         { id: 'f15', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'ghost', status: 'completed', score: { home: 4, away: 2 } },
         { id: 'f16', matchday: 4, date: '2025-05-15', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'omara', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 5 - May 16, 2025
-        { id: 'f17', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'offer-art', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f17', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'offer-art', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 2 } },
         { id: 'f18', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'omara', status: 'completed', score: { home: 1, away: 1 } },
         { id: 'f19', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'completed', score: { home: 3, away: 5 } },
         { id: 'f20', matchday: 5, date: '2025-05-16', time: '20:00', homeTeam: 'priest', awayTeam: 'maria-khan', status: 'completed', score: { home: 2, away: 0 } },
@@ -851,35 +851,40 @@ function getPageContent(pageId) {
                     <h2 style="font-size:1.5rem;font-weight:700;color:var(--text-color);text-align:center;margin-bottom:1.5rem;">Champions League</h2>
                     <div class="cl-group-container" style="max-width:700px;margin:0 auto;">
                         <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-color);margin-bottom:0.7em;text-align:center;">Group Stage</h3>
-                        <div class="cl-table-scroll" style="width:100%;overflow-x:auto;">
-                        <table class="league-table" style="margin-bottom:2em;">
-                            <thead>
-                                <tr>
-                                    <th>Team</th>
-                                    <th>P</th>
-                                    <th>W</th>
-                                    <th>D</th>
-                                    <th>L</th>
-                                    <th>GF</th>
-                                    <th>GA</th>
-                                    <th>Pts</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${clGroupTable.map(row => `
+                        <div class="cl-table-scroll" style="width:100%;overflow-x:auto;margin:0 -1rem;padding:0 1rem;">
+                            <table class="league-table" style="margin-bottom:2em;min-width:600px;">
+                                <thead>
                                     <tr>
-                                        <td style=\"display:flex;align-items:center;gap:0.5em;\"><img src=\"${teamsData[row.teamId].logo}\" alt=\"${row.name} logo\" style=\"width:28px;height:28px;border-radius:50%;background:#fff;\">${row.name}</td>
-                                        <td>${row.played}</td>
-                                        <td>${row.won}</td>
-                                        <td>${row.drawn}</td>
-                                        <td>${row.lost}</td>
-                                        <td>${row.goalsFor}</td>
-                                        <td>${row.goalsAgainst}</td>
-                                        <td>${row.points}</td>
+                                        <th>Pos</th>
+                                        <th>Team</th>
+                                        <th>P</th>
+                                        <th>W</th>
+                                        <th>D</th>
+                                        <th>L</th>
+                                        <th>GF</th>
+                                        <th>GA</th>
+                                        <th>Pts</th>
                                     </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    ${clGroupTable.map((row, idx) => `
+                                        <tr class="${idx < 2 ? 'cl-qualifier' : ''}">
+                                            <td>${idx + 1}</td>
+                                            <td style="display:flex;align-items:center;gap:0.5em;"><img src="${teamsData[row.teamId].logo}" alt="${row.name} logo" style="width:28px;height:28px;border-radius:50%;background:#fff;">${row.name}</td>
+                                            <td>${row.played}</td>
+                                            <td>${row.won}</td>
+                                            <td>${row.drawn}</td>
+                                            <td>${row.lost}</td>
+                                            <td>${row.goalsFor}</td>
+                                            <td>${row.goalsAgainst}</td>
+                                            <td>${row.points}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-legend-simple">
+                            Champions League Final qualification <span class="legend-color cl"></span>
                         </div>
                         <h3 style="font-size:1.2rem;font-weight:700;color:var(--accent-color);margin-bottom:0.7em;text-align:center;">Fixtures</h3>
                         <div class="cl-fixtures-container">
