@@ -281,8 +281,8 @@ const news = [
 ];
 
 // Function to get page content
-function getPageContent(pageId) {
-    switch(pageId) {
+function getPageContent(page) {
+    switch(page) {
         case 'home': {
             // Dynamic Latest News
             // Use global news array
@@ -956,6 +956,55 @@ function getPageContent(pageId) {
             `;
         }
 
+        case 'chatbot':
+            return `
+                <div class="chatbot-container" style="max-width:800px;margin:0 auto;padding:1rem;">
+                    <div class="chatbot-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;">
+                        <div class="chatbot-avatar" style="width:48px;height:48px;border-radius:50%;background:var(--primary-color);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:1.2rem;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h2 style="margin:0;color:var(--text-color);">Dano Madit</h2>
+                            <p style="margin:0;color:var(--text-muted);">Select a question to get information!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chatbot-controls" style="margin-bottom:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;">
+                        <select id="chatbot-questions" style="width:100%;padding:0.8rem;border:1px solid var(--border-color);border-radius:8px;background:var(--light-bg);color:var(--text-color);font-size:1rem;">
+                            <option value="">Select a question...</option>
+                            <option value="table">Show me the league table</option>
+                            <option value="recent">Show recent match results</option>
+                            <option value="upcoming">Show upcoming matches</option>
+                            <option value="champions">Tell me about the Champions League</option>
+                            <option value="cups">Show cup progression</option>
+                            <option value="managers">Show manager rankings</option>
+                            <optgroup label="Team Analysis">
+                                ${Object.entries(teamsData).map(([id, team]) => 
+                                    `<option value="team_${id}">How is ${team.name} performing?</option>`
+                                ).join('')}
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="chatbot-messages" style="height:500px;overflow-y:auto;padding:1rem;background:var(--light-bg);border-radius:12px;">
+                        <div class="message bot" style="display:flex;gap:0.8rem;max-width:85%;align-self:flex-start;margin-bottom:1rem;">
+                            <div class="message-avatar" style="width:32px;height:32px;border-radius:50%;background:var(--primary-color);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.9rem;flex-shrink:0;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content" style="background:var(--light-bg);padding:0.8rem;border-radius:12px;color:var(--text-color);">
+                                Hello! I'm Dano Madit, your Elite League assistant. Select a question from the dropdown above to get information about:
+                                • League standings and statistics
+                                • Match results and predictions
+                                • Upcoming fixtures
+                                • Champions League updates
+                                • Cup competitions progress
+                                • Team performance analysis
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
         case 'teams':
             return `
                 <section class="teams-section">
@@ -1249,6 +1298,10 @@ function loadPage(pageId) {
     if (pageId === 'search') {
         initializeTeamStats();
     }
+    if (pageId === 'chatbot') {
+        // Initialize chatbot after a short delay to ensure DOM is ready
+        setTimeout(initializeChatbot, 100);
+    }
 }
 
 // Function to update active states in navigation
@@ -1351,10 +1404,13 @@ const themeManager = {
     createThemeToggle() {
         const toggleHTML = `
             <div class="header-controls">
-                <button class="search-btn" title="Search">
+                <button class="search-btn" id="search-btn">
                     <i class="fas fa-search"></i>
                 </button>
-                <button class="theme-toggle-btn" title="Switch to Dark Theme">
+                <a href="#chatbot" class="chatbot-btn" style="background:rgba(255,255,255,0.2);color:white;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid rgba(255,255,255,0.3);box-shadow:0 2px 5px rgba(0,0,0,0.2);text-decoration:none;">
+                    <i class="fas fa-robot"></i>
+                </a>
+                <button class="theme-toggle-btn" id="theme-toggle">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
@@ -2523,6 +2579,27 @@ if (!document.getElementById('responsive-table-legend-style')) {
     .table-legend-simple {
         margin-top: 2.5em !important;
     }
+
+    @media (max-width: 768px) {
+        .header-controls {
+            top: 0.75rem;
+            right: 0.75rem;
+            gap: 0.4rem;
+        }
+
+        .search-btn,
+        .theme-toggle-btn,
+        .chatbot-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 1rem;
+        }
+    }
+
+    .chatbot-btn:hover {
+        background: rgba(255,255,255,0.3) !important;
+        transform: rotate(15deg);
+    }
     `;
     document.head.appendChild(style);
 }
@@ -2683,5 +2760,657 @@ function showTeamStats(teamId) {
 
     // Update the modal content
     document.querySelector('.team-stats-modal').innerHTML = modalContent;
+}
+
+// Initialize chatbot functionality
+function initializeChatbot() {
+    console.log('Initializing chatbot...');
+    const select = document.getElementById('chatbot-questions');
+    const messagesContainer = document.querySelector('.chatbot-messages');
+    
+    if (!select || !messagesContainer) {
+        console.error('Chatbot elements not found:', { select, messagesContainer });
+        return;
+    }
+
+    console.log('Found chatbot elements:', { select, messagesContainer });
+
+    // Remove any existing event listeners
+    const newSelect = select.cloneNode(true);
+    select.parentNode.replaceChild(newSelect, select);
+    
+    // Add new event listener
+    newSelect.addEventListener('change', function() {
+        const selectedValue = this.value;
+        if (!selectedValue) return;
+        
+        console.log('Selected value:', selectedValue);
+        
+        // Add user message
+        const questionText = this.options[this.selectedIndex].text;
+        console.log('Adding user message:', questionText);
+        addMessage(questionText, false);
+        
+        // Process the query and add bot response
+        let response;
+        if (selectedValue === 'table') {
+            response = processUserQuery('show me the league table');
+        } else if (selectedValue === 'recent') {
+            response = processUserQuery('show recent results');
+        } else if (selectedValue === 'upcoming') {
+            response = processUserQuery('show upcoming matches');
+        } else if (selectedValue === 'champions') {
+            response = processUserQuery('tell me about the champions league');
+        } else if (selectedValue === 'cups') {
+            response = processUserQuery('show cup progression');
+        } else if (selectedValue === 'managers') {
+            response = processUserQuery('show manager rankings');
+        } else if (selectedValue.startsWith('team_')) {
+            const teamId = selectedValue.replace('team_', '');
+            const team = teamsData[teamId];
+            if (team) {
+                response = processUserQuery(`how is ${team.name} performing`);
+            }
+        }
+
+        console.log('Bot response:', response);
+        
+        if (response) {
+            console.log('Adding bot response to chat');
+            addMessage(response);
+        } else {
+            console.log('No response generated');
+        }
+
+        // Reset the select
+        this.value = '';
+    });
+}
+
+function addMessage(content, isBot = true) {
+    console.log('Adding message:', { content, isBot });
+    const messagesContainer = document.querySelector('.chatbot-messages');
+    if (!messagesContainer) {
+        console.error('Messages container not found');
+        return;
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
+    messageDiv.style.cssText = `
+        display: flex;
+        gap: 0.8rem;
+        max-width: 85%;
+        margin-bottom: 1.5rem;
+        align-self: ${isBot ? 'flex-start' : 'flex-end'};
+        flex-direction: ${isBot ? 'row' : 'row-reverse'};
+        animation: fadeIn 0.3s ease-out;
+    `;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.style.cssText = `
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: ${isBot ? 'var(--primary-color)' : 'var(--accent-color)'};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    `;
+    avatar.innerHTML = isBot ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.style.cssText = `
+        background: ${isBot ? 'var(--light-bg)' : 'var(--accent-color)'};
+        padding: 1rem;
+        border-radius: 16px;
+        color: ${isBot ? 'var(--text-color)' : 'white'};
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        width: 100%;
+    `;
+
+    // Format the content with proper styling
+    if (isBot) {
+        // Split content into sections if it contains bullet points
+        const sections = content.split('\n\n');
+        if (sections.length > 1) {
+            contentDiv.innerHTML = sections.map(section => {
+                const lines = section.trim().split('\n');
+                const firstLine = lines[0];
+                const restLines = lines.slice(1);
+                
+                // Check if first line is a header (contains emoji)
+                const isHeader = firstLine.match(/[🏆🌟📊📈⚽📅]/);
+                
+                return `
+                    <div style="margin-bottom: 1rem;">
+                        ${isHeader ? 
+                            `<div style="font-size: 1.1em; font-weight: 700; color: var(--primary-color); margin-bottom: 0.5rem;">
+                                ${firstLine}
+                            </div>` : 
+                            `<div style="margin-bottom: 0.5rem;">${firstLine}</div>`
+                        }
+                        ${restLines.map(line => {
+                            // Check if line is a bullet point
+                            if (line.startsWith('•')) {
+                                return `<div style="margin: 0.3rem 0; padding-left: 1rem; position: relative;">
+                                    <span style="position: absolute; left: 0; color: var(--primary-color);">•</span>
+                                    ${line.substring(1)}
+                                </div>`;
+                            }
+                            // Check if line is a stat or metric
+                            else if (line.includes(':') && !line.includes('vs')) {
+                                const [label, value] = line.split(':');
+                                return `<div style="margin: 0.3rem 0;">
+                                    <span style="font-weight: 600; color: var(--primary-color);">${label}:</span>
+                                    <span style="margin-left: 0.3rem;">${value}</span>
+                                </div>`;
+                            }
+                            // Regular line
+                            return `<div style="margin: 0.3rem 0;">${line}</div>`;
+                        }).join('')}
+                    </div>
+                `;
+            }).join('');
+        } else {
+            contentDiv.textContent = content;
+        }
+    } else {
+        contentDiv.textContent = content;
+    }
+
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(contentDiv);
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Add fade-in animation
+    messageDiv.style.opacity = '0';
+    setTimeout(() => {
+        messageDiv.style.opacity = '1';
+    }, 50);
+}
+
+// Add this CSS to the existing styles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message {
+        transition: all 0.3s ease;
+    }
+
+    .message:hover {
+        transform: translateY(-2px);
+    }
+
+    .message-content {
+        transition: all 0.3s ease;
+    }
+
+    .message:hover .message-content {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+`;
+document.head.appendChild(style);
+
+// Make sure chatbot is initialized when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing chatbot...');
+    // Initialize chatbot after a short delay to ensure DOM is ready
+    setTimeout(initializeChatbot, 100);
+});
+
+// Also initialize chatbot when switching to the chatbot page
+function loadPage(pageId) {
+    console.log('Loading page:', pageId);
+    document.querySelector('main').innerHTML = getPageContent(pageId);
+    updateActiveState(pageId);
+    history.pushState({ page: pageId }, '', `#${pageId}`);
+    window.scrollTo(0, 0);
+
+    if (pageId === 'teams') {
+        initializeTeamStats();
+        initializeTeamSearch();
+    }
+    if (pageId === 'fixtures' || pageId === 'results') {
+        initializeMatchdaySelectors();
+    }
+    if (pageId === 'search') {
+        initializeTeamStats();
+    }
+    if (pageId === 'chatbot') {
+        console.log('Initializing chatbot for chatbot page');
+        // Initialize chatbot after a short delay to ensure DOM is ready
+        setTimeout(initializeChatbot, 100);
+    }
+}
+
+function processUserQuery(query) {
+    // Convert query to lowercase for easier matching
+    const lowerQuery = query.toLowerCase();
+    
+    // League table related queries
+    if (lowerQuery.includes('table') || lowerQuery.includes('standings') || lowerQuery.includes('position')) {
+        const leagueTable = computeLeagueTable();
+        const top4 = leagueTable.slice(0, 4);
+        const bottom2 = leagueTable.slice(-2);
+        
+        let response = 'Here\'s a detailed analysis of the current league standings:\n\n';
+        response += '🏆 Top 4 (Champions League Qualification):\n';
+        top4.forEach((team, idx) => {
+            const form = team.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
+            response += `${idx + 1}. ${team.name} - ${team.points} points (${team.played} played)\n`;
+            response += `   Form: ${form}\n`;
+            response += `   Goals: ${team.goalsFor}-${team.goalsAgainst} (GD: ${team.goalDiff > 0 ? '+' : ''}${team.goalDiff})\n`;
+        });
+        
+        response += '\n⚠️ Bottom 2 (Relegation Zone):\n';
+        bottom2.forEach((team, idx) => {
+            const form = team.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
+            response += `${leagueTable.length - 1 + idx}. ${team.name} - ${team.points} points (${team.played} played)\n`;
+            response += `   Form: ${form}\n`;
+            response += `   Goals: ${team.goalsFor}-${team.goalsAgainst} (GD: ${team.goalDiff > 0 ? '+' : ''}${team.goalDiff})\n`;
+        });
+
+        // Add league insights
+        const avgGoalsPerGame = leagueTable.reduce((sum, team) => sum + team.goalsFor + team.goalsAgainst, 0) / 
+                            (leagueTable.reduce((sum, team) => sum + team.played, 0) * 2);
+        const highestScorer = leagueTable.reduce((max, team) => team.goalsFor > max.goalsFor ? team : max);
+        const bestDefense = leagueTable.reduce((min, team) => team.goalsAgainst < min.goalsAgainst ? team : min);
+        
+        response += '\n📊 League Insights:\n';
+        response += `• Average goals per game: ${avgGoalsPerGame.toFixed(2)}\n`;
+        response += `• Highest scoring team: ${highestScorer.name} (${highestScorer.goalsFor} goals)\n`;
+        response += `• Best defense: ${bestDefense.name} (${bestDefense.goalsAgainst} goals conceded)\n`;
+        
+        return response;
+    }
+
+    // Team specific queries
+    const teamMatch = lowerQuery.match(/(?:how is|what about|tell me about|show|analyze) (.*?)(?:doing|performing|stats|form|analysis)/);
+    if (teamMatch) {
+        const teamName = teamMatch[1].trim();
+        console.log('Looking for team:', teamName);
+        
+        // Find team ID by name (case-insensitive)
+        const teamId = Object.entries(teamsData).find(([_, data]) => 
+            data.name.toLowerCase() === teamName.toLowerCase() ||
+            data.shortName.toLowerCase() === teamName.toLowerCase()
+        )?.[0];
+
+        console.log('Found team ID:', teamId);
+
+        if (teamId) {
+            const overview = getTeamOverview(teamId);
+            if (overview) {
+                const team = overview.teamDetails;
+                const stats = overview.league.stats;
+                const form = stats.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
+                
+                let response = `📊 Detailed Analysis of ${team.name}:\n\n`;
+                response += `League Position: ${overview.league.position}${overview.league.position === 1 ? 'st' : overview.league.position === 2 ? 'nd' : overview.league.position === 3 ? 'rd' : 'th'}\n`;
+                response += `Points: ${stats.points} (${stats.won}W ${stats.drawn}D ${stats.lost}L)\n`;
+                response += `Form: ${form}\n`;
+                response += `Goals: ${stats.goalsFor}-${stats.goalsAgainst} (GD: ${stats.goalDiff > 0 ? '+' : ''}${stats.goalDiff})\n\n`;
+                
+                // Performance analysis
+                const winRate = ((stats.won / stats.played) * 100).toFixed(1);
+                const avgGoalsScored = (stats.goalsFor / stats.played).toFixed(2);
+                const avgGoalsConceded = (stats.goalsAgainst / stats.played).toFixed(2);
+                
+                response += '📈 Performance Metrics:\n';
+                response += `• Win Rate: ${winRate}%\n`;
+                response += `• Average Goals Scored: ${avgGoalsScored} per game\n`;
+                response += `• Average Goals Conceded: ${avgGoalsConceded} per game\n`;
+                
+                // Recent form analysis
+                const recentForm = stats.form.slice(-5);
+                const wins = recentForm.filter(f => f === 'W').length;
+                const draws = recentForm.filter(f => f === 'D').length;
+                const losses = recentForm.filter(f => f === 'L').length;
+                
+                response += '\n🔄 Recent Form Analysis:\n';
+                response += `• Last 5 matches: ${wins}W ${draws}D ${losses}L\n`;
+                if (wins >= 3) response += '• Strong recent form with multiple wins\n';
+                else if (losses >= 3) response += '• Struggling with recent results\n';
+                else response += '• Mixed results in recent matches\n';
+                
+                // Champions League status if applicable
+                if (overview.championsLeague.inCompetition) {
+                    response += '\n🏆 Champions League Status:\n';
+                    response += `• Current Stage: ${overview.championsLeague.progression}\n`;
+                    response += `• Group Position: ${overview.championsLeague.groupPosition}\n`;
+                }
+                
+                console.log('Generated response:', response);
+                return response;
+            }
+        }
+        return `I couldn't find information about ${teamName}. Please make sure you've spelled the team name correctly.`;
+    }
+
+    // Champions League queries
+    if (lowerQuery.includes('champions league') || lowerQuery.includes('cl')) {
+        const clFixtures = getChampionsLeagueFixtures();
+        const completedMatches = clFixtures.filter(f => f.status === 'completed');
+        const upcomingMatches = clFixtures.filter(f => f.status === 'scheduled');
+        
+        let response = '🏆 Champions League Update\n\n';
+        
+        // Group stage analysis
+        const clTeamIds = Array.from(new Set(clFixtures.flatMap(f => [f.homeTeam, f.awayTeam])));
+        const groupTable = {};
+        clTeamIds.forEach(teamId => {
+            groupTable[teamId] = {
+                teamId,
+                name: teamsData[teamId]?.name || teamId,
+                played: 0,
+                won: 0,
+                drawn: 0,
+                lost: 0,
+                goalsFor: 0,
+                goalsAgainst: 0,
+                points: 0
+            };
+        });
+        
+        completedMatches.forEach(match => {
+            const home = groupTable[match.homeTeam];
+            const away = groupTable[match.awayTeam];
+            home.played++;
+            away.played++;
+            home.goalsFor += match.score.home;
+            home.goalsAgainst += match.score.away;
+            away.goalsFor += match.score.away;
+            away.goalsAgainst += match.score.home;
+            
+            if (match.score.home > match.score.away) {
+                home.won++;
+                home.points += 3;
+                away.lost++;
+            } else if (match.score.home < match.score.away) {
+                away.won++;
+                away.points += 3;
+                home.lost++;
+            } else {
+                home.drawn++;
+                away.drawn++;
+                home.points++;
+                away.points++;
+            }
+        });
+        
+        const sortedTable = Object.values(groupTable).sort((a, b) => {
+            if (b.points !== a.points) return b.points - a.points;
+            const gdA = a.goalsFor - a.goalsAgainst;
+            const gdB = b.goalsFor - b.goalsAgainst;
+            if (gdB !== gdA) return gdB - gdA;
+            if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
+            return a.name.localeCompare(b.name);
+        });
+        
+        // Group Stage Table
+        response += '📊 Group Stage Standings:\n';
+        sortedTable.forEach((team, idx) => {
+            const form = team.form ? team.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ') : '';
+            response += `${idx + 1}. ${team.name}\n`;
+            response += `   Points: ${team.points} (${team.won}W ${team.drawn}D ${team.lost}L)\n`;
+            response += `   Goals: ${team.goalsFor}-${team.goalsAgainst}\n`;
+            if (form) response += `   Form: ${form}\n`;
+        });
+        
+        // Recent Results
+        if (completedMatches.length > 0) {
+            response += '\n⚽ Recent Results:\n';
+            const recentMatches = completedMatches
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
+                
+            recentMatches.forEach(match => {
+                const homeTeam = teamsData[match.homeTeam];
+                const awayTeam = teamsData[match.awayTeam];
+                response += `• ${homeTeam.name} ${match.score.home}-${match.score.away} ${awayTeam.name}\n`;
+                response += `  ${match.date} at ${match.time}\n`;
+            });
+        }
+        
+        // Upcoming Matches
+        if (upcomingMatches.length > 0) {
+            response += '\n📅 Upcoming Matches:\n';
+            const nextMatches = upcomingMatches
+                .sort((a, b) => new Date(a.date) - new Date(b.date))
+                .slice(0, 3);
+                
+            nextMatches.forEach(match => {
+                const homeTeam = teamsData[match.homeTeam];
+                const awayTeam = teamsData[match.awayTeam];
+                response += `• ${homeTeam.name} vs ${awayTeam.name}\n`;
+                response += `  ${match.date} at ${match.time}\n`;
+            });
+        }
+        
+        // Final Information
+        if (championsLeagueFinal) {
+            response += '\n🏆 Final:\n';
+            const homeTeam = championsLeagueFinal.homeTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.homeTeam].name;
+            const awayTeam = championsLeagueFinal.awayTeam === 'tbd' ? 'TBD' : teamsData[championsLeagueFinal.awayTeam].name;
+            
+            if (championsLeagueFinal.status === 'completed') {
+                response += `• ${homeTeam} ${championsLeagueFinal.score.home}-${championsLeagueFinal.score.away} ${awayTeam}`;
+                if (championsLeagueFinal.penalties) {
+                    response += ` (pens ${championsLeagueFinal.penalties.home}-${championsLeagueFinal.penalties.away})`;
+                }
+            } else {
+                response += `• ${homeTeam} vs ${awayTeam}\n`;
+                response += `  ${championsLeagueFinal.date} at ${championsLeagueFinal.time}\n`;
+                response += `  Venue: ${championsLeagueFinal.homeTeam !== 'tbd' && teamsData[championsLeagueFinal.homeTeam] ? teamsData[championsLeagueFinal.homeTeam].stadium : 'TBD'}`;
+            }
+        }
+        
+        return response;
+    }
+
+    // Match results queries
+    if (lowerQuery.includes('recent results') || lowerQuery.includes('last matches')) {
+        const recentMatches = matchData.fixtures
+            .filter(m => m.status === 'completed')
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 5);
+        
+        let response = '📊 Recent Match Analysis:\n\n';
+        recentMatches.forEach(match => {
+            const homeTeam = teamsData[match.homeTeam];
+            const awayTeam = teamsData[match.awayTeam];
+            const homeForm = computeLeagueTable().find(t => t.teamId === match.homeTeam)?.form.slice(-3) || [];
+            const awayForm = computeLeagueTable().find(t => t.teamId === match.awayTeam)?.form.slice(-3) || [];
+            
+            response += `🏟️ ${homeTeam.name} ${match.score.home} - ${match.score.away} ${awayTeam.name}\n`;
+            response += `📅 ${match.date} at ${match.time}\n`;
+            response += `📈 Form:\n`;
+            response += `   ${homeTeam.name}: ${homeForm.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ')}\n`;
+            response += `   ${awayTeam.name}: ${awayForm.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ')}\n\n`;
+        });
+        
+        // Add match statistics
+        const totalGoals = recentMatches.reduce((sum, match) => sum + match.score.home + match.score.away, 0);
+        const avgGoals = (totalGoals / recentMatches.length).toFixed(2);
+        const homeWins = recentMatches.filter(m => m.score.home > m.score.away).length;
+        const awayWins = recentMatches.filter(m => m.score.away > m.score.home).length;
+        const draws = recentMatches.filter(m => m.score.home === m.score.away).length;
+        
+        response += '📈 Match Statistics:\n';
+        response += `• Average goals per game: ${avgGoals}\n`;
+        response += `• Home wins: ${homeWins}\n`;
+        response += `• Away wins: ${awayWins}\n`;
+        response += `• Draws: ${draws}\n`;
+        
+        return response;
+    }
+
+    // Upcoming matches queries
+    if (lowerQuery.includes('upcoming matches') || lowerQuery.includes('next matches')) {
+        const upcomingMatches = matchData.fixtures
+            .filter(m => m.status === 'scheduled')
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .slice(0, 5);
+        
+        let response = '📅 Upcoming Match Schedule:\n\n';
+        upcomingMatches.forEach(match => {
+            const homeTeam = teamsData[match.homeTeam];
+            const awayTeam = teamsData[match.awayTeam];
+            const homeForm = computeLeagueTable().find(t => t.teamId === match.homeTeam)?.form.slice(-3) || [];
+            const awayForm = computeLeagueTable().find(t => t.teamId === match.awayTeam)?.form.slice(-3) || [];
+            
+            response += `🏟️ ${homeTeam.name} vs ${awayTeam.name}\n`;
+            response += `📅 ${match.date} at ${match.time}\n`;
+            response += `📈 Recent Form:\n`;
+            response += `   ${homeTeam.name}: ${homeForm.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ')}\n`;
+            response += `   ${awayTeam.name}: ${awayForm.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ')}\n\n`;
+        });
+        
+        // Add match statistics
+        const homeTeams = upcomingMatches.map(m => m.homeTeam);
+        const awayTeams = upcomingMatches.map(m => m.awayTeam);
+        const uniqueTeams = [...new Set([...homeTeams, ...awayTeams])];
+        
+        response += '📊 Team Form Analysis:\n';
+        uniqueTeams.forEach(teamId => {
+            const team = teamsData[teamId];
+            const form = computeLeagueTable().find(t => t.teamId === teamId)?.form.slice(-5) || [];
+            const wins = form.filter(f => f === 'W').length;
+            const draws = form.filter(f => f === 'D').length;
+            const losses = form.filter(f => f === 'L').length;
+            
+            response += `• ${team.name}: ${wins}W ${draws}D ${losses}L in last 5 matches\n`;
+        });
+        
+        return response;
+    }
+
+    // Cup progression queries
+    if (lowerQuery.includes('cup progression') || lowerQuery.includes('show cups')) {
+        let response = '🏆 Cup Competitions Progress:\n\n';
+        
+        // Champions League progression
+        response += '🌟 Champions League:\n';
+        const clFixtures = getChampionsLeagueFixtures();
+        const clCompleted = clFixtures.filter(m => m.status === 'completed').length;
+        const clTotal = clFixtures.length;
+        const clProgress = Math.round((clCompleted / clTotal) * 100);
+        
+        response += `• Progress: ${clProgress}% (${clCompleted}/${clTotal} matches played)\n`;
+        response += `• Current Stage: Group Stage\n`;
+        response += `• Next Stage: Final\n\n`;
+        
+        // YTY Cup progression
+        response += '🏆 YTY Cup:\n';
+        const ytyCompleted = ytyCupFixtures.filter(m => m.status === 'completed').length;
+        const ytyTotal = ytyCupFixtures.length;
+        const ytyProgress = Math.round((ytyCompleted / ytyTotal) * 100);
+        
+        // Find current stage
+        const completedRounds = ytyCupFixtures.filter(m => m.status === 'completed')
+            .map(m => m.round);
+        const currentStage = completedRounds.length > 0 ? 
+            completedRounds[completedRounds.length - 1] : 'Not started';
+        
+        // Find next stage
+        const nextStage = ytyCupFixtures.find(m => m.status === 'scheduled')?.round || 'Final';
+        
+        response += `• Progress: ${ytyProgress}% (${ytyCompleted}/${ytyTotal} matches played)\n`;
+        response += `• Current Stage: ${currentStage}\n`;
+        response += `• Next Stage: ${nextStage}\n\n`;
+        
+        // Upcoming cup matches
+        const upcomingMatches = [
+            ...clFixtures.filter(m => m.status === 'scheduled'),
+            ...ytyCupFixtures.filter(m => m.status === 'scheduled')
+        ].sort((a, b) => new Date(a.date) - new Date(b.date)).slice(0, 3);
+        
+        if (upcomingMatches.length > 0) {
+            response += '📅 Next Cup Matches:\n';
+            upcomingMatches.forEach(match => {
+                const homeTeam = teamsData[match.homeTeam];
+                const awayTeam = teamsData[match.awayTeam];
+                const competition = match.round === 'Final' ? 'YTY Cup Final' : 
+                    match.round ? 'YTY Cup' : 'Champions League';
+                response += `• ${competition}: ${homeTeam.name} vs ${awayTeam.name}\n`;
+                response += `  ${match.date} at ${match.time}\n`;
+            });
+        }
+        
+        return response;
+    }
+
+    // Manager rankings query
+    if (lowerQuery.includes('manager rankings') || lowerQuery.includes('manager points')) {
+        // Get league table to calculate manager points
+        const leagueTable = computeLeagueTable();
+        
+        // Create manager rankings array
+        const managerRankings = leagueTable.map(team => {
+            const teamData = teamsData[team.teamId];
+            return {
+                name: teamData.manager,
+                team: teamData.name,
+                points: team.points,
+                wins: team.won,
+                draws: team.drawn,
+                losses: team.lost,
+                goalsFor: team.goalsFor,
+                goalsAgainst: team.goalsAgainst,
+                goalDiff: team.goalDiff,
+                form: team.form
+            };
+        }).sort((a, b) => b.points - a.points);
+
+        let response = '👔 Manager Rankings:\n\n';
+        
+        // Top 3 managers
+        response += '🏆 Top 3 Managers:\n';
+        managerRankings.slice(0, 3).forEach((manager, idx) => {
+            const form = manager.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
+            response += `${idx + 1}. ${manager.name} (${manager.team})\n`;
+            response += `   • Points: ${manager.points}\n`;
+            response += `   • Record: ${manager.wins}W ${manager.draws}D ${manager.losses}L\n`;
+            response += `   • Goals: ${manager.goalsFor}-${manager.goalsAgainst} (GD: ${manager.goalDiff > 0 ? '+' : ''}${manager.goalDiff})\n`;
+            response += `   • Form: ${form}\n\n`;
+        });
+
+        // Manager statistics
+        const totalPoints = managerRankings.reduce((sum, m) => sum + m.points, 0);
+        const avgPoints = (totalPoints / managerRankings.length).toFixed(1);
+        const highestScoring = managerRankings.reduce((max, m) => m.goalsFor > max.goalsFor ? m : max);
+        const bestDefense = managerRankings.reduce((min, m) => m.goalsAgainst < min.goalsAgainst ? m : min);
+        const mostWins = managerRankings.reduce((max, m) => m.wins > max.wins ? m : max);
+
+        response += '📊 Manager Statistics:\n';
+        response += `• Average Points: ${avgPoints}\n`;
+        response += `• Highest Scoring: ${highestScoring.name} (${highestScoring.goalsFor} goals)\n`;
+        response += `• Best Defense: ${bestDefense.name} (${bestDefense.goalsAgainst} goals conceded)\n`;
+        response += `• Most Wins: ${mostWins.name} (${mostWins.wins} wins)\n\n`;
+
+        // Full rankings
+        response += '📋 Full Rankings:\n';
+        managerRankings.forEach((manager, idx) => {
+            response += `${idx + 1}. ${manager.name} (${manager.team}) - ${manager.points} points\n`;
+        });
+
+        return response;
+    }
+
+    // Default response for unrecognized queries
+    return "I'm not sure I understand. You can ask me about:\n- League standings and detailed statistics\n- Team performance analysis and form\n- Match results and trends\n- Champions League progress and predictions\n- Player statistics and comparisons\n\nTry asking something like:\n• 'Show me the league table'\n• 'How is [team name] performing?'\n• 'Analyze recent results'\n• 'Tell me about the Champions League'";
 }
 
