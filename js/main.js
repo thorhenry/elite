@@ -965,25 +965,74 @@ function getPageContent(page) {
                         </div>
                         <div>
                             <h2 style="margin:0;color:var(--text-color);">Dano Madit</h2>
-                            <p style="margin:0;color:var(--text-muted);">Select a question to get information!</p>
+                            <p style="margin:0;color:var(--text-muted);">Your Elite League assistant</p>
                         </div>
                     </div>
                     
                     <div class="chatbot-controls" style="margin-bottom:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;">
-                        <select id="chatbot-questions" style="width:100%;padding:0.8rem;border:1px solid var(--border-color);border-radius:8px;background:var(--light-bg);color:var(--text-color);font-size:1rem;">
-                            <option value="">Select a question...</option>
-                            <option value="table">Show me the league table</option>
-                            <option value="recent">Show recent match results</option>
-                            <option value="upcoming">Show upcoming matches</option>
-                            <option value="champions">Tell me about the Champions League</option>
-                            <option value="cups">Show cup progression</option>
-                            <option value="managers">Show manager rankings</option>
-                            <optgroup label="Team Analysis">
-                                ${Object.entries(teamsData).map(([id, team]) => 
-                                    `<option value="team_${id}">How is ${team.name} performing?</option>`
-                                ).join('')}
-                            </optgroup>
-                        </select>
+                        <button id="show-questions" style="width:100%;padding:1rem;border:none;border-radius:8px;background:var(--primary-color);color:white;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all 0.3s ease;">
+                            <i class="fas fa-comments"></i>
+                            Ask a Question
+                        </button>
+                    </div>
+
+                    <div id="questions-overlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;padding:2rem;overflow-y:auto;">
+                        <div style="max-width:800px;margin:0 auto;background:var(--bg-color);border-radius:16px;padding:2rem;position:relative;">
+                            <button id="close-questions" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text-color);font-size:1.5rem;cursor:pointer;padding:0.5rem;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            
+                            <h2 style="margin:0 0 1.5rem;color:var(--text-color);">What would you like to know?</h2>
+                            
+                            <div class="questions-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">
+                                <div class="question-category" style="background:var(--light-bg);border-radius:12px;padding:1.5rem;">
+                                    <h3 style="margin:0 0 1rem;color:var(--primary-color);font-size:1.1rem;">
+                                        <i class="fas fa-trophy"></i> League
+                                    </h3>
+                                    <div class="question-options" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                        <button class="question-btn" data-value="table" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-list-ol"></i> Show me the league table
+                                        </button>
+                                        <button class="question-btn" data-value="recent" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-history"></i> Show recent match results
+                                        </button>
+                                        <button class="question-btn" data-value="upcoming" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-calendar"></i> Show upcoming matches
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="question-category" style="background:var(--light-bg);border-radius:12px;padding:1.5rem;">
+                                    <h3 style="margin:0 0 1rem;color:var(--primary-color);font-size:1.1rem;">
+                                        <i class="fas fa-star"></i> Competitions
+                                    </h3>
+                                    <div class="question-options" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                        <button class="question-btn" data-value="champions" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-trophy"></i> Tell me about the Champions League
+                                        </button>
+                                        <button class="question-btn" data-value="cups" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-cup"></i> Show cup progression
+                                        </button>
+                                        <button class="question-btn" data-value="managers" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                            <i class="fas fa-user-tie"></i> Show manager rankings
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="question-category" style="background:var(--light-bg);border-radius:12px;padding:1.5rem;">
+                                    <h3 style="margin:0 0 1rem;color:var(--primary-color);font-size:1.1rem;">
+                                        <i class="fas fa-users"></i> Teams
+                                    </h3>
+                                    <div class="question-options" style="display:flex;flex-direction:column;gap:0.5rem;">
+                                        ${Object.entries(teamsData).map(([id, team]) => `
+                                            <button class="question-btn" data-value="team_${id}" style="text-align:left;padding:0.8rem;border:none;border-radius:8px;background:var(--bg-color);color:var(--text-color);cursor:pointer;transition:all 0.2s ease;">
+                                                <i class="fas fa-shield-alt"></i> How is ${team.name} performing?
+                                            </button>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="chatbot-messages" style="height:500px;overflow-y:auto;padding:1rem;background:var(--light-bg);border-radius:12px;">
@@ -992,7 +1041,7 @@ function getPageContent(page) {
                                 <i class="fas fa-robot"></i>
                             </div>
                             <div class="message-content" style="background:var(--light-bg);padding:0.8rem;border-radius:12px;color:var(--text-color);">
-                                Hello! I'm Dano Madit, your Elite League assistant. Select a question from the dropdown above to get information about:
+                                Hello! I'm Dano Madit, your Elite League assistant. Click "Ask a Question" to get information about:
                                 • League standings and statistics
                                 • Match results and predictions
                                 • Upcoming fixtures
@@ -2765,65 +2814,88 @@ function showTeamStats(teamId) {
 // Initialize chatbot functionality
 function initializeChatbot() {
     console.log('Initializing chatbot...');
-    const select = document.getElementById('chatbot-questions');
+    const showQuestionsBtn = document.getElementById('show-questions');
+    const closeQuestionsBtn = document.getElementById('close-questions');
+    const questionsOverlay = document.getElementById('questions-overlay');
     const messagesContainer = document.querySelector('.chatbot-messages');
     
-    if (!select || !messagesContainer) {
-        console.error('Chatbot elements not found:', { select, messagesContainer });
+    if (!showQuestionsBtn || !closeQuestionsBtn || !questionsOverlay || !messagesContainer) {
+        console.error('Chatbot elements not found');
         return;
     }
 
-    console.log('Found chatbot elements:', { select, messagesContainer });
+    // Show questions overlay
+    showQuestionsBtn.addEventListener('click', () => {
+        questionsOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
 
-    // Remove any existing event listeners
-    const newSelect = select.cloneNode(true);
-    select.parentNode.replaceChild(newSelect, select);
-    
-    // Add new event listener
-    newSelect.addEventListener('change', function() {
-        const selectedValue = this.value;
-        if (!selectedValue) return;
-        
-        console.log('Selected value:', selectedValue);
-        
-        // Add user message
-        const questionText = this.options[this.selectedIndex].text;
-        console.log('Adding user message:', questionText);
-        addMessage(questionText, false);
-        
-        // Process the query and add bot response
-        let response;
-        if (selectedValue === 'table') {
-            response = processUserQuery('show me the league table');
-        } else if (selectedValue === 'recent') {
-            response = processUserQuery('show recent results');
-        } else if (selectedValue === 'upcoming') {
-            response = processUserQuery('show upcoming matches');
-        } else if (selectedValue === 'champions') {
-            response = processUserQuery('tell me about the champions league');
-        } else if (selectedValue === 'cups') {
-            response = processUserQuery('show cup progression');
-        } else if (selectedValue === 'managers') {
-            response = processUserQuery('show manager rankings');
-        } else if (selectedValue.startsWith('team_')) {
-            const teamId = selectedValue.replace('team_', '');
-            const team = teamsData[teamId];
-            if (team) {
-                response = processUserQuery(`how is ${team.name} performing`);
+    // Close questions overlay
+    closeQuestionsBtn.addEventListener('click', () => {
+        questionsOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+
+    // Close overlay when clicking outside
+    questionsOverlay.addEventListener('click', (e) => {
+        if (e.target === questionsOverlay) {
+            questionsOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Handle question selection
+    const questionButtons = document.querySelectorAll('.question-btn');
+    questionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedValue = button.dataset.value;
+            const questionText = button.textContent.trim();
+            
+            // Add user message
+            addMessage(questionText, false);
+            
+            // Process the query and add bot response
+            let response;
+            if (selectedValue === 'table') {
+                response = processUserQuery('show me the league table');
+            } else if (selectedValue === 'recent') {
+                response = processUserQuery('show recent results');
+            } else if (selectedValue === 'upcoming') {
+                response = processUserQuery('show upcoming matches');
+            } else if (selectedValue === 'champions') {
+                response = processUserQuery('tell me about the champions league');
+            } else if (selectedValue === 'cups') {
+                response = processUserQuery('show cup progression');
+            } else if (selectedValue === 'managers') {
+                response = processUserQuery('show manager rankings');
+            } else if (selectedValue.startsWith('team_')) {
+                const teamId = selectedValue.replace('team_', '');
+                const team = teamsData[teamId];
+                if (team) {
+                    response = processUserQuery(`how is ${team.name} performing`);
+                }
             }
-        }
 
-        console.log('Bot response:', response);
-        
-        if (response) {
-            console.log('Adding bot response to chat');
-            addMessage(response);
-        } else {
-            console.log('No response generated');
-        }
+            if (response) {
+                addMessage(response);
+            }
 
-        // Reset the select
-        this.value = '';
+            // Close the overlay
+            questionsOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Add hover effects
+    questionButtons.forEach(button => {
+        button.addEventListener('mouseover', () => {
+            button.style.background = 'var(--primary-color)';
+            button.style.color = 'white';
+        });
+        button.addEventListener('mouseout', () => {
+            button.style.background = 'var(--bg-color)';
+            button.style.color = 'var(--text-color)';
+        });
     });
 }
 
