@@ -92,6 +92,10 @@ header h1 {
     box-shadow: var(--shadow);
 }
 
+.desktop-nav a.active i {
+    color: white;
+}
+
 /* Mobile Navigation */
 .mobile-nav {
     display: none;
@@ -136,8 +140,27 @@ header h1 {
 
 .mobile-nav a:hover,
 .mobile-nav a.active {
-    color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    background: var(--accent-color);
+}
+
+.mobile-nav a.active {
+    color: white;
+    background: var(--accent-color);
+}
+
+.mobile-nav a.active i {
+    color: white;
+}
+
+.mobile-nav a:hover i,
+.mobile-nav a.active i {
+    color: white;
+}
+
+.mobile-nav a:hover {
+    color: white;
+    background: var(--accent-color);
 }
 
 /* Main content styles */
@@ -719,7 +742,7 @@ section h2 {
 
 .mobile-nav a:hover i,
 .mobile-nav a.active i {
-    color: var(--accent-color);
+    color: white;
 }
 
 .desktop-nav a i {
@@ -2253,3 +2276,4 @@ body[data-theme='light'] .form-badge.latest-form {
 .cup-round:last-child {
     margin-bottom: 0;
 }
+
