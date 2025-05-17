@@ -421,6 +421,14 @@ function getPageContent(page) {
                                     <i class="fas fa-users" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
                                     <span style="display:block;font-weight:600;">Teams</span>
                                 </a>
+                                <a href="#cups" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-trophy" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">YTY Cup</span>
+                                </a>
+                                <a href="#hall-of-fame" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-medal" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Hall of Fame</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1325,6 +1333,135 @@ function getPageContent(page) {
                 </section>
             `;
 
+        case 'hall-of-fame':
+            return `
+                <section class="hall-of-fame-section" style="max-width:1200px;margin:0 auto;padding:2rem 1rem;">
+                    <div class="hall-of-fame-header" style="text-align:center;margin-bottom:3rem;">
+                        <h2 style="color:var(--text-color);font-size:2.5rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;">Hall of Fame</h2>
+                        <p style="color:var(--secondary-text);font-size:1.1rem;max-width:600px;margin:0 auto;">Celebrating the greatest achievements in Elite League history</p>
+                    </div>
+                    
+                    <div class="season-selector" style="display:flex;justify-content:center;margin-bottom:3rem;">
+                        <div class="select-wrapper" style="position:relative;min-width:250px;">
+                            <select id="seasonSelect" style="width:100%;padding:1rem 1.5rem;border:2px solid var(--border-color);border-radius:12px;background:var(--card-bg);color:var(--text-color);cursor:pointer;transition:all 0.3s ease;font-size:1.1rem;font-weight:600;appearance:none;-webkit-appearance:none;-moz-appearance:none;padding-right:3rem;">
+                                <option value="season-1">First Season</option>
+                                <option value="season-2">Second Season</option>
+                                <option value="season-3">Third Season</option>
+                            </select>
+                            <div class="select-arrow" style="position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--accent-color);">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hall-of-fame-content">
+                        <!-- Third Season -->
+                        <div class="season-content" data-season="season-3" style="display:none;">
+                            <h3 style="text-align:center;margin-bottom:2rem;color:var(--text-color);font-size:1.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Third Season</h3>
+                            <div class="hall-of-fame-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+                                <!-- Same structure as first Season -->
+                                <!-- ... Copy the same cards structure ... -->
+                            </div>
+                        </div>
+
+                        <!-- Second Season -->
+                        <div class="season-content" data-season="season-2" style="display:none;">
+                            <h3 style="text-align:center;margin-bottom:2rem;color:var(--text-color);font-size:1.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Second Season</h3>
+                            <div class="hall-of-fame-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+                                <!-- Same structure as firt Season -->
+                                <!-- ... Copy the same cards structure ... -->
+                            </div>
+                        </div>
+
+                        <!-- First Season -->
+                        <div class="season-content active" data-season="season-1">
+                            <h3 style="text-align:center;margin-bottom:2rem;color:var(--text-color);font-size:1.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Third Season</h3>
+                            <div class="hall-of-fame-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+                                <!-- League Champions -->
+                                <div class="achievement-card" style="background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s ease;">
+                                    <div class="achievement-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border-color);">
+                                        <i class="fas fa-trophy" style="font-size:2.5rem;color:var(--accent-color);"></i>
+                                        <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">League Champions</h3>
+                                    </div>
+                                    <div class="winner-item" data-team-id="tbd" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                        <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                                            <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                                        </div>
+                                        <div class="winner-info" style="flex:1;">
+                                            <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- YTY Cup Winners -->
+                                <div class="achievement-card" style="background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s ease;">
+                                    <div class="achievement-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border-color);">
+                                        <i class="fas fa-cup" style="font-size:2.5rem;color:var(--accent-color);"></i>
+                                        <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">YTY Cup Winners</h3>
+                                    </div>
+                                    <div class="winner-item" data-team-id="tbd" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                        <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                                            <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                                        </div>
+                                        <div class="winner-info" style="flex:1;">
+                                            <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Champions League Winners -->
+                                <div class="achievement-card" style="background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s ease;">
+                                    <div class="achievement-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border-color);">
+                                        <i class="fas fa-star" style="font-size:2.5rem;color:var(--accent-color);"></i>
+                                        <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Champions League Winners</h3>
+                                    </div>
+                                    <div class="winner-item" data-team-id="tbd" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                        <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                                            <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                                        </div>
+                                        <div class="winner-info" style="flex:1;">
+                                            <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Super Cup Winners -->
+                                <div class="achievement-card" style="background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s ease;">
+                                    <div class="achievement-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border-color);">
+                                        <i class="fas fa-crown" style="font-size:2.5rem;color:var(--accent-color);"></i>
+                                        <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Super Cup Winners</h3>
+                                    </div>
+                                    <div class="winner-item" data-team-id="tbd" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                        <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                                            <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                                        </div>
+                                        <div class="winner-info" style="flex:1;">
+                                            <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Overall Best Team -->
+                                <div class="achievement-card" style="background:var(--card-bg);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);transition:transform 0.3s ease;grid-column:1/-1;">
+                                    <div class="achievement-header" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:2px solid var(--border-color);">
+                                        <i class="fas fa-medal" style="font-size:2.5rem;color:var(--accent-color);"></i>
+                                        <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Overall Best Team</h3>
+                                    </div>
+                                    <div class="winner-item" data-team-id="tbd" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                        <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                                            <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                                        </div>
+                                        <div class="winner-info" style="flex:1;">
+                                            <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+
         default:
             return '<div class="error">Page not found</div>';
     }
@@ -1350,6 +1487,9 @@ function loadPage(pageId) {
     if (pageId === 'chatbot') {
         // Initialize chatbot after a short delay to ensure DOM is ready
         setTimeout(initializeChatbot, 100);
+    }
+    if (pageId === 'hall-of-fame') {
+        initializeHallOfFame();
     }
 }
 
@@ -3066,6 +3206,9 @@ function loadPage(pageId) {
         // Initialize chatbot after a short delay to ensure DOM is ready
         setTimeout(initializeChatbot, 100);
     }
+    if (pageId === 'hall-of-fame') {
+        initializeHallOfFame();
+    }
 }
 
 function processUserQuery(query) {
@@ -3484,5 +3627,101 @@ function processUserQuery(query) {
 
     // Default response for unrecognized queries
     return "I'm not sure I understand. You can ask me about:\n- League standings and detailed statistics\n- Team performance analysis and form\n- Match results and trends\n- Champions League progress and predictions\n- Player statistics and comparisons\n\nTry asking something like:\n• 'Show me the league table'\n• 'How is [team name] performing?'\n• 'Analyze recent results'\n• 'Tell me about the Champions League'";
+}
+
+function initializeSeasonSelector() {
+    const seasonSelect = document.getElementById('seasonSelect');
+    const seasonContents = document.querySelectorAll('.season-content');
+
+    if (seasonSelect) {
+        seasonSelect.addEventListener('change', () => {
+            const selectedSeason = seasonSelect.value;
+            
+            // Show selected season content
+            seasonContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            const selectedContent = document.querySelector(`.season-content[data-season="${selectedSeason}"]`);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+            }
+        });
+
+        // Set initial value to First Season
+        seasonSelect.value = 'season-1';
+    }
+}
+
+function updateHallOfFameWinners(seasonId, winners) {
+    const seasonContent = document.querySelector(`.season-content[data-season="${seasonId}"]`);
+    if (!seasonContent) return;
+
+    const winnerItems = seasonContent.querySelectorAll('.winner-item');
+    winnerItems.forEach(item => {
+        const teamId = item.getAttribute('data-team-id');
+        const winnerInfo = item.querySelector('.winner-info');
+        const winnerName = winnerInfo.querySelector('.winner-name');
+
+        if (teamId === 'tbd') {
+            // Show placeholder for TBD
+            item.innerHTML = `
+                <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
+                    <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
+                </div>
+                <div class="winner-info" style="flex:1;">
+                    <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
+                </div>
+            `;
+        } else {
+            // Show actual team data
+            const team = teamsData[teamId];
+            if (team) {
+                item.innerHTML = `
+                    <img src="${team.logo}" alt="${team.name}" style="width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-color);">
+                    <div class="winner-info" style="flex:1;">
+                        <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">${team.name}</div>
+                    </div>
+                `;
+            }
+        }
+    });
+}
+
+function initializeHallOfFame() {
+    const seasonSelect = document.getElementById('seasonSelect');
+    const seasonContents = document.querySelectorAll('.season-content');
+    const achievementCards = document.querySelectorAll('.achievement-card');
+
+    // Add hover effects to achievement cards
+    achievementCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-5px)';
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+    });
+
+    if (seasonSelect) {
+        seasonSelect.addEventListener('change', () => {
+            const selectedSeason = seasonSelect.value;
+            
+            // Show selected season content
+            seasonContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            const selectedContent = document.querySelector(`.season-content[data-season="${selectedSeason}"]`);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+                // Update winners for the selected season
+                updateHallOfFameWinners(selectedSeason);
+            }
+        });
+
+        // Set initial value to First Season
+        seasonSelect.value = 'season-1';
+        // Update winners for the first season
+        updateHallOfFameWinners('season-1');
+    }
 }
 
