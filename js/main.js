@@ -3663,11 +3663,9 @@ function updateHallOfFameWinners(seasonId, winners) {
         const winnerName = winnerInfo.querySelector('.winner-name');
 
         if (teamId === 'tbd') {
-            // Show placeholder for TBD
+            // Show TBD logo for placeholder
             item.innerHTML = `
-                <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
-                    <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
-                </div>
+                <img src="images/club-logos/tbd.svg" alt="TBD" style="width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--accent-color);">
                 <div class="winner-info" style="flex:1;">
                     <div class="winner-name" style="font-weight:700;color:var(--text-color);font-size:1.1rem;">TBD</div>
                 </div>
