@@ -177,7 +177,7 @@ const matchData = {
         // Matchday 7 - May 18, 2025
         { id: 'f25', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'offer-art', awayTeam: 'thorvisual', status: 'completed', score: { home: 1, away: 1 } },
         { id: 'f26', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'omara', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f27', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f27', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'priest', status: 'completed', score: { home: 8, away: 0 } },
         { id: 'f28', matchday: 7, date: '2025-05-18', time: '20:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'completed', score: { home: 6, away: 3 } },
         // Matchday 8 - May 19, 2025
         { id: 'f29', matchday: 8, date: '2025-05-19', time: '20:00', homeTeam: 'newton', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -489,6 +489,7 @@ function getPageContent(page) {
                                                              class="team-logo-small">
                                                         <span>${matchUtils.getTeamName(match.awayTeam)}</span>
                                                     </div>
+
                                                 </div>
                                                 <div class="match-info" style="display:flex;align-items:center;justify-content:space-between;font-size:0.9em;color:var(--secondary-text);margin-top:0.5em;">
                                                     <div class="date">${match.date} ${match.time || ''}</div>
@@ -3722,4 +3723,5 @@ function initializeHallOfFame() {
         updateHallOfFameWinners('season-1');
     }
 }
+
 
