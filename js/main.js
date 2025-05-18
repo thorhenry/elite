@@ -2710,10 +2710,10 @@ function getChampionsLeagueFixtures() {
         { id: 'clf1', matchday: 1, date: '2025-05-14', time: '20:00', homeTeam: 'priest', awayTeam: 'thorvisual', status: 'completed', score: { home: 5, away: 0 } },
         { id: 'clf2', matchday: 1, date: '2025-05-14', time: '22:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 3 } },
         // Matchday 2
-        { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf3', matchday: 2, date: '2025-05-16', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'completed', score: { home: 2, away: 5 } },
         { id: 'clf4', matchday: 2, date: '2025-05-16', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'completed', score: { home: 1, away: 1 } },
         // Matchday 3
-        { id: 'clf5', matchday: 3, date: '2025-05-18', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf5', matchday: 3, date: '2025-05-18', time: '20:00', homeTeam: 'priest', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 0 } },
         { id: 'clf6', matchday: 3, date: '2025-05-18', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 3 } },
         // Matchday 4
         { id: 'clf7', matchday: 4, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'thorvisual', status: 'scheduled', score: { home: 0, away: 0 } },
