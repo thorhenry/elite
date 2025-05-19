@@ -135,7 +135,8 @@ const pages = {
     cups: 'cups',
     'champions-league': 'champions-league',
     teams: 'teams',
-    search: 'search'
+    search: 'search',
+    friendlies: 'friendlies'
 };
 
 // Current active page
@@ -424,6 +425,10 @@ function getPageContent(page) {
                                 <a href="#cups" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
                                     <i class="fas fa-trophy" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
                                     <span style="display:block;font-weight:600;">YTY Cup</span>
+                                </a>
+                                <a href="#friendlies" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
+                                    <i class="fas fa-handshake" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
+                                    <span style="display:block;font-weight:600;">Friendlies</span>
                                 </a>
                                 <a href="#hall-of-fame" class="link-card" style="background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:1em;text-align:center;text-decoration:none;color:var(--text-color);transition:all 0.3s ease;">
                                     <i class="fas fa-medal" style="font-size:1.5em;color:var(--accent-color);margin-bottom:0.5em;"></i>
@@ -1463,6 +1468,80 @@ function getPageContent(page) {
                 </section>
             `;
 
+        case 'friendlies': {
+            // Group fixtures by round
+            const rounds = Array.from(new Set(friendlyFixtures.map(f => f.round))).sort();
+            return `
+                <section class="friendlies-section" style="max-width:1200px;margin:0 auto;padding:2rem 1rem;">
+                    <h2 style="color:var(--text-color);font-size:2.5rem;font-weight:800;margin-bottom:2rem;text-align:center;">Friendly Matches</h2>
+                    <div class="round-selector-bar" style="display:flex;gap:1em;margin-bottom:2em;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--card-bg);padding:1.5em;border-radius:12px;box-shadow:var(--shadow);">
+                        <div class="selector-group" style="display:flex;align-items:center;gap:0.5em;">
+                            <label for="friendliesRoundSelect" style="color:var(--text-color);font-weight:600;">Round:</label>
+                            <select id="friendliesRoundSelect" style="padding:0.8em;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-color);color:var(--text-color);min-width:150px;">
+                                <option value="all">All Rounds</option>
+                                ${rounds.map(round => `<option value="${round}">${round}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="selector-group" style="display:flex;align-items:center;gap:0.5em;">
+                            <label for="friendliesTeamSelect" style="color:var(--text-color);font-weight:600;">Team:</label>
+                            <select id="friendliesTeamSelect" style="padding:0.8em;border-radius:8px;border:1px solid var(--border-color);background:var(--bg-color);color:var(--text-color);min-width:200px;">
+                                <option value="all">All Teams</option>
+                                ${Object.values(teamsData).map(team => `<option value="${team.name}">${team.name}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="friendlies-container">
+                        <div class="no-friendlies-message" style="display:none;text-align:center;color:var(--secondary-text);padding:2em 0;font-size:1.1em;background:var(--card-bg);border-radius:12px;margin:2em 0;">No friendly matches found for the selected filters.</div>
+                        ${rounds.map(round => {
+                            const roundFixtures = friendlyFixtures.filter(f => f.round === round && f.status !== 'scheduled');
+                            if (roundFixtures.length === 0) return ''; // Skip rounds with no completed matches
+                            return `
+                                <div class="fixture-week" data-round="${round}" style="margin-bottom:2em;">
+                                    <h3 style="color:var(--primary-color);font-size:1.5em;font-weight:700;margin-bottom:1em;padding-bottom:0.5em;border-bottom:2px solid var(--border-color);">${round}</h3>
+                                    <div class="fixture-list" style="display:grid;gap:1em;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+                                        ${roundFixtures.map(match => {
+                                            const homeTeam = teamsData[match.homeTeam];
+                                            const awayTeam = teamsData[match.awayTeam];
+                                            return `
+                                                <div class="fixture-card ${match.status}"
+                                                     data-home="${homeTeam.name}"
+                                                     data-away="${awayTeam.name}"
+                                                     data-round="${match.round}"
+                                                     style="background:var(--card-bg);border-radius:12px;padding:1.5em;box-shadow:var(--shadow);">
+                                                    <div class="match-details" style="display:flex;flex-direction:column;gap:1em;margin-bottom:1em;">
+                                                        <div class="team home" style="display:flex;align-items:center;gap:0.8em;">
+                                                            <img src="${homeTeam.logo}" 
+                                                                 alt="${homeTeam.name}" 
+                                                                 class="team-logo-small"
+                                                                 style="width:32px;height:32px;border-radius:50%;background:#fff;">
+                                                            <span style="font-weight:600;color:var(--text-color);">${homeTeam.name}</span>
+                                                        </div>
+                                                        <div class="score" style="text-align:center;font-size:1.5em;font-weight:700;color:var(--accent-color);">${match.score.home} - ${match.score.away}</div>
+                                                        <div class="team away" style="display:flex;align-items:center;gap:0.8em;">
+                                                            <img src="${awayTeam.logo}" 
+                                                                 alt="${awayTeam.name}" 
+                                                                 class="team-logo-small"
+                                                                 style="width:32px;height:32px;border-radius:50%;background:#fff;">
+                                                            <span style="font-weight:600;color:var(--text-color);">${awayTeam.name}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="match-info" style="display:flex;justify-content:space-between;align-items:center;font-size:0.9em;color:var(--secondary-text);">
+                                                        <div class="date">${match.date} ${match.time}</div>
+                                                        <div class="venue">${homeTeam.stadium}</div>
+                                                        <div class="match-status completed" style="color:#4caf50;">Completed</div>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </section>
+            `;
+        }
+
         default:
             return '<div class="error">Page not found</div>';
     }
@@ -1491,6 +1570,9 @@ function loadPage(pageId) {
     }
     if (pageId === 'hall-of-fame') {
         initializeHallOfFame();
+    }
+    if (pageId === 'friendlies') {
+        initializeFriendliesFilters();
     }
 }
 
@@ -2400,7 +2482,7 @@ function loadTeamStats(teamId) {
                     month: 'short',
                     day: 'numeric'
                 });
-                return `
+            return `
                     <div class="recent-match">
                         <span class="matchday">MD${m.matchday}</span>
                         <div class="opponent">
@@ -2702,6 +2784,21 @@ const superCupFixture = {
     score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
 };
+
+// --- Friendly Fixtures ---
+const friendlyFixtures = [
+    // Pre-season Friendlies
+    { id: 'ff1', round: 'Pre-season', date: '2025-05-01', time: '19:00', homeTeam: 'offer-art', awayTeam: 'thorvisual', status: 'completed', score: { home: 3, away: 2 } },
+    { id: 'ff2', round: 'Pre-season', date: '2025-05-02', time: '19:00', homeTeam: 'imoizy', awayTeam: 'offer-art', status: 'completed', score: { home: 1, away: 2 } },
+    { id: 'ff3', round: 'Pre-season', date: '2025-05-03', time: '19:00', homeTeam: 'priest', awayTeam: 'ghost', status: 'completed', score: { home: 5, away: 6 } },
+    { id: 'ff4', round: 'Pre-season', date: '2025-05-04', time: '19:00', homeTeam: 'imoizy', awayTeam: 'omara', status: 'completed', score: { home: 2, away: 2 } },
+    
+    // Mid-season Friendlies
+    { id: 'ff5', round: 'Mid-season', date: '2025-05-20', time: '19:00', homeTeam: 'ghost', awayTeam: 'offer-art', status: 'completed', score: { home: 2, away: 2 } },
+    { id: 'ff6', round: 'Mid-season', date: '2025-05-21', time: '19:00', homeTeam: 'priest', awayTeam: 'omara', status: 'completed', score: { home: 1, away: 2 } },
+    { id: 'ff7', round: 'Mid-season', date: '2025-05-22', time: '19:00', homeTeam: 'maria-khan', awayTeam: 'imoizy', status: 'completed', score: { home: 1, away: 2 } },
+    { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'offer-art', awayTeam: 'thorvisual', status: 'completed', score: { home: 1, away: 5 } }
+];
 
 // Function to get Champions League fixtures
 function getChampionsLeagueFixtures() {
@@ -3209,6 +3306,9 @@ function loadPage(pageId) {
     }
     if (pageId === 'hall-of-fame') {
         initializeHallOfFame();
+    }
+    if (pageId === 'friendlies') {
+        initializeFriendliesFilters();
     }
 }
 
@@ -3732,6 +3832,76 @@ function initializeHallOfFame() {
         // Update winners for the first season
         updateHallOfFameWinners('season-1');
     }
+}
+
+// Initialize friendlies page filters
+function initializeFriendliesFilters() {
+    const roundSelect = document.getElementById('friendliesRoundSelect');
+    const teamSelect = document.getElementById('friendliesTeamSelect');
+    const fixtureWeeks = document.querySelectorAll('.fixture-week');
+    const fixtureCards = document.querySelectorAll('.fixture-card');
+    const noFriendliesMessage = document.querySelector('.no-friendlies-message');
+
+    function filterFixtures() {
+        const selectedRound = roundSelect.value;
+        const selectedTeam = teamSelect.value;
+        let visibleFixtures = 0;
+
+        fixtureWeeks.forEach(week => {
+            const weekRound = week.dataset.round;
+            const weekCards = week.querySelectorAll('.fixture-card');
+            let weekVisible = false;
+
+            weekCards.forEach(card => {
+                const homeTeam = card.dataset.home;
+                const awayTeam = card.dataset.away;
+                const round = card.dataset.round;
+
+                // Check if the round matches (if a specific round is selected)
+                const roundMatch = selectedRound === 'all' || round === selectedRound;
+                
+                // Check if the team matches (if a specific team is selected)
+                const teamMatch = selectedTeam === 'all' || 
+                    homeTeam.toLowerCase() === selectedTeam.toLowerCase() || 
+                    awayTeam.toLowerCase() === selectedTeam.toLowerCase();
+
+                // Show the card only if both round and team match
+                if (roundMatch && teamMatch) {
+                    card.style.display = 'block';
+                    weekVisible = true;
+                    visibleFixtures++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Show/hide the entire week section based on whether it has any visible cards
+            week.style.display = weekVisible ? 'block' : 'none';
+        });
+
+        // Show/hide the "no matches" message
+        if (noFriendliesMessage) {
+            noFriendliesMessage.style.display = visibleFixtures === 0 ? 'block' : 'none';
+        }
+    }
+
+    // Add event listeners to both selectors
+    if (roundSelect) {
+        roundSelect.addEventListener('change', filterFixtures);
+    }
+    if (teamSelect) {
+        teamSelect.addEventListener('change', filterFixtures);
+    }
+
+    // Apply initial filtering when the page loads
+    filterFixtures();
+}
+
+// Initialize all page-specific functionality
+function initializePageFunctionality() {
+    initializeMatchdaySelectors();
+    initializeFriendliesFilters();
+    // ... existing code ...
 }
 
 
