@@ -3577,10 +3577,19 @@ function processUserQuery(query) {
         // Create manager rankings array
         const managerRankings = leagueTable.map(team => {
             const teamData = teamsData[team.teamId];
+            // Calculate form points (3 for W, 1 for D, 0 for L)
+            const formPoints = (team.form || []).reduce((sum, result) => {
+                switch(result) {
+                    case 'W': return sum + 3;
+                    case 'D': return sum + 1;
+                    default: return sum;
+                }
+            }, 0);
             return {
                 name: teamData.manager,
                 team: teamData.name,
                 points: team.points,
+                formPoints: formPoints,
                 wins: team.won,
                 draws: team.drawn,
                 losses: team.lost,
@@ -3589,30 +3598,31 @@ function processUserQuery(query) {
                 goalDiff: team.goalDiff,
                 form: team.form
             };
-        }).sort((a, b) => b.points - a.points);
+        }).sort((a, b) => b.formPoints - a.formPoints);
 
-        let response = '👔 Manager Rankings:\n\n';
+        let response = '👔 Manager Rankings (Based on Form):\n\n';
         
         // Top 3 managers
         response += '🏆 Top 3 Managers:\n';
         managerRankings.slice(0, 3).forEach((manager, idx) => {
             const form = manager.form.map(f => f === 'W' ? '✅' : f === 'D' ? '➖' : '❌').join(' ');
             response += `${idx + 1}. ${manager.name} (${manager.team})\n`;
-            response += `   • Points: ${manager.points}\n`;
+            response += `   • Form Points: ${manager.formPoints}\n`;
+            response += `   • Total Points: ${manager.points}\n`;
             response += `   • Record: ${manager.wins}W ${manager.draws}D ${manager.losses}L\n`;
             response += `   • Goals: ${manager.goalsFor}-${manager.goalsAgainst} (GD: ${manager.goalDiff > 0 ? '+' : ''}${manager.goalDiff})\n`;
             response += `   • Form: ${form}\n\n`;
         });
 
         // Manager statistics
-        const totalPoints = managerRankings.reduce((sum, m) => sum + m.points, 0);
-        const avgPoints = (totalPoints / managerRankings.length).toFixed(1);
+        const totalFormPoints = managerRankings.reduce((sum, m) => sum + m.formPoints, 0);
+        const avgFormPoints = (totalFormPoints / managerRankings.length).toFixed(1);
         const highestScoring = managerRankings.reduce((max, m) => m.goalsFor > max.goalsFor ? m : max);
         const bestDefense = managerRankings.reduce((min, m) => m.goalsAgainst < min.goalsAgainst ? m : min);
         const mostWins = managerRankings.reduce((max, m) => m.wins > max.wins ? m : max);
 
         response += '📊 Manager Statistics:\n';
-        response += `• Average Points: ${avgPoints}\n`;
+        response += `• Average Form Points: ${avgFormPoints}\n`;
         response += `• Highest Scoring: ${highestScoring.name} (${highestScoring.goalsFor} goals)\n`;
         response += `• Best Defense: ${bestDefense.name} (${bestDefense.goalsAgainst} goals conceded)\n`;
         response += `• Most Wins: ${mostWins.name} (${mostWins.wins} wins)\n\n`;
@@ -3620,7 +3630,7 @@ function processUserQuery(query) {
         // Full rankings
         response += '📋 Full Rankings:\n';
         managerRankings.forEach((manager, idx) => {
-            response += `${idx + 1}. ${manager.name} (${manager.team}) - ${manager.points} points\n`;
+            response += `${idx + 1}. ${manager.name} (${manager.team}) - ${manager.formPoints} form points\n`;
         });
 
         return response;
