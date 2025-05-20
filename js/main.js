@@ -188,7 +188,7 @@ const matchData = {
         // Matchday 9 - May 20, 2025
         { id: 'f33', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'offer-art', awayTeam: 'omara', status: 'completed', score: { home: 1, away: 5 } },
         { id: 'f34', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'thorvisual', status: 'completed', score: { home: 1, away: 4 } },
-        { id: 'f35', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'imoizy', awayTeam: 'maria-khan', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f35', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'imoizy', awayTeam: 'maria-khan', status: 'completed', score: { home: 0, away: 1 } },
         { id: 'f36', matchday: 9, date: '2025-05-20', time: '20:00', homeTeam: 'newton', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 10 - May 21, 2025
         { id: 'f37', matchday: 10, date: '2025-05-21', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -606,9 +606,9 @@ function getPageContent(page) {
                 const played = matchData.fixtures
                     .filter(m => m.status === 'completed' && (m.homeTeam === teamId || m.awayTeam === teamId))
                     .map(m => m.matchday)
-                    .sort((a, b) => a - b);
-                const last = played[played.length - 1];
-                const prev = played[played.length - 2];
+                    .sort((a, b) => b - a); // Changed to descending order to get most recent first
+                const last = played[0];      // Get first item (most recent)
+                const prev = played[1];      // Get second item (previous)
                 teamLastTwoMatchdays[teamId] = { last, prev };
             });
 
@@ -617,18 +617,20 @@ function getPageContent(page) {
             Object.keys(teamsData).forEach(teamId => {
                 const { last, prev } = teamLastTwoMatchdays[teamId];
                 let lastPos = null, prevPos = null;
+                
                 if (last !== undefined) {
                     const table = computeLeagueTable(last);
-                    lastPos = table.findIndex(t => t.teamId === teamId);
+                    lastPos = table.findIndex(t => t.teamId === teamId) + 1;
                 }
                 if (prev !== undefined) {
                     const table = computeLeagueTable(prev);
-                    prevPos = table.findIndex(t => t.teamId === teamId);
+                    prevPos = table.findIndex(t => t.teamId === teamId) + 1;
                 }
+                
                 let moveAttr = 'same';
                 if (prevPos !== null && lastPos !== null) {
-                    if (prevPos > lastPos) moveAttr = 'up';
-                    else if (prevPos < lastPos) moveAttr = 'down';
+                    if (lastPos > prevPos) moveAttr = 'down';      // Changed comparison logic
+                    else if (lastPos < prevPos) moveAttr = 'up';   // Changed comparison logic
                 }
                 teamMoveMap[teamId] = moveAttr;
             });
@@ -3468,11 +3470,25 @@ function processUserQuery(query) {
         });
         
         const sortedTable = Object.values(groupTable).sort((a, b) => {
+            // First sort by points (descending)
             if (b.points !== a.points) return b.points - a.points;
+            
+            // Then by goal difference (descending)
             const gdA = a.goalsFor - a.goalsAgainst;
             const gdB = b.goalsFor - b.goalsAgainst;
             if (gdB !== gdA) return gdB - gdA;
+            
+            // Then by total goals scored (descending)
             if (b.goalsFor !== a.goalsFor) return b.goalsFor - a.goalsFor;
+            
+            // Finally by head-to-head results or alphabetically if tied
+            if (a.headToHead && b.headToHead) {
+                if (a.headToHead[b.id] !== b.headToHead[a.id]) {
+                    return b.headToHead[a.id] - a.headToHead[b.id];
+                }
+            }
+            
+            // If everything else is equal, sort alphabetically by team name
             return a.name.localeCompare(b.name);
         });
         
