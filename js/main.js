@@ -206,10 +206,10 @@ const matchData = {
         { id: 'f47', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f48', matchday: 12, date: '2025-05-23', time: '20:00', homeTeam: 'omara', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 13 - May 24, 2025
-        { id: 'f49', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer-art', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f49', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer-art', status: 'completed', score: { home: 4, away: 0 } },
         { id: 'f50', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'omara', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f51', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'thorvisual', awayTeam: 'newton', status: 'completed', score: { home: 5, away: 3 } },
-        { id: 'f52', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f52', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'priest', status: 'completed', score: { home: 2, away: 2 } },
         // Matchday 14 - May 25, 2025
         { id: 'f53', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'offer-art', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f54', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2822,7 +2822,7 @@ function getChampionsLeagueFixtures() {
         { id: 'clf10', matchday: 5, date: '2025-05-22', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'completed', score: { home: 4, away: 1 } },
         // Matchday 6
         { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 } }
+        { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 2, away: 0 } }
     ];
 }
 
