@@ -212,7 +212,7 @@ const matchData = {
         { id: 'f52', matchday: 13, date: '2025-05-24', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'priest', status: 'completed', score: { home: 2, away: 2 } },
         // Matchday 14 - May 25, 2025
         { id: 'f53', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'offer-art', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 1 } },
-        { id: 'f54', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f54', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
         { id: 'f55', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'priest', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f56', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'thorvisual', status: 'completed', score: { home: 3, away: 0 } }
     ]
