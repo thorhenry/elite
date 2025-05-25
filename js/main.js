@@ -2821,8 +2821,8 @@ function getChampionsLeagueFixtures() {
         { id: 'clf9', matchday: 5, date: '2025-05-22', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thorvisual', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'clf10', matchday: 5, date: '2025-05-22', time: '22:00', homeTeam: 'priest', awayTeam: 'newton', status: 'completed', score: { home: 4, away: 1 } },
         // Matchday 6
-        { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'scheduled', score: { home: 2, away: 0 } }
+        { id: 'clf11', matchday: 6, date: '2025-05-24', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'completed', score: { home: 5, away: 2 } },
+        { id: 'clf12', matchday: 6, date: '2025-05-24', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'priest', status: 'completed', score: { home: 2, away: 0 } }
     ];
 }
 
@@ -2832,8 +2832,8 @@ const championsLeagueFinal = {
     matchday: 7,
     date: '2025-05-26',
     time: '20:00',
-    homeTeam: 'tbd',
-    awayTeam: 'tbd',
+    homeTeam: 'priest',
+    awayTeam: 'newton',
     status: 'scheduled',
     score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
