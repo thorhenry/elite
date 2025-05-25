@@ -2834,8 +2834,8 @@ const championsLeagueFinal = {
     time: '20:00',
     homeTeam: 'priest',
     awayTeam: 'newton',
-    status: 'scheduled',
-    score: { home: 0, away: 0 },
+    status: 'completed',
+    score: { home: 4, away: 1 },
     penalties: { home: 0, away: 0 }
 };
 
