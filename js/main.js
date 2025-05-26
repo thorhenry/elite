@@ -213,7 +213,7 @@ const matchData = {
         // Matchday 14 - May 25, 2025
         { id: 'f53', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'offer-art', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 1 } },
         { id: 'f54', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
-        { id: 'f55', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'priest', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f55', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'priest', awayTeam: 'omara', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f56', matchday: 14, date: '2025-05-25', time: '20:00', homeTeam: 'maria-khan', awayTeam: 'thorvisual', status: 'completed', score: { home: 3, away: 0 } }
     ]
 };
@@ -2769,9 +2769,9 @@ const ytyCupFixtures = [
     { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-05-19', time: '22:00', homeTeam: 'ghost', awayTeam: 'thorvisual', status: 'completed', score: { home: 3, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-05-19', time: '22:00', homeTeam: 'thorvisual', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 3 }, penalties: { home: 0, away: 0 } },
     { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-05-19', time: '22:00', homeTeam: 'priest', awayTeam: 'omara', status: 'completed', score: { home: 4, away: 2 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-05-19', time: '22:00', homeTeam: 'omara', awayTeam: 'priest', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-05-19', time: '22:00', homeTeam: 'omara', awayTeam: 'priest', status: 'completed', score: { home: 0, away: 2 }, penalties: { home: 0, away: 0 } },
     // Final
-    { id: 'yfinal', round: 'Final', date: '2025-05-23', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
+    { id: 'yfinal', round: 'Final', date: '2025-05-23', time: '22:00', homeTeam: 'ghost', awayTeam: 'priest', status: 'completed', score: { home: 3, away: 2 }, penalties: { home: 0, away: 0 } }
 ];
 
 // --- Super Cup Fixture ---
