@@ -1,7 +1,7 @@
 // Team data structure
 const teamsData = {
     'kenno': {
-        name: 'Kenno FC',
+        name: 'Kenno',
         stadium: 'Ken Arena',
         manager: 'Big Kenno',
         capacity: 45000,
