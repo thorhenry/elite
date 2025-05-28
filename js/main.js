@@ -34,7 +34,7 @@ const teamsData = {
         logo: 'images/club-logos/offer-art.svg'
     },
     'omara': {
-        name: 'Giveaway FC',
+        name: 'Darkside FC',
         stadium: 'Old Trafford',
         manager: 'OMaRa',
         capacity: 42000,
@@ -146,9 +146,9 @@ let currentPage = 'home';
 const matchData = {
     fixtures: [
         // Matchday 1 - May 12, 2025
-        { id: 'f1', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'kenno', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f2', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f3', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f1', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'kenno', awayTeam: 'omara', status: 'completed', score: { home: 4, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 6, away: 3 } },
+        { id: 'f3', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f4', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - May 13, 2025
         { id: 'f5', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
