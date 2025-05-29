@@ -149,12 +149,12 @@ const matchData = {
         { id: 'f1', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'kenno', awayTeam: 'omara', status: 'completed', score: { home: 4, away: 0 } },
         { id: 'f2', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 6, away: 3 } },
         { id: 'f3', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f4', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f4', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 2 - May 13, 2025
-        { id: 'f5', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f5', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 5 } },
         { id: 'f6', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'maria', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f7', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f8', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f8', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 2 } },
         // Matchday 3 - May 14, 2025
         { id: 'f9', matchday: 3, date: '2025-05-30', time: '20:00', homeTeam: 'newton', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-05-30', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
