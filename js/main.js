@@ -2806,7 +2806,7 @@ const friendlyFixtures = [
 function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-05-30', time: '20:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf1', matchday: 1, date: '2025-05-30', time: '20:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 1 } },
         { id: 'clf2', matchday: 1, date: '2025-05-30', time: '22:00', homeTeam: 'newton', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2
         { id: 'clf3', matchday: 2, date: '2025-06-2', time: '20:00', homeTeam: 'maria', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
