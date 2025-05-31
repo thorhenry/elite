@@ -161,7 +161,7 @@ const matchData = {
         { id: 'f11', matchday: 3, date: '2025-05-30', time: '20:00', homeTeam: 'offer', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 6 } },
         { id: 'f12', matchday: 3, date: '2025-05-30', time: '20:00', homeTeam: 'ghost', awayTeam: 'omara', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 4 - May 15, 2025
-        { id: 'f13', matchday: 4, date: '2025-05-31', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f13', matchday: 4, date: '2025-05-31', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 0 } },
         { id: 'f14', matchday: 4, date: '2025-05-31', time: '20:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f15', matchday: 4, date: '2025-05-31', time: '20:00', homeTeam: 'omara', awayTeam: 'smiles', status: 'completed', score: { home: 2, away: 1 } },
         { id: 'f16', matchday: 4, date: '2025-05-31', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
