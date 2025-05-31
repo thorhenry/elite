@@ -23,7 +23,7 @@ const teamsData = {
         logo: 'images/club-logos/ghost.svg'
     },
     'offer': {
-        name: 'Offer_Art FC',
+        name: 'Offer_Art',
         stadium: 'Art Arena',
         manager: 'Offer Art',
         capacity: 38000,
@@ -34,7 +34,7 @@ const teamsData = {
         logo: 'images/club-logos/offer-art.svg'
     },
     'omara': {
-        name: 'Darkside FC',
+        name: 'Darkside',
         stadium: 'Old Trafford',
         manager: 'OMaRa',
         capacity: 42000,
@@ -45,7 +45,7 @@ const teamsData = {
         logo: 'images/club-logos/omara.svg'
     },
     'smiles': {
-        name: 'Chutosmiles FC',
+        name: 'Chutosmiles',
         stadium: 'Smiles Park',
         manager: 'Chuto Smiles',
         capacity: 36000,
@@ -67,7 +67,7 @@ const teamsData = {
         logo: 'images/club-logos/kingkai.svg'
     },
     'thor': {
-        name: 'Thorvisual FC',
+        name: 'Thorvisual',
         stadium: 'Thor Arena',
         manager: 'Thor Henry',
         capacity: 41000,
@@ -78,7 +78,7 @@ const teamsData = {
         logo: 'images/club-logos/thorvisual.svg'
     },
     'imoizy': {
-        name: 'Imoizy.T FC',
+        name: 'Imoizy.T',
         stadium: 'IT Arena',
         manager: 'Imoizy',
         capacity: 37000,
@@ -148,11 +148,11 @@ const matchData = {
         // Matchday 1 - May 12, 2025
         { id: 'f1', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'kenno', awayTeam: 'omara', status: 'completed', score: { home: 4, away: 0 } },
         { id: 'f2', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 6, away: 3 } },
-        { id: 'f3', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f3', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 4 } },
         { id: 'f4', matchday: 1, date: '2025-05-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 1 } },
         // Matchday 2 - May 13, 2025
         { id: 'f5', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 5 } },
-        { id: 'f6', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'thor', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f6', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'thor', awayTeam: 'omara', status: 'completed', score: { home: 3, away: 3 } },
         { id: 'f7', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-05-29', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 2 } },
         // Matchday 3 - May 14, 2025
