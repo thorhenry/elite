@@ -2761,7 +2761,7 @@ function initializeMatchdaySelectors() {
 // --- YTY Cup Fixtures ---
 const ytyCupFixtures = [
     // Quarter Finals
-    { id: 'yqf1', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf1', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf2', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'offer', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
     { id: 'yqf3', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'completed', score: { home: 6, away: 0 }, penalties: { home: 0, away: 0 } },
