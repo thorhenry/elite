@@ -34,9 +34,9 @@ const teamsData = {
         logo: 'images/club-logos/offer-art.svg'
     },
     'omara': {
-        name: 'Darkside',
+        name: 'Eagles Nest',
         stadium: 'Old Trafford',
-        manager: 'OMaRa',
+        manager: 'Hasahya',
         capacity: 42000,
         founded: 2024,
         titles: 0,
@@ -2766,10 +2766,10 @@ const ytyCupFixtures = [
     { id: 'yqf3', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 1 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-05-29', time: '22:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'completed', score: { home: 6, away: 0 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
-    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-06-3', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-06-3', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-06-3', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-06-3', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-06-3', time: '22:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-06-3', time: '22:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-06-3', time: '22:00', homeTeam: 'kenno', awayTeam: 'omara', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-06-3', time: '22:00', homeTeam: 'omara', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Final
     { id: 'yfinal', round: 'Final', date: '2025-06-7', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
 ];
