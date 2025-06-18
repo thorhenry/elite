@@ -1391,7 +1391,7 @@ function getPageContent(page) {
                                         <i class="fas fa-trophy" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">League Champions</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="imoizy" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1407,7 +1407,7 @@ function getPageContent(page) {
                                         <i class="fas fa-cup" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">YTY Cup Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="imoizy" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="kenno" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1423,7 +1423,7 @@ function getPageContent(page) {
                                         <i class="fas fa-star" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Champions League Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="thor" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1439,7 +1439,7 @@ function getPageContent(page) {
                                         <i class="fas fa-crown" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Super Cup Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="smiles" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1455,7 +1455,7 @@ function getPageContent(page) {
                                         <i class="fas fa-medal" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Overall Best Team</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="imoizy" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
