@@ -153,7 +153,7 @@ const matchData = {
         // Matchday 2 - June 17, 2025
         { id: 'f5', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'black', status: 'completed', score: { home: 4, away: 1 } },
         { id: 'f6', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'thor', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 1 } },
-        { id: 'f7', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f7', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f8', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'completed', score: { home: 1, away: 3 } },
         // Matchday 3 - June 18, 2025
         { id: 'f9', matchday: 3, date: '2025-06-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'black', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2807,7 +2807,7 @@ function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
         { id: 'clf1', matchday: 1, date: '2025-06-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'clf2', matchday: 1, date: '2025-06-18', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf2', matchday: 1, date: '2025-06-18', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 1 } },
         // Matchday 2
         { id: 'clf3', matchday: 2, date: '2025-06-21', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'clf4', matchday: 2, date: '2025-06-21', time: '22:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
