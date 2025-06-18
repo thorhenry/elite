@@ -149,7 +149,7 @@ const matchData = {
         { id: 'f1', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'black', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f2', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f3', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 1 } },
-        { id: 'f4', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f4', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 6 } },
         // Matchday 2 - June 17, 2025
         { id: 'f5', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'black', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f6', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'thor', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2763,7 +2763,7 @@ const ytyCupFixtures = [
     // Quarter Finals
     { id: 'yqf1', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf2', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
-    { id: 'yqf3', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf3', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'black', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
     { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-06-22', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
