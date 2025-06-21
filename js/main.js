@@ -167,13 +167,13 @@ const matchData = {
         { id: 'f16', matchday: 4, date: '2025-06-19', time: '20:00', homeTeam: 'imoizy', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5 - June 20, 2025
         { id: 'f17', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'black', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f18', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 1 } },
+        { id: 'f18', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 0 } },
         { id: 'f19', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f20', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - June 21, 2025
         { id: 'f21', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'black', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f22', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
-        { id: 'f23', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 6 } },
         { id: 'f24', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 2 } },
         // Matchday 7 - June 22, 2025
         { id: 'f25', matchday: 7, date: '2025-06-22', time: '20:00', homeTeam: 'black', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
