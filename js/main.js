@@ -168,7 +168,7 @@ const matchData = {
         // Matchday 5 - June 20, 2025
         { id: 'f17', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'cook', awayTeam: 'offer', status: 'completed', score: { home: 7, away: 1 } },
         { id: 'f18', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 0 } },
-        { id: 'f19', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f19', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'completed', score: { home: 4, away: 3 } },
         { id: 'f20', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6 - June 21, 2025
         { id: 'f21', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'cook', status: 'scheduled', score: { home: 0, away: 0 } },
