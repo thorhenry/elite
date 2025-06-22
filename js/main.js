@@ -147,7 +147,7 @@ const matchData = {
     fixtures: [
         // Matchday 1 - June 16, 2025
         { id: 'f1', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'cook', awayTeam: 'newton', status: 'completed', score: { home: 5, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 6 } },
         { id: 'f3', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 1 } },
         { id: 'f4', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 6 } },
         // Matchday 2 - June 17, 2025
@@ -2806,7 +2806,7 @@ const friendlyFixtures = [
 function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-06-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf1', matchday: 1, date: '2025-06-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 5 } },
         { id: 'clf2', matchday: 1, date: '2025-06-18', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 1 } },
         // Matchday 2
         { id: 'clf3', matchday: 2, date: '2025-06-21', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
