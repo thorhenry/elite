@@ -2771,7 +2771,7 @@ const ytyCupFixtures = [
     { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-06-22', time: '22:00', homeTeam: 'newton', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 3 }, penalties: { home: 0, away: 0 } },
     { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-06-22', time: '22:00', homeTeam: 'thor', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 0 }, penalties: { home: 0, away: 0 } },
     // Final
-    { id: 'yfinal', round: 'Final', date: '2025-06-26', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
+    { id: 'yfinal', round: 'Final', date: '2025-06-26', time: '22:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 0 }, penalties: { home: 0, away: 0 } }
 ];
 
 // --- Super Cup Fixture ---
