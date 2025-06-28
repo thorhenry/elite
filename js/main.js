@@ -202,7 +202,7 @@ const matchData = {
         { id: 'f44', matchday: 11, date: '2025-06-26', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 12 - June 27, 2025
         { id: 'f45', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'cook', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f46', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f46', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 4 } },
         { id: 'f47', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f48', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 0, away: 3 } },
         // Matchday 13 - June 28, 2025
