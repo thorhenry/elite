@@ -2819,7 +2819,7 @@ function getChampionsLeagueFixtures() {
         { id: 'clf8', matchday: 4, date: '2025-06-25', time: '22:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5
         { id: 'clf9', matchday: 5, date: '2025-06-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'clf10', matchday: 5, date: '2025-06-27', time: '22:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf10', matchday: 5, date: '2025-06-27', time: '22:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 0 } },
         // Matchday 6
         { id: 'clf11', matchday: 6, date: '2025-06-29', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'clf12', matchday: 6, date: '2025-06-29', time: '22:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } }
