@@ -36,7 +36,7 @@ const teamsData = {
     'offer': {
         name: 'Offer Art',
         stadium: 'Art Ground',
-        manager: 'Offer_Art',
+        manager: 'Offer Art',
         capacity: 42000,
         founded: 2024,
         titles: 0,
