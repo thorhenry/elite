@@ -1,30 +1,30 @@
 // Team data structure
 const teamsData = {
-    'cook': {
-        name: 'Cooked FC',
-        stadium: 'Kitchen Arena',
-        manager: 'Mr. Grey',
+    'maria': {
+        name: 'Aka The Kraven',
+        stadium: 'Holy Stadium',
+        manager: 'Mariakhan',
         capacity: 45000,
         founded: 2023,
         titles: 0,
         colors: ['#1a237e', '#90caf9'],
-        shortName: 'BMFC',
-        logo: 'images/club-logos/omara.svg'
+        shortName: 'AFC',
+        logo: 'images/club-logos/aka.svg'
     },
-    'imoizy': {
-        name: 'Imoizy.T',
-        stadium: 'IT',
-        manager: 'Imoizy.T',
+    'thor': {
+        name: 'Thorvisual',
+        stadium: 'Creative Arena',
+        manager: 'Thorhenry',
         capacity: 40000,
         founded: 2022,
         titles: 0,
         colors: ['#283593', '#64b5f6'],
-        shortName: 'IFC',
-        logo: 'images/club-logos/imoizy.svg'
+        shortName: 'TFC',
+        logo: 'images/club-logos/thorvisual.svg'
     },
     'smiles': {
         name: 'Chutosmiles',
-        stadium: 'Smiles Arena',
+        stadium: 'Happy Arena',
         manager: 'Chuto Smiles',
         capacity: 38000,
         founded: 2023,
@@ -33,54 +33,54 @@ const teamsData = {
         shortName: 'CSFC',
         logo: 'images/club-logos/chutosmiles.svg'
     },
-    'newton': {
-        name: 'Newton FC',
-        stadium: 'Emirates Stadium',
-        manager: 'Isaac Newton',
+    'offer': {
+        name: 'Offer Art',
+        stadium: 'Art Ground',
+        manager: 'Offer_Art',
         capacity: 42000,
         founded: 2024,
         titles: 0,
         colors: ['#0d47a1', '#29b6f6'],
-        shortName: 'NFC',
-        logo: 'images/club-logos/kingkai.svg'
+        shortName: 'OAFC',
+        logo: 'images/club-logos/offer-art.svg'
     },
-    'offer': {
-        name: 'Offfer_Art',
-        stadium: 'Art Park',
-        manager: 'Offer Art',
+    'newton': {
+        name: 'Newton',
+        stadium: 'Emirates Stadium',
+        manager: 'Isaac Newton',
         capacity: 36000,
         founded: 2024,
         titles: 0,
         colors: ['#1e88e5', '#81d4fa'],
-        shortName: 'OAFC',
-        logo: 'images/club-logos/offer-art.svg'
+        shortName: 'NFC',
+        logo: 'images/club-logos/kingkai.svg'
     },
-    'ghost': {
-        name: 'Ghost Da Killer',
-        stadium: 'Winner Stadium',
-        manager: 'Grayson',
+    'grey': {
+        name: 'Cooked',
+        stadium: 'Classic Stadium',
+        manager: 'Grey',
         capacity: 39000,
         founded: 2024,
         titles: 0,
         colors: ['#1976d2', '#4dd0e1'],
-        shortName: 'GFC',
-        logo: 'images/club-logos/ghost.svg'
+        shortName: 'CFC',
+        logo: 'images/club-logos/omara.svg'
     },
-    'thor': {
-        name: 'Thorvisual',
-        stadium: 'Thunder Ground',
-        manager: 'Thor Henry',
+    'ghost': {
+        name: 'Ghost Da Killer',
+        stadium: 'Winner Ground',
+        manager: 'Grayson',
         capacity: 41000,
         founded: 2025,
         titles: 0,
         colors: ['#2196f3', '#80deea'],
-        shortName: 'TFC',
-        logo: 'images/club-logos/thorvisual.svg'
+        shortName: 'GFC',
+        logo: 'images/club-logos/ghost.svg'
     },
     'kenno': {
         name: 'Kenno',
-        stadium: 'K-Arena',
-        manager: 'Kenno',
+        stadium: 'Ken Arena',
+        manager: 'Big Kenno',
         capacity: 37000,
         founded: 2024,
         titles: 0,
@@ -145,76 +145,76 @@ let currentPage = 'home';
 // Match data structure
 const matchData = {
     fixtures: [
-        // Matchday 1 - June 16, 2025
-        { id: 'f1', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'cook', awayTeam: 'newton', status: 'completed', score: { home: 5, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 6 } },
-        { id: 'f3', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 1 } },
-        { id: 'f4', matchday: 1, date: '2025-06-16', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 6 } },
-        // Matchday 2 - June 17, 2025
-        { id: 'f5', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'cook', status: 'completed', score: { home: 4, away: 1 } },
-        { id: 'f6', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'thor', awayTeam: 'newton', status: 'completed', score: { home: 2, away: 1 } },
-        { id: 'f7', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 3, away: 1 } },
-        { id: 'f8', matchday: 2, date: '2025-06-17', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'completed', score: { home: 1, away: 3 } },
-        // Matchday 3 - June 18, 2025
-        { id: 'f9', matchday: 3, date: '2025-06-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'cook', status: 'completed', score: { home: 1, away: 3 } },
-        { id: 'f10', matchday: 3, date: '2025-06-18', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 4 } },
-        { id: 'f11', matchday: 3, date: '2025-06-18', time: '20:00', homeTeam: 'smiles', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 3 } },
-        { id: 'f12', matchday: 3, date: '2025-06-18', time: '20:00', homeTeam: 'imoizy', awayTeam: 'newton', status: 'completed', score: { home: 6, away: 4 } },
-        // Matchday 4 - June 19, 2025
-        { id: 'f13', matchday: 4, date: '2025-06-19', time: '20:00', homeTeam: 'cook', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 3 } },
-        { id: 'f14', matchday: 4, date: '2025-06-19', time: '20:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f15', matchday: 4, date: '2025-06-19', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'completed', score: { home: 0, away: 1 } },
-        { id: 'f16', matchday: 4, date: '2025-06-19', time: '20:00', homeTeam: 'imoizy', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 0 } },
-        // Matchday 5 - June 20, 2025
-        { id: 'f17', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'cook', awayTeam: 'offer', status: 'completed', score: { home: 7, away: 1 } },
-        { id: 'f18', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 0 } },
-        { id: 'f19', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'completed', score: { home: 4, away: 3 } },
-        { id: 'f20', matchday: 5, date: '2025-06-20', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'completed', score: { home: 4, away: 4 } },
-        // Matchday 6 - June 21, 2025
-        { id: 'f21', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'cook', status: 'completed', score: { home: 3, away: 8 } },
-        { id: 'f22', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'imoizy', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
-        { id: 'f23', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 6 } },
-        { id: 'f24', matchday: 6, date: '2025-06-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 2 } },
-        // Matchday 7 - June 22, 2025
-        { id: 'f25', matchday: 7, date: '2025-06-22', time: '20:00', homeTeam: 'cook', awayTeam: 'imoizy', status: 'completed', score: { home: 1, away: 0 } },
-        { id: 'f26', matchday: 7, date: '2025-06-22', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f27', matchday: 7, date: '2025-06-22', time: '20:00', homeTeam: 'offer', awayTeam: 'kenno', status: 'completed', score: { home: 3, away: 6 } },
-        { id: 'f28', matchday: 7, date: '2025-06-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 3 } },
-        // Matchday 8 - June 23, 2025
-        { id: 'f29', matchday: 8, date: '2025-06-23', time: '20:00', homeTeam: 'thor', awayTeam: 'cook', status: 'completed', score: { home: 2, away: 0 } },
-        { id: 'f30', matchday: 8, date: '2025-06-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 0 } },
-        { id: 'f31', matchday: 8, date: '2025-06-23', time: '20:00', homeTeam: 'offer', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 6 } },
-        { id: 'f32', matchday: 8, date: '2025-06-23', time: '20:00', homeTeam: 'smiles', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 3 } },
-        // Matchday 9 - June 24, 2025
-        { id: 'f33', matchday: 9, date: '2025-06-24', time: '20:00', homeTeam: 'cook', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f34', matchday: 9, date: '2025-06-24', time: '20:00', homeTeam: 'offer', awayTeam: 'imoizy', status: 'completed', score: { home: 0, away: 2 } },
-        { id: 'f35', matchday: 9, date: '2025-06-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'completed', score: { home: 6, away: 0 } },
-        { id: 'f36', matchday: 9, date: '2025-06-24', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 2 } },
-        // Matchday 10 - June 25, 2025
-        { id: 'f37', matchday: 10, date: '2025-06-25', time: '20:00', homeTeam: 'newton', awayTeam: 'cook', status: 'completed', score: { home: 1, away: 4 } },
-        { id: 'f38', matchday: 10, date: '2025-06-25', time: '20:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'completed', score: { home: 5, away: 0 } },
-        { id: 'f39', matchday: 10, date: '2025-06-25', time: '20:00', homeTeam: 'thor', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f40', matchday: 10, date: '2025-06-25', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'completed', score: { home: 2, away: 0 } },
-        // Matchday 11 - June 26, 2025
-        { id: 'f41', matchday: 11, date: '2025-06-26', time: '20:00', homeTeam: 'imoizy', awayTeam: 'cook', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f42', matchday: 11, date: '2025-06-26', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f43', matchday: 11, date: '2025-06-26', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'completed', score: { home: 6, away: 0 } },
-        { id: 'f44', matchday: 11, date: '2025-06-26', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 0 } },
-        // Matchday 12 - June 27, 2025
-        { id: 'f45', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'cook', awayTeam: 'kenno', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f46', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 4 } },
-        { id: 'f47', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f48', matchday: 12, date: '2025-06-27', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 0, away: 3 } },
-        // Matchday 13 - June 28, 2025
-        { id: 'f49', matchday: 13, date: '2025-06-28', time: '20:00', homeTeam: 'offer', awayTeam: 'cook', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f50', matchday: 13, date: '2025-06-28', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f51', matchday: 13, date: '2025-06-28', time: '20:00', homeTeam: 'imoizy', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f52', matchday: 13, date: '2025-06-28', time: '20:00', homeTeam: 'newton', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 8 } },
-        // Matchday 14 - June 29, 2025
-        { id: 'f53', matchday: 14, date: '2025-06-29', time: '20:00', homeTeam: 'cook', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 } },
-        { id: 'f54', matchday: 14, date: '2025-06-29', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f55', matchday: 14, date: '2025-06-29', time: '20:00', homeTeam: 'kenno', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'f56', matchday: 14, date: '2025-06-29', time: '20:00', homeTeam: 'newton', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 1 } }
+        // Matchday 1 - July 14, 2025
+        { id: 'f1', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f3', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f4', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 2 - July 15, 2025
+        { id: 'f5', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f6', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f7', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'grey', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f8', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 3 - July 16, 2025
+        { id: 'f9', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'grey', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f10', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f11', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'smiles', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 4 - July 17, 2025
+        { id: 'f13', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'maria', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f14', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f15', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'offer', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f16', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'thor', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 5 - July 18, 2025
+        { id: 'f17', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'maria', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f18', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'grey', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 1 } },
+        { id: 'f19', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f20', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 6 - July 19, 2025
+        { id: 'f21', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f22', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'thor', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f23', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'offer', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f24', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 7 - July 20, 2025
+        { id: 'f25', matchday: 7, date: '2025-07-20', time: '20:00', homeTeam: 'maria', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f26', matchday: 7, date: '2025-07-20', time: '20:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f27', matchday: 7, date: '2025-07-20', time: '20:00', homeTeam: 'newton', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f28', matchday: 7, date: '2025-07-20', time: '20:00', homeTeam: 'grey', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 8 - July 21, 2025
+        { id: 'f29', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f30', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'grey', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f31', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f32', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 9 - July 22, 2025
+        { id: 'f33', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f34', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f35', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'grey', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f36', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 10 - July 23, 2025
+        { id: 'f37', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f38', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f39', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f40', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'grey', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 11 - July 24, 2025
+        { id: 'f41', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f42', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f43', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f44', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 12 - July 25, 2025
+        { id: 'f45', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f46', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f47', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'thor', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f48', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 13 - July 26, 2025
+        { id: 'f49', matchday: 13, date: '2025-07-26', time: '20:00', homeTeam: 'newton', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f50', matchday: 13, date: '2025-07-26', time: '20:00', homeTeam: 'smiles', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f51', matchday: 13, date: '2025-07-26', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f52', matchday: 13, date: '2025-07-26', time: '20:00', homeTeam: 'offer', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        // Matchday 14 - July 27, 2025
+        { id: 'f53', matchday: 14, date: '2025-07-27', time: '20:00', homeTeam: 'maria', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f54', matchday: 14, date: '2025-07-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f55', matchday: 14, date: '2025-07-27', time: '20:00', homeTeam: 'kenno', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f56', matchday: 14, date: '2025-07-27', time: '20:00', homeTeam: 'offer', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } }
     ]
 };
 
@@ -256,17 +256,17 @@ const news = [
     },
     {
         title: 'Season Fixtures Confirmed',
-        content: 'The Season fixtures and Dates have been confirmed, First games will be played on 12 May 2025',
+        content: 'The Season fixtures and Dates have been confirmed, First games will be played on 12 July 2025',
         date: '2025-05-10'
     },
     {
-        title: 'Offer_Art FC Unveils New Stadium',
-        content: 'Offer_Art FC has officially opened the new Art Arena, a state-of-the-art facility for fans and players.',
+        title: 'smiles_Art FC Unveils New Stadium',
+        content: 'smiles_Art FC has officially opened the new Art Arena, a state-of-the-art facility for fans and players.',
         date: '2025-05-10'
     },
     {
-        title: 'imoizy FC Signs Star Striker',
-        content: 'imoizy FC has completed the signing of a top striker to boost their attacking options this season.',
+        title: 'thor FC Signs Star Striker',
+        content: 'thor FC has completed the signing of a top striker to boost their attacking options this season.',
         date: '2025-05-03'
     },
     {
@@ -275,8 +275,8 @@ const news = [
         date: '2025-05-05'
     },
     {
-        title: 'offer Da Killer Youth Academy Success',
-        content: 'offer FC youth academy graduates have made their debut in the first team, impressing fans and coaches alike.',
+        title: 'newton Da Killer Youth Academy Success',
+        content: 'newton FC youth academy graduates have made their debut in the first team, impressing fans and coaches alike.',
         date: '2024-05-07'
     }
 ];
@@ -1391,7 +1391,7 @@ function getPageContent(page) {
                                         <i class="fas fa-trophy" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">League Champions</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="thor" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1407,7 +1407,7 @@ function getPageContent(page) {
                                         <i class="fas fa-cup" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">YTY Cup Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="kenno" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="thor" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1423,7 +1423,7 @@ function getPageContent(page) {
                                         <i class="fas fa-star" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Champions League Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="thor" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="grey" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1439,7 +1439,7 @@ function getPageContent(page) {
                                         <i class="fas fa-crown" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Super Cup Winners</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="smiles" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -1455,7 +1455,7 @@ function getPageContent(page) {
                                         <i class="fas fa-medal" style="font-size:2.5rem;color:var(--accent-color);"></i>
                                         <h3 style="margin:0;color:var(--text-color);font-size:1.4rem;font-weight:700;">Overall Best Team</h3>
                                     </div>
-                                    <div class="winner-item" data-team-id="ghost" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
+                                    <div class="winner-item" data-team-id="thor" style="display:flex;align-items:center;gap:1rem;padding:1rem;background:var(--light-bg);border-radius:12px;transition:all 0.3s ease;">
                                         <div class="placeholder-logo" style="width:50px;height:50px;border-radius:50%;background:var(--card-bg);display:flex;align-items:center;justify-content:center;border:2px solid var(--accent-color);">
                                             <i class="fas fa-trophy" style="font-size:1.5rem;color:var(--accent-color);"></i>
                                         </div>
@@ -2761,27 +2761,27 @@ function initializeMatchdaySelectors() {
 // --- YTY Cup Fixtures ---
 const ytyCupFixtures = [
     // Quarter Finals
-    { id: 'yqf1', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'completed', score: { home: 4, away: 1 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'completed', score: { home: 1, away: 5 }, penalties: null },
-    { id: 'yqf3', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf4', round: 'Quarter Final', date: '2025-06-17', time: '22:00', homeTeam: 'cook', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 2 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf1', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf2', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
+    { id: 'yqf3', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf4', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
-    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-06-22', time: '22:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'completed', score: { home: 0, away: 3 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-06-22', time: '22:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-06-22', time: '22:00', homeTeam: 'newton', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 3 }, penalties: { home: 0, away: 0 } },
-    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-06-22', time: '22:00', homeTeam: 'thor', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2a', round: 'Semi Final - 1st Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'ysf2b', round: 'Semi Final - 2nd Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     // Final
-    { id: 'yfinal', round: 'Final', date: '2025-06-26', time: '22:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 0 }, penalties: { home: 0, away: 0 } }
+    { id: 'yfinal', round: 'Final', date: '2025-07-24', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } }
 ];
 
 // --- Super Cup Fixture ---
 const superCupFixture = {
     id: 'supercup',
     round: 'Super Cup',
-    date: '2025-06-30',
+    date: '2025-07-30',
     time: '22:00',
-    homeTeam: 'thor', // League winner
-    awayTeam: 'kenno', // YTY Cup winner
+    homeTeam: 'tbd', // League winner
+    awayTeam: 'tbd', // YTY Cup winner
     status: 'scheduled',
     score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
@@ -2790,39 +2790,39 @@ const superCupFixture = {
 // --- Friendly Fixtures ---
 const friendlyFixtures = [
     // Pre-season Friendlies
-    { id: 'ff1', round: 'Pre-season', date: '2025-05-01', time: '19:00', homeTeam: 'cook', awayTeam: 'imoizy', status: 'completed', score: { home: 3, away: 2 } },
-    { id: 'ff2', round: 'Pre-season', date: '2025-05-02', time: '19:00', homeTeam: 'ghost', awayTeam: 'cook', status: 'completed', score: { home: 1, away: 2 } },
-    { id: 'ff3', round: 'Pre-season', date: '2025-05-03', time: '19:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'completed', score: { home: 5, away: 6 } },
-    { id: 'ff4', round: 'Pre-season', date: '2025-05-04', time: '19:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 2, away: 2 } },
+    { id: 'ff1', round: 'Pre-season', date: '2025-05-01', time: '19:00', homeTeam: 'maria', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 2 } },
+    { id: 'ff2', round: 'Pre-season', date: '2025-05-02', time: '19:00', homeTeam: 'grey', awayTeam: 'maria', status: 'completed', score: { home: 1, away: 2 } },
+    { id: 'ff3', round: 'Pre-season', date: '2025-05-03', time: '19:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'completed', score: { home: 5, away: 6 } },
+    { id: 'ff4', round: 'Pre-season', date: '2025-05-04', time: '19:00', homeTeam: 'grey', awayTeam: 'smiles', status: 'completed', score: { home: 2, away: 2 } },
     
     // Mid-season Friendlies
-    { id: 'ff5', round: 'Mid-season', date: '2025-05-20', time: '19:00', homeTeam: 'offer', awayTeam: 'cook', status: 'completed', score: { home: 2, away: 2 } },
+    { id: 'ff5', round: 'Mid-season', date: '2025-05-20', time: '19:00', homeTeam: 'newton', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 2 } },
     { id: 'ff6', round: 'Mid-season', date: '2025-05-21', time: '19:00', homeTeam: 'kenno', awayTeam: 'smiles', status: 'completed', score: { home: 1, away: 2 } },
-    { id: 'ff7', round: 'Mid-season', date: '2025-05-22', time: '19:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 2 } },
-    { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'cook', awayTeam: 'imoizy', status: 'completed', score: { home: 1, away: 5 } }
+    { id: 'ff7', round: 'Mid-season', date: '2025-05-22', time: '19:00', homeTeam: 'offer', awayTeam: 'grey', status: 'completed', score: { home: 1, away: 2 } },
+    { id: 'ff8', round: 'Mid-season', date: '2025-05-23', time: '19:00', homeTeam: 'maria', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 5 } }
 ];
 
 // Function to get Champions League fixtures
 function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-06-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'imoizy', status: 'completed', score: { home: 2, away: 5 } },
-        { id: 'clf2', matchday: 1, date: '2025-06-18', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 1 } },
+        { id: 'clf1', matchday: 1, date: '2025-07-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf2', matchday: 1, date: '2025-07-16', time: '22:00', homeTeam: 'grey', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2
-        { id: 'clf3', matchday: 2, date: '2025-06-21', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 2 } },
-        { id: 'clf4', matchday: 2, date: '2025-06-21', time: '22:00', homeTeam: 'imoizy', awayTeam: 'ghost', status: 'completed', score: { home: 0, away: 3 } },
+        { id: 'clf3', matchday: 2, date: '2025-07-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf4', matchday: 2, date: '2025-07-19', time: '22:00', homeTeam: 'thor', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3
-        { id: 'clf5', matchday: 3, date: '2025-06-23', time: '20:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 3 } },
-        { id: 'clf6', matchday: 3, date: '2025-06-23', time: '22:00', homeTeam: 'imoizy', awayTeam: 'thor', status: 'completed', score: { home: 2, away: 3 } },
+        { id: 'clf5', matchday: 3, date: '2025-07-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf6', matchday: 3, date: '2025-07-21', time: '22:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 4
-        { id: 'clf7', matchday: 4, date: '2025-06-25', time: '20:00', homeTeam: 'thor', awayTeam: 'imoizy', status: 'completed', score: { home: 3, away: 1 } },
-        { id: 'clf8', matchday: 4, date: '2025-06-25', time: '22:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 4 } },
+        { id: 'clf7', matchday: 4, date: '2025-07-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf8', matchday: 4, date: '2025-07-23', time: '22:00', homeTeam: 'grey', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5
-        { id: 'clf9', matchday: 5, date: '2025-06-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'imoizy', status: 'completed', score: { home: 3, away: 0 } },
-        { id: 'clf10', matchday: 5, date: '2025-06-27', time: '22:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 0 } },
+        { id: 'clf9', matchday: 5, date: '2025-07-25', time: '20:00', homeTeam: 'grey', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf10', matchday: 5, date: '2025-07-25', time: '22:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6
-        { id: 'clf11', matchday: 6, date: '2025-06-29', time: '20:00', homeTeam: 'thor', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 1 } },
-        { id: 'clf12', matchday: 6, date: '2025-06-29', time: '22:00', homeTeam: 'imoizy', awayTeam: 'kenno', status: 'completed', score: { home: 0, away: 3 } }
+        { id: 'clf11', matchday: 6, date: '2025-07-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf12', matchday: 6, date: '2025-07-27', time: '22:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } }
     ];
 }
 
@@ -2830,10 +2830,10 @@ function getChampionsLeagueFixtures() {
 const championsLeagueFinal = {
     id: 'clfinal',
     matchday: 7,
-    date: '2025-06-30',
+    date: '2025-07-28',
     time: '20:00',
-    homeTeam: 'kenno',
-    awayTeam: 'ghost',
+    homeTeam: 'tbd',
+    awayTeam: 'tbd',
     status: 'scheduled',
     score: { home: 0, away: 0 },
     penalties: { home: 0, away: 0 }
