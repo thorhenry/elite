@@ -147,7 +147,7 @@ const matchData = {
     fixtures: [
         // Matchday 1 - July 14, 2025
         { id: 'f1', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
-        { id: 'f2', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f2', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f3', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f4', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - July 15, 2025
