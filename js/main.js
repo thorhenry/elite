@@ -159,7 +159,7 @@ const matchData = {
         { id: 'f9', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'grey', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f10', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'newton', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f11', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'smiles', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f12', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f12', matchday: 3, date: '2025-07-16', time: '20:00', homeTeam: 'thor', awayTeam: 'offer', status: 'completed', score: { home: 5, away: 1 } },
         // Matchday 4 - July 17, 2025
         { id: 'f13', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'maria', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f14', matchday: 4, date: '2025-07-17', time: '20:00', homeTeam: 'kenno', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
@@ -2762,7 +2762,7 @@ function initializeMatchdaySelectors() {
 const ytyCupFixtures = [
     // Quarter Finals
     { id: 'yqf1', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'completed', score: { home: 6, away: 2 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf2', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
+    { id: 'yqf2', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'completed', score: { home: 5, away: 1 }, penalties: null },
     { id: 'yqf3', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf4', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 5 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
@@ -2806,7 +2806,7 @@ const friendlyFixtures = [
 function getChampionsLeagueFixtures() {
     return [
         // Matchday 1
-        { id: 'clf1', matchday: 1, date: '2025-07-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf1', matchday: 1, date: '2025-07-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 1 } },
         { id: 'clf2', matchday: 1, date: '2025-07-16', time: '22:00', homeTeam: 'grey', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2
         { id: 'clf3', matchday: 2, date: '2025-07-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
