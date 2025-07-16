@@ -148,11 +148,11 @@ const matchData = {
         // Matchday 1 - July 14, 2025
         { id: 'f1', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
         { id: 'f2', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 2 } },
-        { id: 'f3', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f3', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 7 } },
         { id: 'f4', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 2 - July 15, 2025
-        { id: 'f5', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f6', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f5', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'completed', score: { home: 4, away: 1 } },
+        { id: 'f6', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f7', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'grey', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f8', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'newton', awayTeam: 'smiles', status: 'completed', score: { home: 7, away: 2 } },
         // Matchday 3 - July 16, 2025
@@ -2764,7 +2764,7 @@ const ytyCupFixtures = [
     { id: 'yqf1', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'yqf2', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'smiles', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 }, penalties: null },
     { id: 'yqf3', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
-    { id: 'yqf4', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
+    { id: 'yqf4', round: 'Quarter Final', date: '2025-07-15', time: '22:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 5 }, penalties: { home: 0, away: 0 } },
     // Semi Finals (Home & Away) - use 'tbd' for placeholders
     { id: 'ysf1a', round: 'Semi Final - 1st Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
     { id: 'ysf1b', round: 'Semi Final - 2nd Leg', date: '2025-07-20', time: '22:00', homeTeam: 'tbd', awayTeam: 'tbd', status: 'scheduled', score: { home: 0, away: 0 }, penalties: { home: 0, away: 0 } },
