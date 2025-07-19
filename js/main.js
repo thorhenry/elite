@@ -169,7 +169,7 @@ const matchData = {
         { id: 'f17', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'maria', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f18', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'grey', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 1 } },
         { id: 'f19', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'ghost', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f20', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f20', matchday: 5, date: '2025-07-18', time: '20:00', homeTeam: 'kenno', awayTeam: 'offer', status: 'completed', score: { home: 7, away: 0 } },
         // Matchday 6 - July 19, 2025
         { id: 'f21', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'smiles', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f22', matchday: 6, date: '2025-07-19', time: '20:00', homeTeam: 'thor', awayTeam: 'newton', status: 'completed', score: { home: 3, away: 2 } },
