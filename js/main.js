@@ -149,7 +149,7 @@ const matchData = {
         { id: 'f1', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'maria', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
         { id: 'f2', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 2 } },
         { id: 'f3', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'smiles', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 7 } },
-        { id: 'f4', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'newton', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f4', matchday: 1, date: '2025-07-14', time: '20:00', homeTeam: 'newton', awayTeam: 'grey', status: 'completed', score: { home: 1, away: 2 } },
         // Matchday 2 - July 15, 2025
         { id: 'f5', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'kenno', awayTeam: 'maria', status: 'completed', score: { home: 4, away: 1 } },
         { id: 'f6', matchday: 2, date: '2025-07-15', time: '20:00', homeTeam: 'ghost', awayTeam: 'offer', status: 'completed', score: { home: 3, away: 1 } },
@@ -2809,7 +2809,7 @@ function getChampionsLeagueFixtures() {
         { id: 'clf1', matchday: 1, date: '2025-07-16', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 1 } },
         { id: 'clf2', matchday: 1, date: '2025-07-16', time: '22:00', homeTeam: 'grey', awayTeam: 'ghost', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 2
-        { id: 'clf3', matchday: 2, date: '2025-07-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf3', matchday: 2, date: '2025-07-19', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'clf4', matchday: 2, date: '2025-07-19', time: '22:00', homeTeam: 'thor', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 3
         { id: 'clf5', matchday: 3, date: '2025-07-21', time: '20:00', homeTeam: 'kenno', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
