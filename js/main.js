@@ -184,9 +184,9 @@ const matchData = {
         { id: 'f29', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'ghost', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f30', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'grey', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f31', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'newton', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f32', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f32', matchday: 8, date: '2025-07-21', time: '20:00', homeTeam: 'smiles', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 4 } },
         // Matchday 9 - July 22, 2025
-        { id: 'f33', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f33', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 1 } },
         { id: 'f34', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f35', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'grey', awayTeam: 'offer', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f36', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
