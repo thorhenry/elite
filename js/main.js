@@ -196,14 +196,14 @@ const matchData = {
         { id: 'f39', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f40', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'grey', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 11 - July 24, 2025
-        { id: 'f41', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f41', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'completed', score: { home: 6, away: 0 } },
         { id: 'f42', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'completed', score: { home: 0, away: 7 } },
         { id: 'f43', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f44', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 12 - July 25, 2025
         { id: 'f45', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         { id: 'f46', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f47', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'thor', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f47', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'thor', awayTeam: 'grey', status: 'completed', score: { home: 0, away: 1 } },
         { id: 'f48', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'smiles', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 13 - July 26, 2025
         { id: 'f49', matchday: 13, date: '2025-07-26', time: '20:00', homeTeam: 'newton', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
