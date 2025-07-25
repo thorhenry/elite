@@ -193,7 +193,7 @@ const matchData = {
         // Matchday 10 - July 23, 2025
         { id: 'f37', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f38', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 3 } },
-        { id: 'f39', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f39', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'ghost', awayTeam: 'smiles', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'f40', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'grey', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 11 - July 24, 2025
         { id: 'f41', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'scheduled', score: { home: 0, away: 0 } },
