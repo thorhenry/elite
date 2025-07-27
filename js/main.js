@@ -199,7 +199,7 @@ const matchData = {
         { id: 'f41', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'thor', awayTeam: 'maria', status: 'completed', score: { home: 6, away: 0 } },
         { id: 'f42', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'offer', awayTeam: 'smiles', status: 'completed', score: { home: 0, away: 7 } },
         { id: 'f43', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'kenno', awayTeam: 'newton', status: 'scheduled', score: { home: 0, away: 0 } },
-        { id: 'f44', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f44', matchday: 11, date: '2025-07-24', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'completed', score: { home: 2, away: 0 } },
         // Matchday 12 - July 25, 2025
         { id: 'f45', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'maria', awayTeam: 'kenno', status: 'completed', score: { home: 1, away: 8 } },
         { id: 'f46', matchday: 12, date: '2025-07-25', time: '20:00', homeTeam: 'offer', awayTeam: 'ghost', status: 'completed', score: { home: 1, away: 2 } },
@@ -2821,7 +2821,7 @@ function getChampionsLeagueFixtures() {
         { id: 'clf9', matchday: 5, date: '2025-07-25', time: '20:00', homeTeam: 'grey', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 1 } },
         { id: 'clf10', matchday: 5, date: '2025-07-25', time: '22:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 6
-        { id: 'clf11', matchday: 6, date: '2025-07-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf11', matchday: 6, date: '2025-07-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'completed', score: { home: 1, away: 0 } },
         { id: 'clf12', matchday: 6, date: '2025-07-27', time: '22:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } }
     ];
 }
