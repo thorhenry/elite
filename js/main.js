@@ -189,7 +189,7 @@ const matchData = {
         { id: 'f33', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'maria', awayTeam: 'smiles', status: 'completed', score: { home: 4, away: 1 } },
         { id: 'f34', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'newton', awayTeam: 'thor', status: 'completed', score: { home: 0, away: 2 } },
         { id: 'f35', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'grey', awayTeam: 'offer', status: 'completed', score: { home: 1, away: 2 } },
-        { id: 'f36', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'f36', matchday: 9, date: '2025-07-22', time: '20:00', homeTeam: 'ghost', awayTeam: 'kenno', status: 'completed', score: { home: 2, away: 5 } },
         // Matchday 10 - July 23, 2025
         { id: 'f37', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'offer', awayTeam: 'maria', status: 'completed', score: { home: 2, away: 3 } },
         { id: 'f38', matchday: 10, date: '2025-07-23', time: '20:00', homeTeam: 'kenno', awayTeam: 'thor', status: 'completed', score: { home: 1, away: 3 } },
@@ -2819,7 +2819,7 @@ function getChampionsLeagueFixtures() {
         { id: 'clf8', matchday: 4, date: '2025-07-23', time: '22:00', homeTeam: 'grey', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } },
         // Matchday 5
         { id: 'clf9', matchday: 5, date: '2025-07-25', time: '20:00', homeTeam: 'grey', awayTeam: 'thor', status: 'completed', score: { home: 3, away: 1 } },
-        { id: 'clf10', matchday: 5, date: '2025-07-25', time: '22:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'scheduled', score: { home: 0, away: 0 } },
+        { id: 'clf10', matchday: 5, date: '2025-07-25', time: '22:00', homeTeam: 'kenno', awayTeam: 'ghost', status: 'completed', score: { home: 3, away: 2 } },
         // Matchday 6
         { id: 'clf11', matchday: 6, date: '2025-07-27', time: '20:00', homeTeam: 'ghost', awayTeam: 'grey', status: 'completed', score: { home: 1, away: 0 } },
         { id: 'clf12', matchday: 6, date: '2025-07-27', time: '22:00', homeTeam: 'thor', awayTeam: 'kenno', status: 'scheduled', score: { home: 0, away: 0 } }
